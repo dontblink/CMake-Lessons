@@ -1,4 +1,5 @@
 add_library(gdtoa INTERFACE)
+
 target_sources(gdtoa INTERFACE
 	gdtoa/src/dmisc.c
 	gdtoa/src/dtoa.c
@@ -44,149 +45,189 @@ target_sources(gdtoa INTERFACE
 )
 
 target_include_directories(gdtoa INTERFACE gdtoa/include)
+
 target_compile_definitions(gdtoa INTERFACE
-	NO_ERRNO
-	IFNAN_CHECK
-	GDTOA_NO_ASSERT
-	NO_FENV_H
-)
+                           NO_ERRNO
+                           IFNAN_CHECK
+                           GDTOA_NO_ASSERT
+                           NO_FENV_H)
 
 add_library(c)
 
+# private causes libc target to use the interface properties of the printf library
+# but they are not passed on when another target links against libc
 target_link_libraries(c PRIVATE printf openlibm gdtoa)
-# can't declare openlibm as public because that would propogate the source files to not only the c library target, but also 
-# for any library linking against our library
-# private would be better, but some libc headers include openlibm headers
-# need to use a generator expression to extract the include directory property from the openlibm library. We can 
-# use that value as an INTERFACE include for libc itself (which fixes the libc header issue)
 
-target_include_directories( c
-	                        PRIVATE
-		                    	${PROJECT_SOURCE_DIR}/include
-		                    	${PROJECT_SOURCE_DIR}/arch/x86_64/include
-)
-target_include_directories( c SYSTEM
-	                        INTERFACE
-		                        ${PROJECT_SOURCE_DIR}/include
-		                        ${PROJECT_SOURCE_DIR}/arch/x86_64/include
-	                        		$<TARGET_PROPERTY:openlibm,INTERFACE_INCLUDE_DIRECTORIES>
+target_include_directories(c  
+   PRIVATE 
+       ${PROJECT_SOURCE_DIR}/include
+       ${PROJECT_SOURCE_DIR}/arch/${CMAKE_SYSTEM_PROCESSOR}/include
 )
 
+target_include_directories(c SYSTEM
+	INTERFACE
+		${PROJECT_SOURCE_DIR}/include
+		${PROJECT_SOURCE_DIR}/arch/${CMAKE_SYSTEM_PROCESSOR}/include
+		$<TARGET_PROPERTY:openlibm,INTERFACE_INCLUDE_DIRECTORIES>
+)
 
-#Assert Module
-target_sources(c PRIVATE
-               	assert/assert.c
-               	)
+list(APPEND libc_private_flags
+     "-Wno-unknown-pragmas"
+     "-Wno-nonnull-compare")
 
-# CType Module
+list(APPEND libc_public_flags
+     "")
+
+if (DISABLE_BUILTINS)
+	list(APPEND libc_private_flags "-fno-builtin")
+endif()
+
+if(DISABLE_STACK_PROTECTION)
+	list(APPEND libc_public_flags "-fno-stack-protector")
+endif()
+
+if(NOSTDINC_FOR_DEPENDENTS)
+	list(APPEND libc_public_flags "-nostdinc")
+else()
+	list(APPEND libc_private_flags "-nostdinc")
+endif()
+
+apply_supported_compiler_flags(C c PRIVATE libc_private_flags)
+apply_supported_compiler_flags(C c PUBLIC libc_public_flags)
+
+if("${CMAKE_CROSSCOMPILING}")
+	check_c_compiler_flag("-nostdlib" _nostdlib)
+	if(_nostdlib)
+		target_link_options(c INTERFACE "-nostdlib")
+	else()
+		apply_supported_linker_flags(C c INTERFACE "-nolibc")
+	endif()
+endif()
+
+
+target_compile_definitions(c
+	INTERFACE
+		$<$<BOOL:${HIDE_UNIMPLEMENTED_C_APIS}>:DISABLE_UNIMPLEMENTED_LIBC_APIS>
+	PUBLIC
+		$<$<BOOL:${ENABLE_GNU_EXTENSIONS}>:_GNU_SOURCE>
+	PRIVATE
+		# Define a DEBUG symbol if we're using a Debug or Relase with Debug Info buildtype
+		$<$<OR:$<STREQUAL:${CMAKE_BUILD_TYPE},Debug>,$<STREQUAL:${CMAKE_BUILD_TYPE},RelWithDebInfo>>:DEBUG>
+	)
+
+# Assert Module
 target_sources(c PRIVATE
-               	ctype/isalnum.c
-				ctype/isalpha.c
-				ctype/isascii.c
-				ctype/isblank.c
-				ctype/iscntrl.c
-				ctype/isdigit.c
-				ctype/isgraph.c
-				ctype/islower.c
-				ctype/isprint.c
-				ctype/ispunct.c
-				ctype/isspace.c
-				ctype/isupper.c
-				ctype/isxdigit.c
-				ctype/toascii.c
-				ctype/tolower.c
-				ctype/toupper.c)
+               assert/assert.c)
+# CType Module                         
+target_sources(c PRIVATE
+	ctype/isalnum.c
+	ctype/isalpha.c
+	ctype/isascii.c
+	ctype/isblank.c
+	ctype/iscntrl.c
+	ctype/isdigit.c
+	ctype/isgraph.c
+	ctype/islower.c
+	ctype/isprint.c
+	ctype/ispunct.c
+	ctype/isspace.c
+	ctype/isupper.c
+	ctype/isxdigit.c
+	ctype/toascii.c
+	ctype/tolower.c
+	ctype/toupper.c
+)
 
 # stdlib Module
 target_sources(c PRIVATE
-				stdlib/abs.c
-				stdlib/atof.c
-				stdlib/atoi.c
-				stdlib/atol.c
-				stdlib/atoll.c
-				stdlib/bsearch.c
-				stdlib/calloc.c
-				stdlib/div.c
-				stdlib/heapsort_r.c
-				stdlib/heapsort.c
-				stdlib/imaxabs.c
-				stdlib/imaxdiv.c
-				stdlib/labs.c
-				stdlib/ldiv.c
-				stdlib/llabs.c
-				stdlib/lldiv.c
-				stdlib/qsort_r.c
-				stdlib/qsort.c
-				stdlib/rand.c
-				stdlib/realloc.c
-				stdlib/strtol.c
-				stdlib/strtold.c
-				stdlib/strtoul.c
-				stdlib/strtoll.c
-				stdlib/strtoull.c
-)				
+	stdlib/abs.c
+	stdlib/atof.c
+	stdlib/atoi.c
+	stdlib/atol.c
+	stdlib/atoll.c
+	stdlib/bsearch.c
+	stdlib/calloc.c
+	stdlib/div.c
+	stdlib/heapsort_r.c
+	stdlib/heapsort.c
+	stdlib/imaxabs.c
+	stdlib/imaxdiv.c
+	stdlib/labs.c
+	stdlib/ldiv.c
+	stdlib/llabs.c
+	stdlib/lldiv.c
+	stdlib/qsort_r.c
+	stdlib/qsort.c
+	stdlib/rand.c
+	stdlib/realloc.c
+	stdlib/strtol.c
+	stdlib/strtold.c
+	stdlib/strtoul.c
+	stdlib/strtoll.c
+	stdlib/strtoull.c
+)
 
 # wchar Module
 target_sources(c PRIVATE
-				wchar/iswalnum.c
-				wchar/iswalpha.c
-				wchar/iswblank.c
-				wchar/iswcntrl.c
-				wchar/iswalnum.c
-				wchar/iswalpha.c
-				wchar/iswblank.c
-				wchar/iswcntrl.c
-				wchar/iswctype.c
-				wchar/iswdigit.c
-				wchar/iswgraph.c
-				wchar/iswlower.c
-				wchar/iswprint.c
-				wchar/iswpunct.c
-				wchar/iswspace.c
-				wchar/iswupper.c
-				wchar/iswxdigit.c
-				wchar/towccase.c
-				wchar/towctrans.c
-				wchar/towlower.c
-				wchar/towupper.c
-				wchar/wcswidth.c
-				wchar/wctrans.c
-				wchar/wctype.c
-				wchar/wcwidth.c
+	wchar/iswalnum.c
+	wchar/iswalpha.c
+	wchar/iswblank.c
+	wchar/iswcntrl.c
+	wchar/iswalnum.c
+	wchar/iswalpha.c
+	wchar/iswblank.c
+	wchar/iswcntrl.c
+	wchar/iswctype.c
+	wchar/iswdigit.c
+	wchar/iswgraph.c
+	wchar/iswlower.c
+	wchar/iswprint.c
+	wchar/iswpunct.c
+	wchar/iswspace.c
+	wchar/iswupper.c
+	wchar/iswxdigit.c
+	wchar/towccase.c
+	wchar/towctrans.c
+	wchar/towlower.c
+	wchar/towupper.c
+	wchar/wcswidth.c
+	wchar/wctrans.c
+	wchar/wctype.c
+	wchar/wcwidth.c
 )
 
 # locale module
 target_sources(c PRIVATE
-               	locale/langinfo.c)
+               locale/langinfo.c)
 
-#math module
+# math module
 target_sources(c PRIVATE
                math/fabs.c
-               math/fabsf.c)               	
+               math/fabsf.c)
 
-#stdio module
+# stdio module
 target_sources(c PRIVATE
                stdio/asprintf.c
                stdio/putchar.c
                stdio/puts.c
                stdio/vasprintf.c)
 
-#stdio_native module               
+# stdio_native module
 target_sources(c PRIVATE
                stdio/putchar_native.c)
 
-#support module
+# support module
 target_sources(c PRIVATE
                support/fls.c
                support/flsl.c
-               support/flsll.c)               
+               support/flsll.c)
 
-#time module
+# time module
 target_sources(c PRIVATE
                time/asctime.c
                time/asctime_r.c)
 
-#string module
+# string module
 target_sources(c PRIVATE
                string/memcmp.c
                string/memcpy.c
@@ -203,20 +244,20 @@ target_sources(c PRIVATE
                string/strcpy.c
                string/strcspn.c
                string/strdup.c
-			   string/strerror.c
-			   string/strerror_r.c
-			   string/strlen.c
-			   string/strncat.c
-			   string/strncmp.c
-			   string/strncpy.c
-			   string/strndup.c
-			   string/strnlen.c
-			   string/strnstr.c
-			   string/strpbrk.c
-			   string/strrchr.c
-			   string/strspn.c
-			   string/strstr.c
-			   string/strtok.c
-			   string/strxfrm.c
-               )               
+               string/strerror.c
+               string/strerror_r.c
+               string/strlen.c
+               string/strncat.c
+               string/strncmp.c
+               string/strncpy.c
+               string/strndup.c
+               string/strnlen.c
+               string/strnstr.c
+               string/strpbrk.c
+               string/strrchr.c
+               string/strspn.c
+               string/strstr.c
+               string/strtok.c
+               string/strxfrm.c)
+
 

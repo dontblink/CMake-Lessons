@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
-  "/mnt/d/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-src"
-  "/mnt/d/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-build"
-  "/mnt/d/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/openlibm-populate-prefix"
-  "/mnt/d/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/openlibm-populate-prefix/tmp"
-  "/mnt/d/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp"
-  "/mnt/d/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/openlibm-populate-prefix/src"
-  "/mnt/d/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp"
+  "/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-src"
+  "/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-build"
+  "/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/openlibm-populate-prefix"
+  "/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/openlibm-populate-prefix/tmp"
+  "/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp"
+  "/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/openlibm-populate-prefix/src"
+  "/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "/mnt/d/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp/${subDir}")
+    file(MAKE_DIRECTORY "/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "/mnt/d/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp${cfgdir}") # cfgdir has leading slash
 endif()

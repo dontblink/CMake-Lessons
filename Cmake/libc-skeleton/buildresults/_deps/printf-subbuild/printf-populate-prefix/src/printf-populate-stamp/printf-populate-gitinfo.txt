@@ -3,9 +3,9 @@
 # No other meaning or use of this file is supported.
 
 method=git
-command=/usr/local/bin/cmake;-P;/mnt/d/code/EA/Cmake/libc-skeleton/buildresults/_deps/printf-subbuild/printf-populate-prefix/tmp/printf-populate-gitclone.cmake
-source_dir=/mnt/d/code/EA/Cmake/libc-skeleton/buildresults/_deps/printf-src
-work_dir=/mnt/d/code/EA/Cmake/libc-skeleton/buildresults/_deps
+command=/usr/bin/cmake;-P;/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/printf-subbuild/printf-populate-prefix/tmp/printf-populate-gitclone.cmake
+source_dir=/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/printf-src
+work_dir=/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps
 repository=https://github.com/mpaland/printf.git
 remote=origin
 init_submodules=TRUE

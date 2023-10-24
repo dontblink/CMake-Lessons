@@ -4,17 +4,17 @@
 
 
 # Configuration directories and files
-SourceDirectory: /mnt/d/code/EA/Cmake/libc-skeleton
-BuildDirectory: /mnt/d/code/EA/Cmake/libc-skeleton/buildresults
+SourceDirectory: /mnt/c/code/EA/Cmake/libc-skeleton
+BuildDirectory: /mnt/c/code/EA/Cmake/libc-skeleton/buildresults
 
 # Where to place the cost data store
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: DESKTOP-5666A6H
+Site: DESKTOP-BH3NAIB
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
-BuildName: Linux-c++
+BuildName: Generic-ninja
 
 # Subprojects
 LabelsForSubprojects: 
@@ -27,8 +27,8 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/usr/local/bin/cmake" "/mnt/d/code/EA/Cmake/libc-skeleton"
-MakeCommand: /usr/local/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}"
+ConfigureCommand: "/usr/bin/cmake" "/mnt/c/code/EA/Cmake/libc-skeleton"
+MakeCommand: /usr/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 
 # version control
@@ -63,8 +63,8 @@ UpdateOptions:
 UpdateType: 
 
 # Compiler info
-Compiler: /usr/bin/c++
-CompilerVersion: 9.4.0
+Compiler: /home/nirve/toolchain/gcc-arm-none-eabi/bin/arm-none-eabi-g++
+CompilerVersion: 10.3.1
 
 # Dynamic analysis (MemCheck)
 PurifyCommand: 

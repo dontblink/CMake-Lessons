@@ -1,19 +1,28 @@
 add_executable(libc_tests)
 
-list(APPEND desired_libc_tests_flags
-     "-Wno-stringop-overflow"
-     "-Wno-unused-parameter"
-)
-
-apply_supported_c_compiler_flags(libc_tests PRIVATE desired_libc_tests_flags)
-# target_compile_options(libc_tests PRIVATE -Wno-unused-parameter -Wno-stringop-overflow)
+# Workaround for the potential to have CMake block our include directory if 
+# -nostdinc is used and the header is in a CMake implicit include path
+if(NOSTDINC_FOR_DEPENDENTS)
+    list(REMOVE_ITEM CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES "${CMOCKA_INCLUDE_DIR}")
+endif()
 target_include_directories(libc_tests PRIVATE . test/)
 target_include_directories(libc_tests SYSTEM PRIVATE ${CMOCKA_INCLUDE_DIR})
-
 target_link_libraries(libc_tests PRIVATE c ${CMOCKA_LIBRARIES})
 
-target_sources(libc_tests PRIVATE main.c)
+list(APPEND desired_libc_test_flags
+    "-Wno-stringop-overflow"
+    "-Wno-unused-parameter"
+    "-Wno-nonnull-compare"
+    "-Wno-nonnull"
+    "-Wno-stringop-truncation"
+    "-Wno-unknown-pragmas"
+    "-Wno-stringop-overread"
+)
+
+apply_supported_compiler_flags(C libc_tests PRIVATE desired_libc_test_flags)
+
 target_sources(libc_tests PRIVATE 
+               main.c
                ctype/ctype_tests.c
                ctype/isalnum.c
                ctype/isalpha.c
@@ -30,9 +39,7 @@ target_sources(libc_tests PRIVATE
                ctype/isxdigit.c
                ctype/toascii.c
                ctype/tolower.c
-               ctype/toupper.c )
-
-target_sources(libc_tests PRIVATE
+               ctype/toupper.c
                stdlib/abs.c
                stdlib/atof.c
                stdlib/atoi.c
@@ -58,9 +65,7 @@ target_sources(libc_tests PRIVATE
                stdlib/strtol.c
                stdlib/strtoll.c
                stdlib/strtoul.c
-               stdlib/strtoull.c)
-
-target_sources(libc_tests PRIVATE
+               stdlib/strtoull.c
                string/memcmp.c
                string/memcpy.c
                string/memmem.c
@@ -81,25 +86,21 @@ target_sources(libc_tests PRIVATE
                string/strnstr.c
                string/strrchr.c
                string/strstr.c
-               string/strtok.c)
-
-target_sources(libc_tests PRIVATE test/rand.c)
+               string/strtok.c
+               test/rand.c)
 
 
 add_custom_target(test-clear-results
-                  COMMAND ${CMAKE_COMMAND} -E rm -f ${CMAKE_BINARY_DIR}/test/*.xml
-                  COMMENT "Removing XML files in the test/ directory")
-
-add_test(NAME LibC.Test COMMAND libc_tests)
-
+    COMMAND ${CMAKE_COMMAND} -E rm -f ${CMAKE_BINARY_DIR}/test/*.xml
+    COMMENT "Removing XML files in the test/ directory")
 add_test(NAME Libc.ClearResults
-         COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target test-clear-results)
+    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target test-clear-results)
+add_test(NAME Libc.Test COMMAND libc_tests)
+set_tests_properties(Libc.Test 
+    PROPERTIES 
+    	ENVIRONMENT CMOCKA_XML_FILE=${CMAKE_CURRENT_BINARY_DIR}/%g.xml
+    	DEPENDS Libc.ClearResults)
 
-set_tests_properties(LibC.Test
-                     PROPERTIES
-                        ENVIRONMENT CMOCKA_XML_FILE=${CMAKE_CURRENT_BINARY_DIR}/%g.xml                        
-                        DEPENDS Libc.ClearResults)
-add_custom_target(test-libc 
-                  COMMAND export CMOCKA_MESSAGE_OUTPUT=stdout
-                  COMMAND libc_tests
-)
+add_custom_target(test-libc
+    COMMAND export CMOCKA_MESSAGE_OUTPUT=stdout              
+    COMMAND libc_tests)

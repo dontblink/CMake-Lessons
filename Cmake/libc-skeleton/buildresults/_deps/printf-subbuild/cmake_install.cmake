@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/d/code/EA/Cmake/libc-skeleton/buildresults/_deps/printf-subbuild
+# Install script for directory: /mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/printf-subbuild
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/d/code/EA/Cmake/libc-skeleton/buildresults/_deps/printf-subbuild/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/printf-subbuild/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
