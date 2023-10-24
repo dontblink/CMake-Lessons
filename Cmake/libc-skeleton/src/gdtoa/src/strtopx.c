@@ -34,37 +34,23 @@ THIS SOFTWARE.
 #undef _0
 #undef _1
 
-/* one or the other of IEEE_MC68k or IEEE_8087 should be #defined */
-
-#ifdef IEEE_MC68k
-#define _0 0
-#define _1 1
-#define _2 2
-#define _3 3
-#define _4 4
-#endif
 #ifdef IEEE_8087
-#define _0 4
-#define _1 3
-#define _2 2
-#define _3 1
-#define _4 0
+	#define _0 4
+	#define _1 3
+	#define _2 2
+	#define _3 1
+	#define _4 0
+#else
+	#error Something went wrong, IEEE8087 is not defined
 #endif
 
-int
-#ifdef KR_headers
-	strtopx(s, sp, V) CONST char* s;
-char** sp;
-void* V;
-#else
-strtopx(CONST char *s, char **sp, void *V)
-#endif
+int strtopx(const char* s, char** sp, void* V)
 {
 	static FPI fpi = {64, 1 - 16383 - 64 + 1, 32766 - 16383 - 64 + 1, 1, SI};
-	ULong bits[2];
-	Long exp;
+	uint32_t bits[2];
+	int32_t exp;
 	int k;
-	UShort* L = (UShort*)V;
+	uint16_t* L = (uint16_t*)V;
 
 	k = strtodg(s, sp, &fpi, &exp, bits);
 	switch(k & STRTOG_Retmask)
@@ -80,12 +66,12 @@ strtopx(CONST char *s, char **sp, void *V)
 
 		case STRTOG_Normal:
 		case STRTOG_NaNbits:
-			L[_0] = (UShort)(exp + 0x3fff + 63);
+			L[_0] = (uint16_t)(exp + 0x3fff + 63);
 		normal_bits:
-			L[_4] = (UShort)bits[0];
-			L[_3] = (UShort)(bits[0] >> 16);
-			L[_2] = (UShort)bits[1];
-			L[_1] = (UShort)(bits[1] >> 16);
+			L[_4] = (uint16_t)bits[0];
+			L[_3] = (uint16_t)(bits[0] >> 16);
+			L[_2] = (uint16_t)bits[1];
+			L[_1] = (uint16_t)(bits[1] >> 16);
 			break;
 
 		case STRTOG_Infinite:

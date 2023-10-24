@@ -83,7 +83,7 @@ THIS SOFTWARE.
  *	significant byte has the lowest address.
  * #define IEEE_MC68k for IEEE-arithmetic machines where the most
  *	significant byte has the lowest address.
- * #define Long int on machines with 32-bit ints and 64-bit longs.
+ * #define int32_t int on machines with 32-bit ints and 64-bit longs.
  * #define Sudden_Underflow for IEEE-format machines without gradual
  *	underflow (i.e., that flush to zero on underflow).
  * #define IBM for IBM mainframe-style floating-point arithmetic.
@@ -99,14 +99,13 @@ THIS SOFTWARE.
  *	products but inaccurate quotients, e.g., for Intel i860.
  * #define NO_LONG_LONG on machines that do not have a "long long"
  *	integer type (of >= 64 bits).  On such machines, you can
- *	#define Just_16 to store 16 bits per 32-bit Long when doing
+ *	#define Just_16 to store 16 bits per 32-bit int32_t when doing
  *	high-precision integer arithmetic.  Whether this speeds things
  *	up or slows things down depends on the machine and the number
  *	being converted.  If long long is available and the name is
- *	something other than "long long", #define Llong to be the name,
- *	and if "unsigned Llong" does not work as an unsigned version of
- *	Llong, #define #ULLong to be the corresponding unsigned type.
- * #define KR_headers for old-style C function headers.
+ *	something other than "long long", #define int64_t to be the name,
+ *	and if "unsigned int64_t" does not work as an unsigned version of
+ *	int64_t, #define #uint64_t to be the corresponding unsigned type.
  * #define Bad_float_h if your system lacks a float.h or if it does not
  *	define some or all of DBL_DIG, DBL_MAX_10_EXP, DBL_MAX_EXP,
  *	FLT_RADIX, FLT_ROUNDS, and DBL_MAX.
@@ -161,7 +160,7 @@ THIS SOFTWARE.
  *	On some K&R systems, it may also be necessary to
  *	#define DECLARE_SIZE_T in this case.
  * #define YES_ALIAS to permit aliasing certain double values with
- *	arrays of ULongs.  This leads to slightly better code with
+ *	arrays of uint32_ts.  This leads to slightly better code with
  *	some compilers and was always used prior to 19990916, but it
  *	is not strictly legal and can cause trouble with aggressively
  *	optimizing compilers (e.g., gcc 2.95.1 under -O2).
@@ -186,7 +185,8 @@ THIS SOFTWARE.
 #define Bug(...)
 #else
 #include <assert.h>
-#define Bug(x) assert(!(x))
+#include <stdbool.h>
+#define Bug(x) assert(!(bool)(x))
 #endif // GDTOA_NO_ASSET
 #endif // GDTOA_HOST_DEBUG
 #endif // DEBUG
@@ -194,25 +194,18 @@ THIS SOFTWARE.
 #include "stdlib.h"
 #include "string.h"
 
-#ifdef KR_headers
-#define Char char
-#else
-#define Char void
-#endif
-
 #ifdef MALLOC
-extern Char* MALLOC ANSI((size_t));
+extern void* MALLOC(size_t);
 #else
 #define MALLOC malloc
 #endif
 
 #undef IEEE_Arith
 #undef Avoid_Underflow
-#ifdef IEEE_MC68k
-#define IEEE_Arith
-#endif
 #ifdef IEEE_8087
 #define IEEE_Arith
+#else
+#error Something went wrong, IEEE8087 is not defined
 #endif
 
 #ifndef NO_ERRNO
@@ -277,24 +270,24 @@ extern Char* MALLOC ANSI((size_t));
 extern "C" {
 #endif
 
-#if defined(IEEE_8087) + defined(IEEE_MC68k) + defined(VAX) + defined(IBM) != 1
-Exactly one of IEEE_8087, IEEE_MC68k, VAX, or IBM should be defined.
+#if defined(IEEE_8087) + defined(VAX) + defined(IBM) != 1
+Exactly one of IEEE_8087, VAX, or IBM should be defined.
 #endif
 
 											   typedef union
 {
 	double d;
-	ULong L[2];
+	uint32_t L[2];
 } U;
 
 #ifdef YES_ALIAS
 #define dval(x) x
 #ifdef IEEE_8087
-#define word0(x) ((ULong*)&x)[1]
-#define word1(x) ((ULong*)&x)[0]
+#define word0(x) ((uint32_t*)&x)[1]
+#define word1(x) ((uint32_t*)&x)[0]
 #else
-#define word0(x) ((ULong*)&x)[0]
-#define word1(x) ((ULong*)&x)[1]
+#define word0(x) ((uint32_t*)&x)[0]
+#define word1(x) ((uint32_t*)&x)[1]
 #endif
 #else /* !YES_ALIAS */
 #ifdef IEEE_8087
@@ -423,12 +416,7 @@ Exactly one of IEEE_8087, IEEE_MC68k, VAX, or IBM should be defined.
 
 #ifdef RND_PRODQUOT
 #define rounded_product(a, b) a = rnd_prod(a, b)
-#define rounded_quotient(a, b) a = rnd_quot(a, b)
-#ifdef KR_headers
-extern double rnd_prod(), rnd_quot();
-#else
-extern double rnd_prod(double, double), rnd_quot(double, double);
-#endif
+#define rounded_quotient(a, b) a = rnd_quot(a, b) extern double rnd_prod(double, double), rnd_quot(double, double);
 #else
 #define rounded_product(a, b) a *= b
 #define rounded_quotient(a, b) a /= b
@@ -443,22 +431,14 @@ extern double rnd_prod(double, double), rnd_quot(double, double);
 #endif
 
 #ifdef NO_LONG_LONG
-#undef ULLong
 #ifdef Just_16
 #undef Pack_32
 #define Pack_16
-/* When Pack_32 is not defined, we store 16 bits per 32-bit Long.
+/* When Pack_32 is not defined, we store 16 bits per 32-bit int32_t.
  * This makes some inner loops simpler and sometimes saves work
  * during multiplications, but it often seems to make things slightly
- * slower.  Hence the default is now to store 32 bits per Long.
+ * slower.  Hence the default is now to store 32 bits per int32_t.
  */
-#endif
-#else /* long long available */
-#ifndef Llong
-#define Llong long long
-#endif
-#ifndef ULLong
-#define ULLong unsigned Llong
 #endif
 #endif /* NO_LONG_LONG */
 
@@ -485,7 +465,7 @@ struct Bigint
 {
 	struct Bigint* next;
 	int k, maxwds, sign, wds;
-	ULong x[1];
+	uint32_t x[1];
 };
 
 typedef struct Bigint Bigint;
@@ -494,105 +474,61 @@ typedef struct Bigint Bigint;
 #ifdef DECLARE_SIZE_T
 typedef unsigned int size_t;
 #endif
-extern void memcpy_D2A ANSI((void*, const void*, size_t));
+extern void memcpy(void*, const void*, size_t);
 #define Bcopy(x, y) \
-	memcpy_D2A(&x->sign, &y->sign, (size_t)(y->wds) * sizeof(ULong) + 2 * sizeof(int))
+	memcpy(&x->sign, &y->sign, (size_t)(y->wds) * sizeof(uint32_t) + 2 * sizeof(int))
 #else /* !NO_STRING_H */
-#define Bcopy(x, y) memcpy(&x->sign, &y->sign, (size_t)(y->wds) * sizeof(ULong) + 2 * sizeof(int))
+#define Bcopy(x, y) memcpy(&x->sign, &y->sign, (size_t)(y->wds) * sizeof(uint32_t) + 2 * sizeof(int))
 #endif /* NO_STRING_H */
 
-#define Balloc Balloc_D2A
-#define Bfree Bfree_D2A
-#define ULtoQ ULtoQ_D2A
-#define ULtof ULtof_D2A
-#define ULtod ULtod_D2A
-#define ULtodd ULtodd_D2A
-#define ULtox ULtox_D2A
-#define ULtoxL ULtoxL_D2A
-#define any_on any_on_D2A
-#define b2d b2d_D2A
-#define bigtens bigtens_D2A
-#define cmp cmp_D2A
-#define copybits copybits_D2A
-#define d2b d2b_D2A
-#define decrement decrement_D2A
-#define diff diff_D2A
-#define dtoa_result dtoa_result_D2A
-#define g__fmt g__fmt_D2A
-#define gethex gethex_D2A
-#define hexdig hexdig_D2A
-#define hexnan hexnan_D2A
-#define hi0bits(x) hi0bits_D2A((ULong)(x))
-#define i2b i2b_D2A
-#define increment increment_D2A
-#define lo0bits lo0bits_D2A
-#define lshift lshift_D2A
-#define match match_D2A
-#define mult mult_D2A
-#define multadd multadd_D2A
-#define nrv_alloc nrv_alloc_D2A
-#define pow5mult pow5mult_D2A
-#define quorem quorem_D2A
-#define ratio ratio_D2A
-#define rshift rshift_D2A
-#define rv_alloc rv_alloc_D2A
-#define s2b s2b_D2A
-#define set_ones set_ones_D2A
-#define strcp strcp_D2A
-#define strtoIg strtoIg_D2A
-#define sum sum_D2A
-#define tens tens_D2A
+// This is still required at the moment because strtod switches out tinytens
+// for its own copy.
 #define tinytens tinytens_D2A
-#define tinytens tinytens_D2A
-#define trailz trailz_D2A
-#define ulp ulp_D2A
 
 extern char* dtoa_result;
-extern CONST double bigtens[], tens[], tinytens[];
+extern const double bigtens[], tens[], tinytens[];
 extern unsigned char hexdig[];
 
-extern Bigint* Balloc ANSI((int));
-extern void Bfree ANSI((Bigint*));
-extern void ULtof ANSI((ULong*, const ULong*, Long, int));
-extern void ULtod ANSI((ULong*, const ULong*, Long, int));
-extern void ULtodd ANSI((ULong*, ULong*, Long, int));
-extern void ULtoQ ANSI((ULong*, const ULong*, Long, int));
-extern void ULtox ANSI((UShort*, const ULong*, Long, int));
-extern void ULtoxL ANSI((ULong*, const ULong*, Long, int));
-extern ULong any_on ANSI((Bigint*, int));
-extern double b2d ANSI((Bigint*, int*));
-extern int cmp ANSI((Bigint*, Bigint*));
-extern void copybits ANSI((ULong*, int, Bigint*));
-extern Bigint* d2b ANSI((double, int*, int*));
-extern int decrement ANSI((Bigint*));
-extern Bigint* diff ANSI((Bigint*, Bigint*));
-extern char* dtoa ANSI((double d, int mode, int ndigits, int* decpt, int* sign, char** rve));
-extern char* g__fmt ANSI((char*, char*, const char*, int, ULong));
-extern int gethex ANSI((CONST char**, FPI*, Long*, Bigint**, int));
-extern void hexdig_init_D2A(Void);
-extern int hexnan ANSI((CONST char**, FPI*, ULong*));
-extern int hi0bits_D2A ANSI((ULong));
-extern Bigint* i2b ANSI((int));
-extern Bigint* increment ANSI((Bigint*));
-extern int lo0bits ANSI((ULong*));
-extern Bigint* lshift ANSI((Bigint*, int));
-extern int match ANSI((CONST char**, char*));
-extern Bigint* mult ANSI((Bigint*, Bigint*));
-extern Bigint* multadd ANSI((Bigint*, int, int));
-extern char* nrv_alloc ANSI((const char*, char**, int));
-extern Bigint* pow5mult ANSI((Bigint*, int));
-extern int quorem ANSI((Bigint*, Bigint*));
-extern double ratio ANSI((Bigint*, Bigint*));
-extern void rshift ANSI((Bigint*, int));
-extern char* rv_alloc ANSI((int));
-extern Bigint* s2b ANSI((CONST char*, int, int, ULong));
-extern Bigint* set_ones ANSI((Bigint*, int));
-extern char* strcp ANSI((char*, const char*));
-extern int strtoIg ANSI((CONST char*, char**, FPI*, Long*, Bigint**, int*));
-extern double strtod ANSI((const char* s00, char** se));
-extern Bigint* sum ANSI((Bigint*, Bigint*));
-extern int trailz ANSI((Bigint*));
-extern double ulp ANSI((double));
+extern Bigint* Balloc(int);
+extern void Bfree(Bigint*);
+extern void ULtof(uint32_t*, const uint32_t*, int32_t, int);
+extern void ULtod(uint32_t*, const uint32_t*, int32_t, int);
+extern void ULtodd(uint32_t*, uint32_t*, int32_t, int);
+extern void ULtoQ(uint32_t*, const uint32_t*, int32_t, int);
+extern void ULtox(uint16_t*, const uint32_t*, int32_t, int);
+extern void ULtoxL(uint32_t*, const uint32_t*, int32_t, int);
+extern uint32_t any_on(Bigint*, int);
+extern double b2d(Bigint*, int*);
+extern int cmp(Bigint*, Bigint*);
+extern void copybits(uint32_t*, int, Bigint*);
+extern Bigint* d2b(double, int*, int*);
+extern int decrement(Bigint*);
+extern Bigint* diff(Bigint*, Bigint*);
+extern char* g__fmt(char*, char*, const char*, int, uint32_t);
+extern int gethex(const char**, FPI*, int32_t*, Bigint**, int);
+extern void hexdig_init(void);
+extern int hexnan(const char**, FPI*, uint32_t*);
+extern int hi0bits(uint32_t);
+extern Bigint* i2b(int);
+extern Bigint* increment(Bigint*);
+extern int lo0bits(uint32_t*);
+extern Bigint* lshift(Bigint*, int);
+extern int match(const char**, char*);
+extern Bigint* mult(Bigint*, Bigint*);
+extern Bigint* multadd(Bigint*, int, int);
+extern char* nrv_alloc(const char*, char**, int);
+extern Bigint* pow5mult(Bigint*, int);
+extern int quorem(Bigint*, Bigint*);
+extern double ratio(Bigint*, Bigint*);
+extern void rshift(Bigint*, int);
+extern char* rv_alloc(int);
+extern Bigint* s2b(const char*, int, int, uint32_t);
+extern Bigint* set_ones(Bigint*, int);
+extern char* strcp(char*, const char*);
+extern int strtoIg(const char*, char**, FPI*, int32_t*, Bigint**, int*);
+extern Bigint* sum(Bigint*, Bigint*);
+extern int trailz(Bigint*);
+extern double ulp(double);
 
 #ifdef __cplusplus
 }

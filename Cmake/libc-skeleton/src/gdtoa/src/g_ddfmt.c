@@ -31,31 +31,36 @@ THIS SOFTWARE.
 #include "gdtoaimp.h"
 #include <string.h>
 
-char*
-#ifdef KR_headers
-	g_ddfmt(buf, dd, ndig, bufsize) char* buf;
-double* dd;
-int ndig;
-unsigned bufsize;
-#else
-g_ddfmt(char *buf, double *dd, int ndig, unsigned bufsize)
-#endif
+char* g_ddfmt(char* buf, double* dd, int ndig, unsigned bufsize)
 {
 	FPI fpi;
-	char *b, *s, *se;
-	ULong *L, bits0[4], *bits, *zx;
-	int bx, by, decpt, ex, ey, i, j, mode;
-	Bigint *x, *y, *z;
+	char* b;
+	char* s;
+	char* se;
+	uint32_t* L;
+	uint32_t bits0[4];
+	uint32_t* bits;
+	uint32_t* zx;
+	int bx;
+	int by;
+	int decpt;
+	int ex;
+	int ey;
+	int i;
+	int j;
+	int mode;
+	Bigint* x;
+	Bigint* y;
+	Bigint* z;
 	double ddx[2];
 
 	if(bufsize < 10 || bufsize < (unsigned)(ndig + 8))
 	{
-		{
-			return 0;
-		}
+		return 0;
 	}
 
-	L = (ULong*)dd;
+	L = (uint32_t*)dd;
+
 	if((L[_0] & 0x7ff00000L) == 0x7ff00000L)
 	{
 		/* Infinity or NaN */
@@ -64,73 +69,76 @@ g_ddfmt(char *buf, double *dd, int ndig, unsigned bufsize)
 		nanret:
 			return strcp(buf, "NaN");
 		}
+
 		if((L[2 + _0] & 0x7ff00000) == 0x7ff00000)
 		{
 			if(L[2 + _0] & 0xfffff || L[2 + _1])
 			{
-				{
-					goto nanret;
-				}
+				goto nanret;
 			}
+
 			if((L[_0] ^ L[2 + _0]) & 0x80000000L)
 			{
-				{
-					goto nanret; /* Infinity - Infinity */
-				}
+				goto nanret; /* Infinity - Infinity */
 			}
 		}
 	infret:
 		b = buf;
+
 		if(L[_0] & 0x80000000L)
 		{
-			{
-				*b++ = '-';
-			}
+			*b++ = '-';
 		}
+
 		return strcp(b, "Infinity");
 	}
+
 	if((L[2 + _0] & 0x7ff00000) == 0x7ff00000)
 	{
 		L += 2;
+
 		if(L[_0] & 0xfffff || L[_1])
 		{
-			{
-				goto nanret;
-			}
+			goto nanret;
 		}
+
 		goto infret;
 	}
+
 	if(fabs(dd[0] + dd[1]) <= DBL_EPSILON)
 	{
 		b = buf;
+
 #ifndef IGNORE_ZERO_SIGN
 		if(L[_0] & L[2 + _0] & 0x80000000L)
 		{
-			{
-				*b++ = '-';
-			}
+			*b++ = '-';
 		}
 #endif
 		*b++ = '0';
 		*b = 0;
+
 		return b;
 	}
+
 	if((L[_0] & 0x7ff00000L) < (L[2 + _0] & 0x7ff00000L))
 	{
 		ddx[1] = dd[0];
 		ddx[0] = dd[1];
 		dd = ddx;
-		L = (ULong*)dd;
+		L = (uint32_t*)dd;
 	}
+
 	z = d2b(dd[0], &ex, &bx);
+
 	if(fabs(dd[1]) <= DBL_EPSILON)
 	{
-		{
-			goto no_y;
-		}
+		goto no_y;
 	}
+
 	x = z;
 	y = d2b(dd[1], &ey, &by);
+
 	if((i = ex - ey) != 0)
 	{
 		if(i > 0)
@@ -140,29 +148,26 @@ g_ddfmt(char *buf, double *dd, int ndig, unsigned bufsize)
 		}
 		else
 		{
-			{
-				y = lshift(y, -i);
-			}
+			y = lshift(y, -i);
 		}
 	}
+
 	if((L[_0] ^ L[2 + _0]) & 0x80000000L)
 	{
 		z = diff(x, y);
+
 		if(L[_0] & 0x80000000L)
 		{
-			{
-				z->sign = 1 - z->sign;
-			}
+			z->sign = 1 - z->sign;
 		}
 	}
 	else
 	{
 		z = sum(x, y);
+
 		if(L[_0] & 0x80000000L)
 		{
-			{
-				z->sign = 1;
-			}
+			z->sign = 1;
 		}
 	}
 	Bfree(x);
@@ -171,34 +176,41 @@ no_y:
 	bits = zx = z->x;
 	for(i = 0; !*zx; zx++)
 	{
-		{
-			i += 32;
-		}
+		i += 32;
 	}
+
 	i += lo0bits(zx);
+
 	if(i)
 	{
 		rshift(z, i);
 		ex += i;
 	}
+
 	fpi.nbits = z->wds * 32 - hi0bits(z->x[j = z->wds - 1]);
+
 	if(fpi.nbits < 106)
 	{
 		fpi.nbits = 106;
+
 		if(j < 3)
 		{
 			for(i = 0; i <= j; i++)
 			{
 				bits0[i] = bits[i];
 			}
+
 			while(i < 4)
 			{
 				bits0[i++] = 0;
 			}
+
 			bits = bits0;
 		}
 	}
+
 	mode = 2;
+
 	if(ndig <= 0)
 	{
 		if(bufsize < (unsigned)(fpi.nbits * .301029995664) + 10)
@@ -206,15 +218,18 @@ no_y:
 			Bfree(z);
 			return 0;
 		}
+
 		mode = 0;
 	}
+
 	fpi.emin = 1 - 1023 - 53 + 1;
 	fpi.emax = 2046 - 1023 - 106 + 1;
 	fpi.rounding = FPI_Round_near;
 	fpi.sudden_underflow = 0;
 	i = STRTOG_Normal;
 	s = gdtoa(&fpi, ex, bits, &i, mode, ndig, &decpt, &se);
-	b = g__fmt(buf, s, se, decpt, (ULong)z->sign);
+	b = g__fmt(buf, s, se, decpt, (uint32_t)z->sign);
 	Bfree(z);
+
 	return b;
 }

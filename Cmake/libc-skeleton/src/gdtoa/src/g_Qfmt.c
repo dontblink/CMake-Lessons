@@ -34,80 +34,69 @@ THIS SOFTWARE.
 #undef _0
 #undef _1
 
-/* one or the other of IEEE_MC68k or IEEE_8087 should be #defined */
-
-#ifdef IEEE_MC68k
-#define _0 0
-#define _1 1
-#define _2 2
-#define _3 3
-#endif
 #ifdef IEEE_8087
-#define _0 3
-#define _1 2
-#define _2 1
-#define _3 0
+	#define _0 3
+	#define _1 2
+	#define _2 1
+	#define _3 0
+#else
+	#error Something went wrong, IEEE8087 is not defined
 #endif
 
-char*
-#ifdef KR_headers
-	g_Qfmt(buf, V, ndig, bufsize) char* buf;
-char* V;
-int ndig;
-unsigned bufsize;
-#else
-g_Qfmt(char *buf, void *V, int ndig, unsigned bufsize)
-#endif
+char* g_Qfmt(char* buf, void* V, int ndig, unsigned bufsize)
 {
 	static FPI fpi = {113, 1 - 16383 - 113 + 1, 32766 - 16383 - 113 + 1, 1, 0};
-	char *b, *s, *se;
-	ULong bits[4], *L, sign;
-	int decpt, ex, i, mode;
+	char* b;
+	char* s;
+	char* se;
+	uint32_t bits[4];
+	uint32_t* L;
+	uint32_t sign;
+	int decpt;
+	int ex;
+	int i;
+	int mode;
 
 	if(ndig < 0)
 	{
-		{
-			ndig = 0;
-		}
+		ndig = 0;
 	}
 	if(bufsize < (unsigned)ndig + 10)
 	{
-		{
-			return 0;
-		}
+		return 0;
 	}
 
-	L = (ULong*)V;
+	L = (uint32_t*)V;
 	sign = L[_0] & 0x80000000L;
 	bits[3] = L[_0] & 0xffff;
 	bits[2] = L[_1];
 	bits[1] = L[_2];
 	bits[0] = L[_3];
 	b = buf;
-	if((ex = (L[_0] & 0x7fff0000L) >> 16) != 0)
+	if((ex = (int)((L[_0] & 0x7fff0000L) >> 16)) != 0)
 	{
 		if(ex == 0x7fff)
 		{
 			/* Infinity or NaN */
 			if(bits[0] | bits[1] | bits[2] | bits[3])
 			{
-				{
-					b = strcp(b, "NaN");
-				}
+				b = strcp(b, "NaN");
 			}
 			else
 			{
 				b = buf;
+
 				if(sign)
 				{
-					{
-						*b++ = '-';
-					}
+					*b++ = '-';
 				}
+
 				b = strcp(b, "Infinity");
 			}
+
 			return b;
 		}
+
 		i = STRTOG_Normal;
 		bits[3] |= 0x10000;
 	}
@@ -121,27 +110,29 @@ g_Qfmt(char *buf, void *V, int ndig, unsigned bufsize)
 #ifndef IGNORE_ZERO_SIGN
 		if(sign)
 		{
-			{
-				*b++ = '-';
-			}
+			*b++ = '-';
 		}
 #endif
 		*b++ = '0';
 		*b = 0;
+
 		return b;
 	}
+
 	ex -= 0x3fff + 112;
 	mode = 2;
+
 	if(ndig <= 0)
 	{
 		if(bufsize < 48)
 		{
-			{
-				return 0;
-			}
+			return 0;
 		}
+
 		mode = 0;
 	}
+
 	s = gdtoa(&fpi, ex, bits, &i, mode, ndig, &decpt, &se);
+
 	return g__fmt(buf, s, se, decpt, sign);
 }

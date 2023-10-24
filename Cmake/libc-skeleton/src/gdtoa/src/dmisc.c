@@ -35,18 +35,14 @@ THIS SOFTWARE.
 char* dtoa_result;
 #endif
 
-char*
-#ifdef KR_headers
-	rv_alloc(i) int i;
-#else
-rv_alloc(int i)
-#endif
+char* rv_alloc(int i)
 {
-	int k, *r;
+	int k;
+	int* r;
 	size_t j;
 
-	j = sizeof(ULong);
-	for(k = 0; sizeof(Bigint) - sizeof(ULong) - sizeof(int) + j <= (size_t)i; j <<= 1)
+	j = sizeof(uint32_t);
+	for(k = 0; sizeof(Bigint) - sizeof(uint32_t) - sizeof(int) + j <= (size_t)i; j <<= 1)
 	{
 		k++;
 	}
@@ -59,16 +55,10 @@ rv_alloc(int i)
 			(char*)(r + 1);
 }
 
-char *
-#ifdef KR_headers
-	nrv_alloc(s, rve, n) const char *s,
-	char **rve;
-int n;
-#else
-	nrv_alloc(const char* s, char** rve, int n)
-#endif
+char* nrv_alloc(const char* s, char** rve, int n)
 {
-	char *rv, *t;
+	char* rv;
+	char* t;
 
 	t = rv = rv_alloc(n);
 	while((*t = *s++) != 0)
@@ -92,12 +82,7 @@ int n;
  * when MULTIPLE_THREADS is not defined.
  */
 
-void
-#ifdef KR_headers
-	freedtoa(s) char* s;
-#else
-freedtoa(char *s)
-#endif
+void freedtoa(char* s)
 {
 	Bigint* b = (Bigint*)((void*)(s - sizeof(int*)));
 	b->maxwds = 1 << (b->k = *(int*)b);
@@ -110,23 +95,29 @@ freedtoa(char *s)
 #endif
 }
 
-int quorem
-#ifdef KR_headers
-	(b, S) Bigint *b,
-	*S;
-#else
-	(Bigint* b, Bigint* S)
-#endif
+int quorem(Bigint* b, Bigint* S)
 {
 	int n;
-	ULong *bx, *bxe, q, *sx, *sxe;
-#ifdef ULLong
-	ULLong borrow, carry, y, ys;
+	uint32_t* bx;
+	uint32_t* bxe;
+	uint32_t q;
+	uint32_t* sx;
+	uint32_t* sxe;
+#ifndef NO_LONG_LONG
+	uint64_t borrow;
+	uint64_t carry;
+	uint64_t y;
+	uint64_t ys;
 #else
-	ULong borrow, carry, y, ys;
-#ifdef Pack_32
-	ULong si, z, zs;
-#endif
+	uint32_t borrow;
+	uint32_t carry;
+	uint32_t y;
+	uint32_t ys;
+	#ifdef Pack_32
+	uint32_t si;
+	uint32_t z;
+	uint32_t zs;
+	#endif
 #endif
 
 	n = S->wds;
@@ -140,6 +131,7 @@ int quorem
 	{
 		return 0;
 	}
+
 	sx = S->x;
 	sxe = sx + --n;
 	bx = b->x;
@@ -155,16 +147,17 @@ int quorem
 	{
 		borrow = 0;
 		carry = 0;
+
 		do
 		{
-#ifdef ULLong
-			ys = *sx++ * (ULLong)q + carry;
+#ifndef NO_LONG_LONG
+			ys = *sx++ * (uint64_t)q + carry;
 			carry = ys >> 32;
 			y = *bx - (ys & 0xffffffffUL) - borrow;
 			borrow = y >> 32 & 1UL;
 			*bx++ = y & 0xffffffffUL;
 #else
-#ifdef Pack_32
+	#ifdef Pack_32
 			si = *sx++;
 			ys = (si & 0xffff) * q + carry;
 			zs = (si >> 16) * q + (ys >> 16);
@@ -174,25 +167,29 @@ int quorem
 			z = (*bx >> 16) - (zs & 0xffff) - borrow;
 			borrow = (z & 0x10000) >> 16;
 			Storeinc(bx, z, y);
-#else
+	#else
 			ys = *sx++ * q + carry;
 			carry = ys >> 16;
 			y = *bx - (ys & 0xffff) - borrow;
 			borrow = (y & 0x10000) >> 16;
 			*bx++ = y & 0xffff;
-#endif
+	#endif
 #endif
 		} while(sx <= sxe);
+
 		if(!*bxe)
 		{
 			bx = b->x;
+
 			while(--bxe > bx && !*bxe)
 			{
 				--n;
 			}
+
 			b->wds = n;
 		}
 	}
+
 	if(cmp(b, S) >= 0)
 	{
 		q++;
@@ -200,16 +197,17 @@ int quorem
 		carry = 0;
 		bx = b->x;
 		sx = S->x;
+
 		do
 		{
-#ifdef ULLong
+#ifndef NO_LONG_LONG
 			ys = *sx++ + carry;
 			carry = ys >> 32;
 			y = *bx - (ys & 0xffffffffUL) - borrow;
 			borrow = y >> 32 & 1UL;
 			*bx++ = y & 0xffffffffUL;
 #else
-#ifdef Pack_32
+	#ifdef Pack_32
 			si = *sx++;
 			ys = (si & 0xffff) + carry;
 			zs = (si >> 16) + (ys >> 16);
@@ -219,23 +217,26 @@ int quorem
 			z = (*bx >> 16) - (zs & 0xffff) - borrow;
 			borrow = (z & 0x10000) >> 16;
 			Storeinc(bx, z, y);
-#else
+	#else
 			ys = *sx++ + carry;
 			carry = ys >> 16;
 			y = *bx - (ys & 0xffff) - borrow;
 			borrow = (y & 0x10000) >> 16;
 			*bx++ = y & 0xffff;
-#endif
+	#endif
 #endif
 		} while(sx <= sxe);
+
 		bx = b->x;
 		bxe = bx + n;
+
 		if(!*bxe)
 		{
 			while(--bxe > bx && !*bxe)
 			{
 				--n;
 			}
+
 			b->wds = n;
 		}
 	}

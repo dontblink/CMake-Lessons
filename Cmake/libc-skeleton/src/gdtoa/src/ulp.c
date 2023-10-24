@@ -31,17 +31,12 @@ THIS SOFTWARE.
 
 #include "gdtoaimp.h"
 
-double ulp
-#ifdef KR_headers
-	(x) double x;
-#else
-	(double x)
-#endif
+double ulp(double x)
 {
-	Long L;
+	int32_t L;
 	double a = 0.0;
 
-	L = (Long)((word0(x) & Exp_mask) - ((P - 1) * Exp_msk1));
+	L = (int32_t)((word0(x) & Exp_mask) - ((P - 1) * Exp_msk1));
 #ifndef Sudden_Underflow
 	if(L > 0)
 	{
@@ -49,7 +44,7 @@ double ulp
 #ifdef IBM
 		L |= Exp_msk1 >> 4;
 #endif
-		word0(a) = (ULong)L;
+		word0(a) = (uint32_t)L;
 		word1(a) = 0;
 #ifndef Sudden_Underflow
 	}
@@ -58,14 +53,14 @@ double ulp
 		L = -L >> Exp_shift;
 		if(L < Exp_shift)
 		{
-			word0(a) = (ULong)(0x80000 >> L);
+			word0(a) = (uint32_t)(0x80000 >> L);
 			word1(a) = 0;
 		}
 		else
 		{
 			word0(a) = 0;
 			L -= Exp_shift;
-			word1(a) = (L >= 31) ? 1U : (ULong)(1 << (31 - L));
+			word1(a) = (L >= 31) ? 1U : (uint32_t)(1 << (31 - L));
 		}
 	}
 #endif

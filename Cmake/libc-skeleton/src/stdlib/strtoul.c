@@ -75,15 +75,15 @@
  * Ignores `locale' stuff.  Assumes that the upper and lower case
  * alphabets and digits are each contiguous.
  */
-unsigned long strtoul(nptr, endptr, base) const char* nptr;
-char** endptr;
-register int base;
+unsigned long strtoul(const char* nptr, char** endptr, int base)
 {
-	register const char* s = nptr;
-	register unsigned long acc;
-	register int c;
-	register unsigned long cutoff;
-	register int neg = 0, any, cutlim;
+	const char* s = nptr;
+	unsigned long acc;
+	int c;
+	unsigned long cutoff;
+	int neg = 0;
+	int any;
+	int cutlim;
 
 	/*
 	 * See strtol for comments as to the logic used.
@@ -92,6 +92,7 @@ register int base;
 	{
 		c = *s++;
 	} while(isspace(c));
+
 	if(c == '-')
 	{
 		neg = 1;
@@ -101,6 +102,7 @@ register int base;
 	{
 		c = *s++;
 	}
+
 	if((base == 0 || base == 16) && c == '0' && (*s == 'x' || *s == 'X'))
 	{
 		c = s[1];
@@ -113,14 +115,15 @@ register int base;
 		s += 2;
 		base = 2;
 	}
+
 	if(base == 0)
 	{
-		{
-			base = c == '0' ? 8 : 10;
-		}
+		base = c == '0' ? 8 : 10;
 	}
+
 	cutoff = (unsigned long)ULONG_MAX / (unsigned long)base;
 	cutlim = (int)((unsigned long)ULONG_MAX % (unsigned long)base);
+
 	for(acc = 0, any = 0;; c = *s++)
 	{
 		if(isdigit(c))
@@ -150,6 +153,7 @@ register int base;
 			acc += (unsigned long)c;
 		}
 	}
+
 	if(any < 0)
 	{
 		acc = ULONG_MAX;
@@ -159,9 +163,11 @@ register int base;
 	{
 		acc = -acc;
 	}
+
 	if(endptr != 0)
 	{
 		*endptr = (char*)(uintptr_t)(any ? s - 1 : nptr);
 	}
+
 	return (acc);
 }

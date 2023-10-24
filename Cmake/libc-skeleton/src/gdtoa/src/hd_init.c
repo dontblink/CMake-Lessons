@@ -33,23 +33,18 @@ THIS SOFTWARE.
 
 unsigned char hexdig[256];
 
-static void
-#ifdef KR_headers
-	htinit(h, s, inc) unsigned char* h;
-const unsigned char* s;
-int inc;
-#else
-	htinit(unsigned char* h, const unsigned char* s, int inc)
-#endif
+static void htinit(unsigned char* h, const unsigned char* s, int inc)
 {
-	int i, j;
+	int i;
+	int j;
+
 	for(i = 0; (j = s[i]) != 0; i++)
 	{
 		h[j] = (unsigned char)(i + inc);
 	}
 }
 
-void hexdig_init_D2A(Void)
+void hexdig_init(void)
 {
 	htinit(hexdig, (const unsigned char*)"0123456789", 0x10);
 	htinit(hexdig, (const unsigned char*)"abcdef", 0x10 + 10);

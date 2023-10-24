@@ -31,18 +31,17 @@ THIS SOFTWARE.
 
 #include "gdtoaimp.h"
 
-Bigint*
-#ifdef KR_headers
-	sum(a, b) Bigint* a;
-Bigint* b;
-#else
-	sum(Bigint* a, Bigint* b)
-#endif
+Bigint* sum(Bigint* a, Bigint* b)
 {
 	Bigint* c;
-	ULong carry, *xc, *xa, *xb, *xe, y;
+	uint32_t carry;
+	uint32_t* xc;
+	uint32_t* xa;
+	uint32_t* xb;
+	uint32_t* xe;
+	uint32_t y;
 #ifdef Pack_32
-	ULong z;
+	uint32_t z;
 #endif
 
 	if(a->wds < b->wds)

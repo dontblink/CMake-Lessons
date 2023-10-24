@@ -63,26 +63,19 @@ THIS SOFTWARE.
  *	   guarantee that the floating-point calculation has given
  *	   the correctly rounded result.  For k requested digits and
  *	   "uniformly" distributed input, the probability is
- *	   something like 10^(k-15) that we must resort to the Long
+ *	   something like 10^(k-15) that we must resort to the int32_t
  *	   calculation.
  */
 
 #ifdef Honor_FLT_ROUNDS
-#define Rounding rounding
-#undef Check_FLT_ROUNDS
-#define Check_FLT_ROUNDS
+	#define Rounding rounding
+	#undef Check_FLT_ROUNDS
+	#define Check_FLT_ROUNDS
 #else
-#define Rounding Flt_Rounds
+	#define Rounding Flt_Rounds
 #endif
 
-char* dtoa
-#ifdef KR_headers
-	(d, mode, ndigits, decpt, sign, rve) double d;
-int mode, ndigits, *decpt, *sign;
-char** rve;
-#else
-	(double d, int mode, int ndigits, int* decpt, int* sign, char** rve)
-#endif
+char* dtoa(double d, int mode, int ndigits, int* decpt, int* sign, char** rve)
 {
 	/*	Arguments ndigits, decpt, sign are similar to those
 	   of ecvt and fcvt; trailing zeros are suppressed from
@@ -118,21 +111,50 @@ char** rve;
 		   to hold the suppressed trailing zeros.
 	   */
 
-	int bbits, b2, b5, be, dig, i, ieps, ilim = 0, ilim0, ilim1 = 0, j, j1, k, k0, k_check,
-										 leftright, m2, m5, s2, s5, spec_case, try_quick;
-	Long L;
+	int bbits;
+	int b2;
+	int b5;
+	int be;
+	int dig;
+	int i;
+	int ieps;
+	int ilim = 0;
+	int ilim0;
+	int ilim1 = 0;
+	int j;
+	int j1;
+	int k;
+	int k0;
+	int k_check;
+	int leftright;
+	int m2;
+	int m5;
+	int s2;
+	int s5;
+	int spec_case;
+	int try_quick;
+	int32_t L;
 #ifndef Sudden_Underflow
 	int denorm;
-	ULong x;
+	uint32_t x;
 #endif
-	Bigint *b, *b1, *delta, *mlo = NULL, *mhi, *S;
-	double d2, ds, eps;
-	char *s, *s0;
+	Bigint* b;
+	Bigint* b1;
+	Bigint* delta;
+	Bigint* mlo = NULL;
+	Bigint* mhi;
+	Bigint* S;
+	double d2;
+	double ds;
+	double eps;
+	char* s;
+	char* s0;
 #ifdef Honor_FLT_ROUNDS
 	int rounding;
 #endif
 #ifdef SET_INEXACT
-	int inexact, oldinexact;
+	int inexact;
+	int oldinexact;
 #endif
 
 #ifndef MULTIPLE_THREADS
@@ -151,26 +173,24 @@ char** rve;
 	}
 	else
 	{
-		{
-			*sign = 0;
-		}
+		*sign = 0;
 	}
 
 #if defined(IEEE_Arith) + defined(VAX)
-#ifdef IEEE_Arith
+	#ifdef IEEE_Arith
 	if((word0(d) & Exp_mask) == Exp_mask)
-#else
+	#else
 	if(word0(d) == 0x8000)
-#endif
+	#endif
 	{
 		/* Infinity or NaN */
 		*decpt = 9999;
-#ifdef IEEE_Arith
+	#ifdef IEEE_Arith
 		if(!word1(d) && !(word0(d) & 0xfffff))
 		{
 			return nrv_alloc("Infinity", rve, 8);
 		}
-#endif
+	#endif
 		return nrv_alloc("NaN", rve, 3);
 	}
 #endif
@@ -309,11 +329,11 @@ if(mode < 0 || mode > 9)
 }
 
 #ifndef SET_INEXACT
-#ifdef Check_FLT_ROUNDS
+	#ifdef Check_FLT_ROUNDS
 try_quick = Rounding == 1;
-#else
+	#else
 try_quick = 1;
-#endif
+	#endif
 #endif /*SET_INEXACT*/
 
 if(mode > 5)
@@ -450,19 +470,23 @@ if(ilim >= 0 && ilim <= Quick_max && try_quick)
 		{
 			L = (int)dval(d);
 			dval(d) -= L;
-			*s++ = '0' + (char)L;
+			*s++ = (char)('0' + L);
+
 			if(dval(d) < dval(eps))
 			{
 				goto ret1;
 			}
+
 			if(1. - dval(d) < dval(eps))
 			{
 				goto bump_up;
 			}
+
 			if(++i >= ilim)
 			{
 				break;
 			}
+
 			dval(eps) *= 10.;
 			dval(d) *= 10.;
 		}
@@ -474,14 +498,17 @@ if(ilim >= 0 && ilim <= Quick_max && try_quick)
 		dval(eps) *= tens[ilim - 1];
 		for(i = 1;; i++, dval(d) *= 10.)
 		{
-			L = (Long)(dval(d));
+			L = (int32_t)(dval(d));
 			// Formerly if(!(dval(d) -= L))
 			dval(d) -= L;
+
 			if(fabs(dval(d)) <= DBL_EPSILON)
 			{
 				ilim = i;
 			}
-			*s++ = '0' + (char)L;
+
+			*s++ = (char)('0' + L);
+
 			if(i == ilim)
 			{
 				if(dval(d) > 0.5 + dval(eps))
@@ -529,7 +556,7 @@ if(be >= 0 && k <= Int_max)
 	}
 	for(i = 1;; i++, dval(d) *= 10.)
 	{
-		L = (Long)(dval(d) / ds);
+		L = (int32_t)(dval(d) / ds);
 		dval(d) -= L * ds;
 #ifdef Check_FLT_ROUNDS
 		/* If FLT_ROUNDS == 2, L will usually be high by 1 */
@@ -539,7 +566,7 @@ if(be >= 0 && k <= Int_max)
 			dval(d) += ds;
 		}
 #endif
-		*s++ = '0' + (char)L;
+		*s++ = (char)('0' + L);
 		if(fabs(dval(d)) <= DBL_EPSILON)
 		{
 #ifdef SET_INEXACT
@@ -596,7 +623,7 @@ if(leftright)
 		denorm ? be + (Bias + (P - 1) - 1 + 1) :
 #endif
 #ifdef IBM
-			   1 + 4 * P - 3 - bbits + ((bbits + be - 1) & 3);
+				   1 + 4 * P - 3 - bbits + ((bbits + be - 1) & 3);
 #else
 				1 + P - bbits;
 #endif
@@ -760,9 +787,9 @@ if(leftright)
 		Bfree(delta);
 #ifndef ROUND_BIASED
 		if(j1 == 0 && mode != 1 && (!(word1(d) & 1))
-#ifdef Honor_FLT_ROUNDS
+	#ifdef Honor_FLT_ROUNDS
 		   && rounding >= 1
-#endif
+	#endif
 		)
 		{
 			if(dig == '9')
@@ -773,12 +800,12 @@ if(leftright)
 			{
 				dig++;
 			}
-#ifdef SET_INEXACT
+	#ifdef SET_INEXACT
 			else if(!b->x[0] && b->wds <= 1)
 			{
 				inexact = 0;
 			}
-#endif
+	#endif
 			*s++ = (char)dig;
 			goto ret;
 		}
@@ -841,7 +868,7 @@ if(leftright)
 				*s++ = '9';
 				goto roundoff;
 			}
-			*s++ = (char)dig + 1;
+			*s++ = (char)(dig + 1);
 			goto ret;
 		}
 #ifdef Honor_FLT_ROUNDS

@@ -31,30 +31,30 @@ THIS SOFTWARE.
 
 #include "gdtoaimp.h"
 
-int
-#ifdef KR_headers
-	strtoIg(s00, se, fpi, exp, B, rvp) CONST char* s00;
-char** se;
-FPI* fpi;
-Long* exp;
-Bigint** B;
-int* rvp;
-#else
-strtoIg(CONST char *s00, char **se, FPI *fpi, Long *exp, Bigint **B, int *rvp)
-#endif
+int strtoIg(const char* s00, char** se, FPI* fpi, int32_t* exp, Bigint** B, int* rvp)
 {
-	Bigint *b, *b1;
-	int i, nb, nw, nw1, rv, rv1, swap;
-	unsigned int nb1, nb11;
-	Long e1;
+	Bigint* b;
+	Bigint* b1;
+	int i;
+	int nb;
+	int nw;
+	int nw1;
+	int rv;
+	int rv1;
+	int swap;
+	unsigned nb1;
+	unsigned nb11;
+	int32_t e1;
 
 	b = *B;
 	rv = strtodg(s00, se, fpi, exp, b->x);
+
 	if(!(rv & STRTOG_Inexact))
 	{
 		B[1] = 0;
 		return *rvp = rv;
 	}
+
 	e1 = exp[0];
 	rv1 = rv ^ STRTOG_Inexact;
 	b1 = Balloc(b->k);
@@ -64,31 +64,33 @@ strtoIg(CONST char *s00, char **se, FPI *fpi, Long *exp, Bigint **B, int *rvp)
 	nb11 = (nb1 - 1) & 31;
 	nw = b->wds;
 	nw1 = nw - 1;
+
 	if(rv & STRTOG_Inexlo)
 	{
 		swap = 0;
 		b1 = increment(b1);
+
 		if(fpi->sudden_underflow && (rv & STRTOG_Retmask) == STRTOG_Zero)
 		{
 			b1->x[0] = 0;
-			b1->x[nw1] = (ULong)(1L << nb11);
+			b1->x[nw1] = (uint32_t)(1L << nb11);
 			rv1 += STRTOG_Normal - STRTOG_Zero;
 			rv1 &= ~STRTOG_Underflow;
 			goto swapcheck;
 		}
-		if(b1->wds > nw || (nb1 && b1->x[nw1] & 1L << nb1))
+
+		if(b1->wds > nw || (nb1 && b1->x[nw1] & 1UL << nb1))
 		{
 			if(++e1 > fpi->emax)
 			{
-				{
-					rv1 = STRTOG_Infinite | STRTOG_Inexhi;
-				}
+				rv1 = STRTOG_Infinite | STRTOG_Inexhi;
 			}
+
 			rshift(b1, 1);
 		}
 		else if((rv & STRTOG_Retmask) == STRTOG_Denormal)
 		{
-			if(b1->x[nw1] & 1L << nb11)
+			if(b1->x[nw1] & 1UL << nb11)
 			{
 				rv1 += STRTOG_Normal - STRTOG_Denormal;
 				rv1 &= ~STRTOG_Underflow;
@@ -98,6 +100,7 @@ strtoIg(CONST char *s00, char **se, FPI *fpi, Long *exp, Bigint **B, int *rvp)
 	else
 	{
 		swap = STRTOG_Neg;
+
 		if((rv & STRTOG_Retmask) == STRTOG_Infinite)
 		{
 			b1 = set_ones(b1, nb);
@@ -105,36 +108,33 @@ strtoIg(CONST char *s00, char **se, FPI *fpi, Long *exp, Bigint **B, int *rvp)
 			rv1 = STRTOG_Normal | STRTOG_Inexlo;
 			goto swapcheck;
 		}
+
 		decrement(b1);
+
 		if((rv & STRTOG_Retmask) == STRTOG_Denormal)
 		{
 			for(i = nw1; !b1->x[i]; --i)
 			{
+				if(!i)
 				{
-					if(!i)
-					{
-						rv1 = STRTOG_Zero | STRTOG_Inexlo;
-						break;
-					}
+					rv1 = STRTOG_Zero | STRTOG_Inexlo;
+					break;
 				}
 			}
 			goto swapcheck;
 		}
-		if(!(b1->x[nw1] & 1L << nb11))
+
+		if(!(b1->x[nw1] & 1UL << nb11))
 		{
 			if(e1 == fpi->emin)
 			{
 				if(fpi->sudden_underflow)
 				{
-					{
-						rv1 += STRTOG_Zero - STRTOG_Normal;
-					}
+					rv1 += STRTOG_Zero - STRTOG_Normal;
 				}
 				else
 				{
-					{
-						rv1 += STRTOG_Denormal - STRTOG_Normal;
-					}
+					rv1 += STRTOG_Denormal - STRTOG_Normal;
 				}
 				rv1 |= STRTOG_Underflow;
 			}
@@ -146,6 +146,7 @@ strtoIg(CONST char *s00, char **se, FPI *fpi, Long *exp, Bigint **B, int *rvp)
 			}
 		}
 	}
+
 swapcheck:
 	if(swap ^ (rv & STRTOG_Neg))
 	{
@@ -163,5 +164,6 @@ swapcheck:
 		B[1] = b1;
 		exp[1] = e1;
 	}
+
 	return rv;
 }

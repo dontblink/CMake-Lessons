@@ -139,20 +139,24 @@
  * a data set that will trigger the worst case is nonexistent.  Heapsort's
  * only advantage over quicksort is that it requires little additional memory.
  */
-int heapsort_r(vbase, nmemb, size, thunk, compar) void* vbase;
-size_t nmemb, size;
-void* thunk;
-int (*compar)(void*, const void*, const void*);
+int heapsort_r(void* vbase, size_t nmemb, size_t size, void* thunk,
+			   int (*compar)(void*, const void*, const void*))
 {
-	size_t cnt, i, j, l;
-	char tmp, *tmp1, *tmp2;
-	char *base, *k, *p, *t;
+	size_t cnt;
+	size_t i;
+	size_t j;
+	size_t l;
+	char tmp;
+	char* tmp1;
+	char* tmp2;
+	char* base;
+	char* k;
+	char* p;
+	char* t;
 
 	if(nmemb <= 1)
 	{
-		{
-			return (0);
-		}
+		return (0);
 	}
 
 	if(!size)
@@ -163,9 +167,7 @@ int (*compar)(void*, const void*, const void*);
 
 	if((k = malloc(size)) == NULL)
 	{
-		{
-			return (-1);
-		}
+		return (-1);
 	}
 
 	/*
@@ -175,7 +177,9 @@ int (*compar)(void*, const void*, const void*);
 	base = (char*)vbase - size;
 
 	for(l = nmemb / 2 + 1; --l;)
+	{
 		CREATE(l, nmemb, i, j, t, p, size, cnt, tmp);
+	}
 
 	/*
 	 * For each element of the heap, save the largest element into its
@@ -189,6 +193,8 @@ int (*compar)(void*, const void*, const void*);
 		--nmemb;
 		SELECT(i, j, nmemb, t, p, size, k, cnt, tmp1, tmp2);
 	}
+
 	free(k);
+
 	return (0);
 }

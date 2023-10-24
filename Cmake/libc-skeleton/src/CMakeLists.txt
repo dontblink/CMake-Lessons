@@ -52,6 +52,7 @@ target_compile_definitions(gdtoa INTERFACE
                            GDTOA_NO_ASSERT
                            NO_FENV_H)
 
+#Libc
 add_library(c)
 
 # private causes libc target to use the interface properties of the printf library
@@ -71,6 +72,16 @@ target_include_directories(c SYSTEM
 		$<TARGET_PROPERTY:openlibm,INTERFACE_INCLUDE_DIRECTORIES>
 )
 
+target_compile_definitions(c
+	INTERFACE
+		$<$<BOOL:${HIDE_UNIMPLEMENTED_C_APIS}>:DISABLE_UNIMPLEMENTED_LIBC_APIS>
+	PUBLIC
+		$<$<BOOL:${ENABLE_GNU_EXTENSIONS}>:_GNU_SOURCE>
+	PRIVATE
+		# Define a DEBUG symbol if we're using a Debug or Relase with Debug Info buildtype
+		$<$<OR:$<STREQUAL:${CMAKE_BUILD_TYPE},Debug>,$<STREQUAL:${CMAKE_BUILD_TYPE},RelWithDebInfo>>:DEBUG>
+	)
+
 list(APPEND libc_private_flags
      "-Wno-unknown-pragmas"
      "-Wno-nonnull-compare")
@@ -79,17 +90,17 @@ list(APPEND libc_public_flags
      "")
 
 if (DISABLE_BUILTINS)
-	list(APPEND libc_private_flags "-fno-builtin")
+	list(APPEND libc_private_flags -fno-builtin)
 endif()
 
 if(DISABLE_STACK_PROTECTION)
-	list(APPEND libc_public_flags "-fno-stack-protector")
+	list(APPEND libc_public_flags -fno-stack-protector)
 endif()
 
 if(NOSTDINC_FOR_DEPENDENTS)
-	list(APPEND libc_public_flags "-nostdinc")
+	list(APPEND libc_public_flags -nostdinc)
 else()
-	list(APPEND libc_private_flags "-nostdinc")
+	list(APPEND libc_private_flags -nostdinc)
 endif()
 
 apply_supported_compiler_flags(C c PRIVATE libc_private_flags)
@@ -103,17 +114,6 @@ if("${CMAKE_CROSSCOMPILING}")
 		apply_supported_linker_flags(C c INTERFACE "-nolibc")
 	endif()
 endif()
-
-
-target_compile_definitions(c
-	INTERFACE
-		$<$<BOOL:${HIDE_UNIMPLEMENTED_C_APIS}>:DISABLE_UNIMPLEMENTED_LIBC_APIS>
-	PUBLIC
-		$<$<BOOL:${ENABLE_GNU_EXTENSIONS}>:_GNU_SOURCE>
-	PRIVATE
-		# Define a DEBUG symbol if we're using a Debug or Relase with Debug Info buildtype
-		$<$<OR:$<STREQUAL:${CMAKE_BUILD_TYPE},Debug>,$<STREQUAL:${CMAKE_BUILD_TYPE},RelWithDebInfo>>:DEBUG>
-	)
 
 # Assert Module
 target_sources(c PRIVATE

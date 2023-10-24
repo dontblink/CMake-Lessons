@@ -1,3 +1,0 @@
-/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/CMakeFiles/openlibm-populate.dir
-/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/CMakeFiles/edit_cache.dir
-/mnt/c/code/EA/Cmake/libc-skeleton/buildresults/_deps/openlibm-subbuild/CMakeFiles/rebuild_cache.dir

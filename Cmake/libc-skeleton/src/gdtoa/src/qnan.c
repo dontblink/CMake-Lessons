@@ -45,22 +45,19 @@ SOFTWARE.
 #include "arith.h"
 #include <stdio.h>
 
-#ifndef Long
-#define Long long
+#ifndef int32_t
+	#define int32_t long
 #endif
 
-typedef unsigned Long Ulong;
+typedef unsigned int32_t Ulong;
 
 #undef HAVE_IEEE
 #ifdef IEEE_8087
-#define _0 1
-#define _1 0
-#define HAVE_IEEE
-#endif
-#ifdef IEEE_MC68k
-#define _0 0
-#define _1 1
-#define HAVE_IEEE
+	#define _0 1
+	#define _1 0
+	#define HAVE_IEEE
+#else
+	#error Something went wrong, IEEE8087 is not defined
 #endif
 
 #define UL (unsigned long)
@@ -73,10 +70,10 @@ int main(void)
 		float f;
 		double d;
 		Ulong L[4];
-#ifndef NO_LONG_LONG
+	#ifndef NO_LONG_LONG
 		unsigned short u[5];
 		long double D;
-#endif
+	#endif
 	} U;
 	U a, b, c;
 	int i;
@@ -89,12 +86,12 @@ int main(void)
 	c.d = a.d - b.d; /* quiet NaN */
 	printf("#define d_QNAN0 0x%lx\n", UL c.L[0]);
 	printf("#define d_QNAN1 0x%lx\n", UL c.L[1]);
-#ifdef NO_LONG_LONG
+	#ifdef NO_LONG_LONG
 	for(i = 0; i < 4; i++)
 		printf("#define ld_QNAN%d 0xffffffff\n", i);
 	for(i = 0; i < 5; i++)
 		printf("#define ldus_QNAN%d 0xffff\n", i);
-#else
+	#else
 	b.D = c.D = a.d;
 	if(printf("") < 0)
 		c.D = 37; /* never executed; just defeat optimization */
@@ -104,7 +101,7 @@ int main(void)
 		printf("#define ld_QNAN%d 0x%lx\n", i, UL a.L[i]);
 	for(i = 0; i < 5; i++)
 		printf("#define ldus_QNAN%d 0x%x\n", i, a.u[i]);
-#endif
+	#endif
 #endif /* HAVE_IEEE */
 	return 0;
 }

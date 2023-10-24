@@ -17,7 +17,7 @@
 // clang-format on
 
 #pragma mark - Declarations -
-
+static void* input_thunk_int = (void*)0xDEADBEEF;
 /* 26 items -- even */
 static const char* s[] = {"Bob",	"Alice", "John",   "Ceres",	  "Helga",	 "Drepper", "Emeralda",
 						  "Zoran",	"Momo",	 "Frank",  "Pema",	  "Xavier",	 "Yeva",	"Gedun",
@@ -59,10 +59,16 @@ static int cmp64(void* thunk, const void* a, const void* b)
 	return *ua < *ub ? -1 : *ua != *ub;
 }
 
+static int icmp_thunk_check(void* thunk, const void* a, const void* b)
+{
+	assert_ptr_equal(thunk, input_thunk_int);
+	return *(const int*)a - *(const int*)b;
+}
+
 #pragma mark - Private Test Functions -
 static void qsort_r_string_test(void** state)
 {
-	void* thunk = NULL; // unused in these examples, but we want to test API
+	void* thunk = NULL;
 	size_t len = sizeof(s) / sizeof(*s);
 
 	qsort_r(s, len, sizeof(*s), thunk, scmp);
@@ -70,6 +76,18 @@ static void qsort_r_string_test(void** state)
 	for(size_t i = 0; i < len; i++)
 	{
 		assert_int_equal(strcmp(s[i], s_sorted[i]), 0);
+	}
+}
+
+static void qsort_r_int_test_thunk_not_null(void** state)
+{
+	void* thunk = input_thunk_int;
+	size_t len = sizeof(n) / sizeof(*n);
+	qsort_r(n, len, sizeof(*n), thunk, icmp_thunk_check);
+
+	for(size_t i = 0; i < len; i++)
+	{
+		assert_int_equal(n[i], n_sorted[i]);
 	}
 }
 
@@ -170,9 +188,8 @@ static void qsort_r_uint64_test(void** state)
 int qsort_r_tests(void)
 {
 	const struct CMUnitTest qsort_r_tests[] = {
-		cmocka_unit_test(qsort_r_string_test),
-		cmocka_unit_test(qsort_r_char_test),
-		cmocka_unit_test(qsort_r_int_test),
+		cmocka_unit_test(qsort_r_string_test), cmocka_unit_test(qsort_r_char_test),
+		cmocka_unit_test(qsort_r_int_test),	   cmocka_unit_test(qsort_r_int_test_thunk_not_null),
 		cmocka_unit_test(qsort_r_uint64_test),
 	};
 

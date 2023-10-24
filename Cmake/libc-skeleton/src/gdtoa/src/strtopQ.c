@@ -34,35 +34,22 @@ THIS SOFTWARE.
 #undef _0
 #undef _1
 
-/* one or the other of IEEE_MC68k or IEEE_8087 should be #defined */
-
-#ifdef IEEE_MC68k
-#define _0 0
-#define _1 1
-#define _2 2
-#define _3 3
-#endif
 #ifdef IEEE_8087
-#define _0 3
-#define _1 2
-#define _2 1
-#define _3 0
+	#define _0 3
+	#define _1 2
+	#define _2 1
+	#define _3 0
+#else
+	#error Something went wrong, IEEE8087 is not defined
 #endif
 
-int
-#ifdef KR_headers
-	strtopQ(s, sp, V) CONST char* s;
-char** sp;
-void* V;
-#else
-strtopQ(CONST char *s, char **sp, void *V)
-#endif
+int strtopQ(const char* s, char** sp, void* V)
 {
 	static FPI fpi = {113, 1 - 16383 - 113 + 1, 32766 - 16383 - 113 + 1, 1, SI};
-	ULong bits[4];
-	Long exp;
+	uint32_t bits[4];
+	int32_t exp;
 	int k;
-	ULong* L = (ULong*)V;
+	uint32_t* L = (uint32_t*)V;
 
 	k = strtodg(s, sp, &fpi, &exp, bits);
 	switch(k & STRTOG_Retmask)

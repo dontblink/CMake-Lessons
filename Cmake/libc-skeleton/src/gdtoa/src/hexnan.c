@@ -31,20 +31,14 @@ THIS SOFTWARE.
 
 #include "gdtoaimp.h"
 
-static void
-#ifdef KR_headers
-	L_shift(x, x1, i) ULong* x;
-const ULong* x1;
-int i;
-#else
-	L_shift(ULong* x, const ULong* x1, int i)
-#endif
+static void L_shift(uint32_t* x, const uint32_t* x1, int i)
 {
 	int j;
 
 	i = 8 - i;
 	i <<= 2;
 	j = ULbits - i;
+
 	do
 	{
 		*x |= x[1] << j;
@@ -52,43 +46,49 @@ int i;
 	} while(++x < x1);
 }
 
-int
-#ifdef KR_headers
-	hexnan(sp, fpi, x0) CONST char** sp;
-FPI* fpi;
-ULong* x0;
-#else
-hexnan( CONST char **sp, FPI *fpi, ULong *x0)
-#endif
+int hexnan(const char** sp, FPI* fpi, uint32_t* x0)
 {
-	ULong c, h, *x, *x1, *xe;
-	CONST char* s;
-	int havedig, hd0, i, nbits;
+	uint32_t c;
+	uint32_t h;
+	uint32_t* x;
+	uint32_t* x1;
+	uint32_t* xe;
+	const char* s;
+	int havedig;
+	int hd0;
+	int i;
+	int nbits;
 
 	if(!hexdig['0'])
 	{
-		hexdig_init_D2A();
+		hexdig_init();
 	}
+
 	nbits = fpi->nbits;
 	x = x0 + (nbits >> kshift);
+
 	if(nbits & kmask)
 	{
 		x++;
 	}
+
 	*--x = 0;
 	x1 = xe = x;
 	havedig = hd0 = i = 0;
 	s = *sp;
+
 	/* allow optional initial 0x or 0X */
-	while((c = *(CONST unsigned char*)(s + 1)) && c <= ' ')
+	while((c = *(const unsigned char*)(s + 1)) && c <= ' ')
 	{
 		++s;
 	}
-	if(s[1] == '0' && (s[2] == 'x' || s[2] == 'X') && *(CONST unsigned char*)(s + 3) > ' ')
+
+	if(s[1] == '0' && (s[2] == 'x' || s[2] == 'X') && *(const unsigned char*)(s + 3) > ' ')
 	{
 		s += 2;
 	}
-	while((c = *(CONST unsigned char*)++s))
+
+	while((c = *(const unsigned char*)++s))
 	{
 		if(!(h = hexdig[c]))
 		{
@@ -100,32 +100,39 @@ hexnan( CONST char **sp, FPI *fpi, ULong *x0)
 					{
 						L_shift(x, x1, i);
 					}
+
 					if(x <= x0)
 					{
 						i = 8;
 						continue;
 					}
+
 					hd0 = havedig;
 					*--x = 0;
 					x1 = x;
 					i = 0;
 				}
-				while(*(CONST unsigned char*)(s + 1) <= ' ')
+
+				while(*(const unsigned char*)(s + 1) <= ' ')
 				{
 					++s;
 				}
+
 				if(s[1] == '0' && (s[2] == 'x' || s[2] == 'X') &&
-				   *(CONST unsigned char*)(s + 3) > ' ')
+				   *(const unsigned char*)(s + 3) > ' ')
 				{
 					s += 2;
 				}
+
 				continue;
 			}
+
 			if(/*(*/ c == ')' && havedig)
 			{
 				*sp = s + 1;
 				break;
 			}
+
 #ifndef GDTOA_NON_PEDANTIC_NANCHECK
 			do
 			{
@@ -134,30 +141,38 @@ hexnan( CONST char **sp, FPI *fpi, ULong *x0)
 					*sp = s + 1;
 					break;
 				}
-			} while((c = (ULong) * ++s));
+			} while((c = (uint32_t) * ++s));
 #endif
+
 			return STRTOG_NaN;
 		}
+
 		havedig++;
+
 		if(++i > 8)
 		{
 			if(x <= x0)
 			{
 				continue;
 			}
+
 			i = 1;
 			*--x = 0;
 		}
+
 		*x = (*x << 4) | (h & 0xf);
 	}
+
 	if(!havedig)
 	{
 		return STRTOG_NaN;
 	}
+
 	if(x < x1 && i < 8)
 	{
 		L_shift(x, x1, i);
 	}
+
 	if(x > x0)
 	{
 		x1 = x0;
@@ -165,6 +180,7 @@ hexnan( CONST char **sp, FPI *fpi, ULong *x0)
 		{
 			*x1++ = *x++;
 		} while(x <= xe);
+
 		do
 		{
 			*x1++ = 0;
@@ -175,20 +191,23 @@ hexnan( CONST char **sp, FPI *fpi, ULong *x0)
 		/* truncate high-order word if necessary */
 		if((i = nbits & (ULbits - 1)) != 0)
 		{
-			*xe &= ((ULong)0xffffffff) >> (ULbits - i);
+			*xe &= ((uint32_t)0xffffffff) >> (ULbits - i);
 		}
 	}
+
 	for(x1 = xe;; --x1)
 	{
 		if(*x1 != 0)
 		{
 			break;
 		}
+
 		if(x1 == x0)
 		{
 			*x1 = 1;
 			break;
 		}
 	}
+
 	return STRTOG_NaNbits;
 }

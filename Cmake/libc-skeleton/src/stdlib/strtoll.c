@@ -44,9 +44,12 @@ long long int strtoll(const char* nptr, char** endptr, int base)
 {
 	const char* s;
 	/* LONGLONG */
-	long long int acc, cutoff;
+	long long int acc;
+	long long int cutoff;
 	int c;
-	int neg, any, cutlim;
+	int neg;
+	int any;
+	int cutlim;
 
 	/* endptr may be NULL */
 
@@ -89,9 +92,7 @@ long long int strtoll(const char* nptr, char** endptr, int base)
 		neg = 0;
 		if(c == '+')
 		{
-			{
-				c = *s++;
-			}
+			c = *s++;
 		}
 	}
 	if((base == 0 || base == 16) && c == '0' && (*s == 'x' || *s == 'X'))
@@ -102,9 +103,7 @@ long long int strtoll(const char* nptr, char** endptr, int base)
 	}
 	if(base == 0)
 	{
-		{
-			base = c == '0' ? 8 : 10;
-		}
+		base = c == '0' ? 8 : 10;
 	}
 
 	/*
@@ -141,33 +140,23 @@ long long int strtoll(const char* nptr, char** endptr, int base)
 	{
 		if(isdigit(c))
 		{
-			{
-				c -= '0';
-			}
+			c -= '0';
 		}
 		else if(isalpha(c))
 		{
-			{
-				c -= isupper(c) ? 'A' - 10 : 'a' - 10;
-			}
+			c -= isupper(c) ? 'A' - 10 : 'a' - 10;
 		}
 		else
 		{
-			{
-				break;
-			}
+			break;
 		}
 		if(c >= base)
 		{
-			{
-				break;
-			}
+			break;
 		}
 		if(any < 0)
 		{
-			{
-				continue;
-			}
+			continue;
 		}
 		if(neg)
 		{
@@ -200,10 +189,12 @@ long long int strtoll(const char* nptr, char** endptr, int base)
 			}
 		}
 	}
+
 	if(endptr != 0)
 	{
 		/* LINTED interface specification */
 		*endptr = (char*)(uintptr_t)(any ? s - 1 : nptr);
 	}
+
 	return (acc);
 }

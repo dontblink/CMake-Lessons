@@ -34,28 +34,15 @@ THIS SOFTWARE.
 #undef _0
 #undef _1
 
-/* one or the other of IEEE_MC68k or IEEE_8087 should be #defined */
-
-#ifdef IEEE_MC68k
-#define _0 0
-#define _1 1
-#define _2 2
-#endif
 #ifdef IEEE_8087
-#define _0 2
-#define _1 1
-#define _2 0
+	#define _0 2
+	#define _1 1
+	#define _2 0
+#else
+	#error Something went wrong, IEEE8087 is not defined
 #endif
 
-void
-#ifdef KR_headers
-	ULtoxL(L, bits, exp, k) ULong* L;
-const ULong* bits;
-Long exp;
-int k;
-#else
-ULtoxL(ULong *L, const ULong *bits, Long exp, int k)
-#endif
+void ULtoxL(uint32_t* L, const uint32_t* bits, int32_t exp, int k)
 {
 	switch(k & STRTOG_Retmask)
 	{
@@ -67,7 +54,7 @@ ULtoxL(ULong *L, const ULong *bits, Long exp, int k)
 		case STRTOG_Normal:
 		case STRTOG_Denormal:
 		case STRTOG_NaNbits:
-			L[_0] = (ULong)((exp + 0x3fff + 63) << 16);
+			L[_0] = (uint32_t)((exp + 0x3fff + 63) << 16);
 			L[_1] = bits[1];
 			L[_2] = bits[0];
 			break;
@@ -94,20 +81,13 @@ ULtoxL(ULong *L, const ULong *bits, Long exp, int k)
 	}
 }
 
-int
-#ifdef KR_headers
-	strtorxL(s, sp, rounding, L) CONST char* s;
-char** sp;
-int rounding;
-void* L;
-#else
-strtorxL(CONST char *s, char **sp, int rounding, void *L)
-#endif
+int strtorxL(const char* s, char** sp, int rounding, void* L)
 {
 	static FPI fpi0 = {64, 1 - 16383 - 64 + 1, 32766 - 16383 - 64 + 1, 1, SI};
-	FPI *fpi, fpi1;
-	ULong bits[2];
-	Long exp;
+	FPI* fpi;
+	FPI fpi1;
+	uint32_t bits[2];
+	int32_t exp;
 	int k;
 
 	fpi = &fpi0;
@@ -118,6 +98,6 @@ strtorxL(CONST char *s, char **sp, int rounding, void *L)
 		fpi = &fpi1;
 	}
 	k = strtodg(s, sp, fpi, &exp, bits);
-	ULtoxL((ULong*)L, bits, exp, k);
+	ULtoxL((uint32_t*)L, bits, exp, k);
 	return k;
 }

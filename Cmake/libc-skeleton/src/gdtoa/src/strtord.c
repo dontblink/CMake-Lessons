@@ -31,15 +31,7 @@ THIS SOFTWARE.
 
 #include "gdtoaimp.h"
 
-void
-#ifdef KR_headers
-	ULtod(L, bits, exp, k) ULong* L;
-const ULong* bits;
-Long exp;
-int k;
-#else
-ULtod(ULong *L, const ULong *bits, Long exp, int k)
-#endif
+void ULtod(uint32_t* L, const uint32_t* bits, int32_t exp, int k)
 {
 	switch(k & STRTOG_Retmask)
 	{
@@ -79,20 +71,13 @@ ULtod(ULong *L, const ULong *bits, Long exp, int k)
 	}
 }
 
-int
-#ifdef KR_headers
-	strtord(s, sp, rounding, d) CONST char* s;
-char** sp;
-int rounding;
-double* d;
-#else
-strtord(CONST char *s, char **sp, int rounding, double *d)
-#endif
+int strtord(const char* s, char** sp, int rounding, double* d)
 {
 	static FPI fpi0 = {53, 1 - 1023 - 53 + 1, 2046 - 1023 - 53 + 1, 1, SI};
-	FPI *fpi, fpi1;
-	ULong bits[2];
-	Long exp;
+	FPI* fpi;
+	FPI fpi1;
+	uint32_t bits[2];
+	int32_t exp;
 	int k;
 
 	fpi = &fpi0;
@@ -103,6 +88,6 @@ strtord(CONST char *s, char **sp, int rounding, double *d)
 		fpi = &fpi1;
 	}
 	k = strtodg(s, sp, fpi, &exp, bits);
-	ULtod((ULong*)d, bits, exp, k);
+	ULtod((uint32_t*)d, bits, exp, k);
 	return k;
 }

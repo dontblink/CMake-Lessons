@@ -50,25 +50,30 @@ static int do_rand(unsigned long* ctx)
 	 * Park and Miller, Communications of the ACM, vol. 31, no. 10,
 	 * October 1988, p. 1195.
 	 */
-	long hi, lo, x;
+	long hi;
+	long lo;
+	long x;
 
 	/* Can't be initialized with 0, so use another value. */
 	if(*ctx == 0)
 	{
 		*ctx = 123459876UL;
 	}
+
 	hi = (long)(*ctx / 127773L);
 	lo = (long)(*ctx % 127773L);
 	x = 16807 * lo - 2836 * hi;
+
 	if(x < 0)
 	{
 		x += 0x7fffffff;
 	}
+
 	return (int)((*ctx = (unsigned long)x) % ((unsigned long)RAND_MAX + 1));
 #endif /* !USE_WEAK_SEEDING */
 }
 
-__attribute__((weak)) int rand_r(unsigned int* ctx)
+int __attribute__((weak)) rand_r(unsigned int* ctx)
 {
 	unsigned long val = (unsigned long)*ctx;
 	int r = do_rand(&val);
@@ -77,12 +82,12 @@ __attribute__((weak)) int rand_r(unsigned int* ctx)
 	return (r);
 }
 
-__attribute__((weak)) int rand()
+int __attribute__((weak)) rand(void)
 {
 	return (do_rand(&next));
 }
 
-__attribute__((weak)) void srand(unsigned seed)
+void __attribute__((weak)) srand(unsigned seed)
 {
 	next = seed;
 }

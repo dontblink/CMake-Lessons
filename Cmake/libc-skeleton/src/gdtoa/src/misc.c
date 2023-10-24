@@ -33,23 +33,19 @@ THIS SOFTWARE.
 
 static Bigint* freelist[Kmax + 1];
 #ifndef Omit_Private_Memory
-#ifndef PRIVATE_MEM
-#define PRIVATE_MEM 2304
-#endif
-#define PRIVATE_mem ((PRIVATE_MEM + sizeof(double) - 1) / sizeof(double))
+	#ifndef PRIVATE_MEM
+		#define PRIVATE_MEM 2304
+	#endif
+	#define PRIVATE_mem ((PRIVATE_MEM + sizeof(double) - 1) / sizeof(double))
 static double private_mem[PRIVATE_mem], *pmem_next = private_mem;
 #endif
 
-Bigint* Balloc
-#ifdef KR_headers
-	(k) int k;
-#else
-	(int k)
-#endif
+Bigint* Balloc(int k)
 {
 	Bigint* rv;
 
 	ACQUIRE_DTOA_LOCK(0);
+
 	if((rv = freelist[k]) != 0)
 	{
 		freelist[k] = rv->next;
@@ -58,39 +54,32 @@ Bigint* Balloc
 	{
 		int x = 1 << k;
 #ifdef Omit_Private_Memory
-		rv = (Bigint*)MALLOC(sizeof(Bigint) + (x - 1) * sizeof(ULong));
+		rv = (Bigint*)MALLOC(sizeof(Bigint) + (x - 1) * sizeof(uint32_t));
 #else
-#ifndef Omit_Private_Memory
-		unsigned int len;
-#endif
-		len = (sizeof(Bigint) + ((unsigned)x - 1) * sizeof(ULong) + sizeof(double) - 1) /
+		size_t len;
+		len = (sizeof(Bigint) + ((unsigned)x - 1) * sizeof(uint32_t) + sizeof(double) - 1) /
 			  sizeof(double);
-		if((unsigned)(pmem_next - private_mem + len) <= PRIVATE_mem)
+		if(((unsigned)(pmem_next - private_mem) + len) <= PRIVATE_mem)
 		{
 			rv = (Bigint*)pmem_next;
 			pmem_next += len;
 		}
 		else
 		{
-			{
-				rv = (Bigint*)MALLOC(len * sizeof(double));
-			}
+			rv = (Bigint*)MALLOC(len * sizeof(double));
 		}
 #endif
 		rv->k = k;
 		rv->maxwds = x;
 	}
+
 	FREE_DTOA_LOCK(0);
 	rv->sign = rv->wds = 0;
+
 	return rv;
 }
 
-void Bfree
-#ifdef KR_headers
-	(v) Bigint* v;
-#else
-	(Bigint* v)
-#endif
+void Bfree(Bigint* v)
 {
 	if(v)
 	{
@@ -101,85 +90,87 @@ void Bfree
 	}
 }
 
-int lo0bits
-#ifdef KR_headers
-	(y) ULong* y;
-#else
-	(ULong* y)
-#endif
+int lo0bits(uint32_t* y)
 {
-	register int k;
-	register ULong x = *y;
+	int k;
+	uint32_t x = *y;
 
 	if(x & 7)
 	{
 		if(x & 1)
 		{
-			{
-				return 0;
-			}
+			return 0;
 		}
+
 		if(x & 2)
 		{
 			*y = x >> 1;
 			return 1;
 		}
+
 		*y = x >> 2;
+
 		return 2;
 	}
+
 	k = 0;
+
 	if(!(x & 0xffff))
 	{
 		k = 16;
 		x >>= 16;
 	}
+
 	if(!(x & 0xff))
 	{
 		k += 8;
 		x >>= 8;
 	}
+
 	if(!(x & 0xf))
 	{
 		k += 4;
 		x >>= 4;
 	}
+
 	if(!(x & 0x3))
 	{
 		k += 2;
 		x >>= 2;
 	}
+
 	if(!(x & 1))
 	{
 		k++;
 		x >>= 1;
+
 		if(!x)
 		{
-			{
-				return 32;
-			}
+			return 32;
 		}
 	}
+
 	*y = x;
+
 	return k;
 }
 
-Bigint* multadd
-#ifdef KR_headers
-	(b, m, a) Bigint* b;
-int m, a;
-#else
-	(Bigint* b, int m, int a) /* multiply by m and add a */
-#endif
+Bigint* multadd(Bigint* b, int m, int a) /* multiply by m and add a */
 {
-	int i, wds;
-#ifdef ULLong
-	ULong* x;
-	ULLong carry, y;
+	int i;
+	int wds;
+#ifndef NO_LONG_LONG
+	uint32_t* x;
+	uint64_t carry;
+	uint64_t y;
 #else
-	ULong carry, *x, y;
-#ifdef Pack_32
-	ULong xi, z;
-#endif
+	uint32_t carry;
+	uint32_t* x;
+	uint32_t y;
+	#ifdef Pack_32
+	uint32_t xi;
+	uint32_t z;
+	#endif
 #endif
 	Bigint* b1;
 
@@ -187,26 +178,28 @@ int m, a;
 	x = b->x;
 	i = 0;
 	carry = (unsigned long long)a;
+
 	do
 	{
-#ifdef ULLong
-		y = *x * (ULLong)m + carry;
+#ifndef NO_LONG_LONG
+		y = *x * (uint64_t)m + carry;
 		carry = y >> 32;
 		*x++ = y & 0xffffffffUL;
 #else
-#ifdef Pack_32
+	#ifdef Pack_32
 		xi = *x;
 		y = (xi & 0xffff) * m + carry;
 		z = (xi >> 16) * m + (y >> 16);
 		carry = z >> 16;
 		*x++ = (z << 16) + (y & 0xffff);
-#else
+	#else
 		y = *x * m + carry;
 		carry = y >> 16;
 		*x++ = y & 0xffff;
-#endif
+	#endif
 #endif
 	} while(++i < wds);
+
 	if(carry)
 	{
 		if(wds >= b->maxwds)
@@ -216,88 +209,90 @@ int m, a;
 			Bfree(b);
 			b = b1;
 		}
-		b->x[wds++] = (ULong)carry;
+
+		b->x[wds++] = (uint32_t)carry;
 		b->wds = wds;
 	}
+
 	return b;
 }
 
-int hi0bits_D2A
-#ifdef KR_headers
-	(x) register ULong x;
-#else
-	(register ULong x)
-#endif
+int hi0bits(register uint32_t x)
 {
-	register int k = 0;
+	int k = 0;
 
 	if(!(x & 0xffff0000))
 	{
 		k = 16;
 		x <<= 16;
 	}
+
 	if(!(x & 0xff000000))
 	{
 		k += 8;
 		x <<= 8;
 	}
+
 	if(!(x & 0xf0000000))
 	{
 		k += 4;
 		x <<= 4;
 	}
+
 	if(!(x & 0xc0000000))
 	{
 		k += 2;
 		x <<= 2;
 	}
+
 	if(!(x & 0x80000000))
 	{
 		k++;
+
 		if(!(x & 0x40000000))
 		{
-			{
-				return 32;
-			}
+			return 32;
 		}
 	}
+
 	return k;
 }
 
-Bigint* i2b
-#ifdef KR_headers
-	(i) int i;
-#else
-	(int i)
-#endif
+Bigint* i2b(int i)
 {
 	Bigint* b;
 
 	b = Balloc(1);
-	b->x[0] = (ULong)i;
+	b->x[0] = (uint32_t)i;
 	b->wds = 1;
+
 	return b;
 }
 
-Bigint *mult
-#ifdef KR_headers
-	(a, b) Bigint *a,
-	*b;
-#else
-	(Bigint* a, Bigint* b)
-#endif
+Bigint* mult(Bigint* a, Bigint* b)
 {
 	Bigint* c;
-	int k, wa, wb, wc;
-	ULong *x, *xa, *xae, *xb, *xbe, *xc, *xc0;
-	ULong y;
-#ifdef ULLong
-	ULLong carry, z;
+	int k;
+	int wa;
+	int wb;
+	int wc;
+	uint32_t* x;
+	uint32_t* xa;
+	uint32_t* xae;
+	uint32_t* xb;
+	uint32_t* xbe;
+	uint32_t* xc;
+	uint32_t* xc0;
+	uint32_t y;
+#ifndef NO_LONG_LONG
+	uint64_t carry;
+	uint64_t z;
 #else
-	ULong carry, z;
-#ifdef Pack_32
-	ULong z2;
-#endif
+	uint32_t carry;
+	uint32_t z;
+	#ifdef Pack_32
+	uint32_t z2;
+	#endif
 #endif
 
 	if(a->wds < b->wds)
@@ -306,29 +301,31 @@ Bigint *mult
 		a = b;
 		b = c;
 	}
+
 	k = a->k;
 	wa = a->wds;
 	wb = b->wds;
 	wc = wa + wb;
+
 	if(wc > a->maxwds)
 	{
-		{
-			k++;
-		}
+		k++;
 	}
+
 	c = Balloc(k);
+
 	for(x = c->x, xa = x + wc; x < xa; x++)
 	{
-		{
-			*x = 0;
-		}
+		*x = 0;
 	}
+
 	xa = a->x;
 	xae = xa + wa;
 	xb = b->x;
 	xbe = xb + wb;
 	xc0 = c->x;
-#ifdef ULLong
+
+#ifndef NO_LONG_LONG
 	for(; xb < xbe; xc0++)
 	{
 		if((y = *xb++) != 0)
@@ -336,17 +333,19 @@ Bigint *mult
 			x = xa;
 			xc = xc0;
 			carry = 0;
+
 			do
 			{
-				z = *x++ * (ULLong)y + *xc + carry;
+				z = *x++ * (uint64_t)y + *xc + carry;
 				carry = z >> 32;
 				*xc++ = z & 0xffffffffUL;
 			} while(x < xae);
-			*xc = (ULong)carry;
+
+			*xc = (uint32_t)carry;
 		}
 	}
 #else
-#ifdef Pack_32
+	#ifdef Pack_32
 	for(; xb < xbe; xb++, xc0++)
 	{
 		if((y = *xb & 0xffff) != 0)
@@ -354,6 +353,7 @@ Bigint *mult
 			x = xa;
 			xc = xc0;
 			carry = 0;
+
 			do
 			{
 				z = (*x & 0xffff) * y + (*xc & 0xffff) + carry;
@@ -362,14 +362,17 @@ Bigint *mult
 				carry = z2 >> 16;
 				Storeinc(xc, z2, z);
 			} while(x < xae);
+
 			*xc = carry;
 		}
+
 		if((y = *xb >> 16) != 0)
 		{
 			x = xa;
 			xc = xc0;
 			carry = 0;
 			z2 = *xc;
+
 			do
 			{
 				z = (*x & 0xffff) * y + (*xc >> 16) + carry;
@@ -378,10 +381,11 @@ Bigint *mult
 				z2 = (*x++ >> 16) * y + (*xc & 0xffff) + carry;
 				carry = z2 >> 16;
 			} while(x < xae);
+
 			*xc = z2;
 		}
 	}
-#else
+	#else
 	for(; xb < xbe; xc0++)
 	{
 		if((y = *xb++) != 0)
@@ -389,53 +393,47 @@ Bigint *mult
 			x = xa;
 			xc = xc0;
 			carry = 0;
+
 			do
 			{
 				z = *x++ * y + *xc + carry;
 				carry = z >> 16;
 				*xc++ = z & 0xffff;
 			} while(x < xae);
+
 			*xc = carry;
 		}
 	}
-#endif
+	#endif
 #endif
 	for(xc0 = c->x, xc = xc0 + wc; wc > 0 && !*--xc; --wc)
 	{
-		{
-			;
-		}
+		;
 	}
+
 	c->wds = wc;
+
 	return c;
 }
 
 static Bigint* p5s;
 
-Bigint* pow5mult
-#ifdef KR_headers
-	(b, k) Bigint* b;
-int k;
-#else
-	(Bigint* b, int k)
-#endif
+Bigint* pow5mult(Bigint* b, int k)
 {
-	Bigint *b1, *p5, *p51;
+	Bigint* b1;
+	Bigint* p5;
+	Bigint* p51;
 	int i;
 
 	if((i = k & 3) != 0)
 	{
-		{
-			static int p05[3] = {5, 25, 125};
-			b = multadd(b, p05[i - 1], 0);
-		}
+		static int p05[3] = {5, 25, 125};
+		b = multadd(b, p05[i - 1], 0);
 	}
 
 	if(!(k >>= 2))
 	{
-		{
-			return b;
-		}
+		return b;
 	}
 	if((p5 = p5s) == 0)
 	{
@@ -463,9 +461,7 @@ int k;
 		}
 		if(!(k >>= 1))
 		{
-			{
-				break;
-			}
+			break;
 		}
 		if((p51 = p5->next) == 0)
 		{
@@ -487,91 +483,92 @@ int k;
 	return b;
 }
 
-Bigint* lshift
-#ifdef KR_headers
-	(b, k) Bigint* b;
-int k;
-#else
-	(Bigint* b, int k)
-#endif
+Bigint* lshift(Bigint* b, int k)
 {
-	int i, k1, n, n1;
+	int i;
+	int k1;
+	int n;
+	int n1;
 	Bigint* b1;
-	ULong *x, *x1, *xe, z;
+	uint32_t* x;
+	uint32_t* x1;
+	uint32_t* xe;
+	uint32_t z;
 
 	n = k >> kshift;
 	k1 = b->k;
 	n1 = n + b->wds + 1;
+
 	for(i = b->maxwds; n1 > i; i <<= 1)
 	{
-		{
-			k1++;
-		}
+		k1++;
 	}
+
 	b1 = Balloc(k1);
 	x1 = b1->x;
+
 	for(i = 0; i < n; i++)
 	{
-		{
-			*x1++ = 0;
-		}
+		*x1++ = 0;
 	}
+
 	x = b->x;
 	xe = x + b->wds;
+
 	if(k &= kmask)
 	{
 #ifdef Pack_32
 		k1 = 32 - k;
 		z = 0;
+
 		do
 		{
 			*x1++ = *x << k | z;
 			z = *x++ >> k1;
 		} while(x < xe);
+
 		if((*x1 = z) != 0)
 		{
-			{
-				++n1;
-			}
+			++n1;
 		}
 #else
 		k1 = 16 - k;
 		z = 0;
+
 		do
 		{
 			*x1++ = *x << k & 0xffff | z;
 			z = *x++ >> k1;
 		} while(x < xe);
+
 		if(*x1 = z)
+		{
 			++n1;
+		}
 #endif
 	}
 	else
 	{
+		do
 		{
-			do
-			{
-				{
-					*x1++ = *x++;
-				}
-			} while(x < xe);
-		}
+			*x1++ = *x++;
+		} while(x < xe);
 	}
+
 	b1->wds = n1 - 1;
 	Bfree(b);
+
 	return b1;
 }
 
-int cmp
-#ifdef KR_headers
-	(a, b) Bigint *a,
-	*b;
-#else
-	(Bigint* a, Bigint* b)
-#endif
+int cmp(Bigint* a, Bigint* b)
 {
-	ULong *xa, *xa0, *xb, *xb0;
-	int i, j;
+	uint32_t* xa;
+	uint32_t* xa0;
+	uint32_t* xb;
+	uint32_t* xb0;
+	int i;
+	int j;
 
 	i = a->wds;
 	j = b->wds;
@@ -580,6 +577,7 @@ int cmp
 	{
 		Bug("cmp called with a->x[a->wds-1] == 0");
 	}
+
 	if(j > 1 && !b->x[j - 1])
 	{
 		Bug("cmp called with b->x[b->wds-1] == 0");
@@ -587,60 +585,63 @@ int cmp
 #endif
 	if(i -= j)
 	{
-		{
-			return i;
-		}
+		return i;
 	}
+
 	xa0 = a->x;
 	xa = xa0 + j;
 	xb0 = b->x;
 	xb = xb0 + j;
+
 	for(;;)
 	{
 		if(*--xa != *--xb)
 		{
-			{
-				return *xa < *xb ? -1 : 1;
-			}
+			return *xa < *xb ? -1 : 1;
 		}
+
 		if(xa <= xa0)
 		{
-			{
-				break;
-			}
+			break;
 		}
 	}
+
 	return 0;
 }
 
-Bigint *diff
-#ifdef KR_headers
-	(a, b) Bigint *a,
-	*b;
-#else
-	(Bigint* a, Bigint* b)
-#endif
+Bigint* diff(Bigint* a, Bigint* b)
 {
 	Bigint* c;
-	int i, wa, wb;
-	ULong *xa, *xae, *xb, *xbe, *xc;
-#ifdef ULLong
-	ULLong borrow, y;
+	int i;
+	int wa;
+	int wb;
+	uint32_t* xa;
+	uint32_t* xae;
+	uint32_t* xb;
+	uint32_t* xbe;
+	uint32_t* xc;
+#ifndef NO_LONG_LONG
+	uint64_t borrow;
+	uint64_t y;
 #else
-	ULong borrow, y;
-#ifdef Pack_32
-	ULong z;
-#endif
+	uint32_t borrow;
+	uint32_t y;
+	#ifdef Pack_32
+	uint32_t z;
+	#endif
 #endif
 
 	i = cmp(a, b);
+
 	if(!i)
 	{
 		c = Balloc(0);
 		c->wds = 1;
 		c->x[0] = 0;
+
 		return c;
 	}
+
 	if(i < 0)
 	{
 		c = a;
@@ -650,10 +651,9 @@ Bigint *diff
 	}
 	else
 	{
-		{
-			i = 0;
-		}
+		i = 0;
 	}
+
 	c = Balloc(a->k);
 	c->sign = i;
 	wa = a->wds;
@@ -664,13 +664,15 @@ Bigint *diff
 	xbe = xb + wb;
 	xc = c->x;
 	borrow = 0;
-#ifdef ULLong
+
+#ifndef NO_LONG_LONG
 	do
 	{
-		y = (ULLong)*xa++ - *xb++ - borrow;
+		y = (uint64_t)*xa++ - *xb++ - borrow;
 		borrow = y >> 32 & 1UL;
 		*xc++ = y & 0xffffffffUL;
 	} while(xb < xbe);
+
 	while(xa < xae)
 	{
 		y = *xa++ - borrow;
@@ -678,7 +680,7 @@ Bigint *diff
 		*xc++ = y & 0xffffffffUL;
 	}
 #else
-#ifdef Pack_32
+	#ifdef Pack_32
 	do
 	{
 		y = (*xa & 0xffff) - (*xb & 0xffff) - borrow;
@@ -687,6 +689,7 @@ Bigint *diff
 		borrow = (z & 0x10000) >> 16;
 		Storeinc(xc, z, y);
 	} while(xb < xbe);
+
 	while(xa < xae)
 	{
 		y = (*xa & 0xffff) - borrow;
@@ -695,47 +698,47 @@ Bigint *diff
 		borrow = (z & 0x10000) >> 16;
 		Storeinc(xc, z, y);
 	}
-#else
+	#else
 	do
 	{
 		y = *xa++ - *xb++ - borrow;
 		borrow = (y & 0x10000) >> 16;
 		*xc++ = y & 0xffff;
 	} while(xb < xbe);
+
 	while(xa < xae)
 	{
 		y = *xa++ - borrow;
 		borrow = (y & 0x10000) >> 16;
 		*xc++ = y & 0xffff;
 	}
-#endif
+	#endif
 #endif
 	while(!*--xc)
 	{
-		{
-			wa--;
-		}
+		wa--;
 	}
+
 	c->wds = wa;
+
 	return c;
 }
 
-double b2d
-#ifdef KR_headers
-	(a, e) Bigint* a;
-int* e;
-#else
-	(Bigint* a, int* e)
-#endif
+double b2d(Bigint* a, int* e)
 {
-	ULong *xa, *xa0, w, y, z;
+	uint32_t* xa;
+	uint32_t* xa0;
+	uint32_t w;
+	uint32_t y;
+	uint32_t z;
 	int k;
 	double d;
 #ifdef VAX
-	ULong d0, d1;
+	uint32_t d0;
+	uint32_t d1;
 #else
-#define d0 word0(d)
-#define d1 word1(d)
+	#define d0 word0(d)
+	#define d1 word1(d)
 #endif
 
 	xa0 = a->x;
@@ -757,7 +760,9 @@ int* e;
 		d1 = y << ((32 - Ebits) + k) | w >> (Ebits - k);
 		goto ret_d;
 	}
+
 	z = xa > xa0 ? *--xa : 0;
+
 	if(k -= Ebits)
 	{
 		d0 = Exp_1 | y << k | z >> (32 - k);
@@ -779,6 +784,7 @@ int* e;
 		d1 = z << k + 16 - Ebits | w << k - Ebits | y >> 16 + Ebits - k;
 		goto ret_d;
 	}
+
 	z = xa > xa0 ? *--xa : 0;
 	w = xa > xa0 ? *--xa : 0;
 	k -= Ebits + 16;
@@ -786,37 +792,36 @@ int* e;
 	y = xa > xa0 ? *--xa : 0;
 	d1 = w << k + 16 | y << k;
 #endif
+
 ret_d:
 #ifdef VAX
 	word0(d) = d0 >> 16 | d0 << 16;
 	word1(d) = d1 >> 16 | d1 << 16;
 #endif
+
 	return dval(d);
 }
 #undef d0
 #undef d1
 
-Bigint* d2b
-#ifdef KR_headers
-	(d, e, bits) double d;
-int *e, *bits;
-#else
-	(double d, int* e, int* bits)
-#endif
+Bigint* d2b(double d, int* e, int* bits)
 {
 	Bigint* b;
 #ifndef Sudden_Underflow
 	int i;
 #endif
-	int de, k;
-	ULong *x, y, z;
+	int de;
+	int k;
+	uint32_t* x;
+	uint32_t y;
+	uint32_t z;
 #ifdef VAX
-	ULong d0, d1;
+	uint32_t d0, d1;
 	d0 = word0(d) >> 16 | word0(d) << 16;
 	d1 = word1(d) >> 16 | word1(d) << 16;
 #else
-#define d0 word0(d)
-#define d1 word1(d)
+	#define d0 word0(d)
+	#define d1 word1(d)
 #endif
 
 #ifdef Pack_32
@@ -830,15 +835,13 @@ int *e, *bits;
 	d0 &= 0x7fffffff; /* clear sign bit, which we ignore */
 #ifdef Sudden_Underflow
 	de = (int)(d0 >> Exp_shift);
-#ifndef IBM
+	#ifndef IBM
 	z |= Exp_msk11;
-#endif
+	#endif
 #else
 	if((de = (int)(d0 >> Exp_shift)) != 0)
 	{
-		{
-			z |= Exp_msk1;
-		}
+		z |= Exp_msk1;
 	}
 #endif
 #ifdef Pack_32
@@ -851,22 +854,20 @@ int *e, *bits;
 		}
 		else
 		{
-			{
-				x[0] = y;
-			}
+			x[0] = y;
 		}
-#ifndef Sudden_Underflow
+	#ifndef Sudden_Underflow
 		i =
-#endif
+	#endif
 			b->wds = (x[1] = z) != 0 ? 2 : 1;
 	}
 	else
 	{
 		k = lo0bits(&z);
 		x[0] = z;
-#ifndef Sudden_Underflow
+	#ifndef Sudden_Underflow
 		i =
-#endif
+	#endif
 			b->wds = 1;
 		k += 32;
 	}
@@ -874,6 +875,7 @@ int *e, *bits;
 	if((y = d1) != 0)
 	{
 		if((k = lo0bits(&y)) != 0)
+		{
 			if(k >= 16)
 			{
 				x[0] = y | z << 32 - k & 0xffff;
@@ -889,6 +891,7 @@ int *e, *bits;
 				x[3] = z >> k + 16;
 				i = 3;
 			}
+		}
 		else
 		{
 			x[0] = y & 0xffff;
@@ -900,13 +903,14 @@ int *e, *bits;
 	}
 	else
 	{
-#ifdef DEBUG
+	#ifdef DEBUG
 		if(!z)
 		{
 			Bug("Zero passed to d2b");
 		}
-#endif
+	#endif
 		k = lo0bits(&z);
+
 		if(k >= 16)
 		{
 			x[0] = z;
@@ -918,10 +922,15 @@ int *e, *bits;
 			x[1] = z >> 16;
 			i = 1;
 		}
+
 		k += 32;
 	}
+
 	while(!x[i])
+	{
 		--i;
+	}
+
 	b->wds = i + 1;
 #endif
 #ifndef Sudden_Underflow
@@ -940,11 +949,11 @@ int *e, *bits;
 	else
 	{
 		*e = de - Bias - (P - 1) + 1 + k;
-#ifdef Pack_32
+	#ifdef Pack_32
 		*bits = 32 * i - hi0bits(x[i - 1]);
-#else
+	#else
 		*bits = (i + 2) * 16 - hi0bits(x[i]);
-#endif
+	#endif
 	}
 #endif
 	return b;
@@ -952,21 +961,21 @@ int *e, *bits;
 #undef d0
 #undef d1
 
-CONST double
+const double
 #ifdef IEEE_Arith
 	bigtens[] = {1e16, 1e32, 1e64, 1e128, 1e256};
-CONST double tinytens[] = {1e-16, 1e-32, 1e-64, 1e-128, 1e-256};
+const double tinytens[] = {1e-16, 1e-32, 1e-64, 1e-128, 1e-256};
 #else
-#ifdef IBM
+	#ifdef IBM
 	bigtens[] = {1e16, 1e32, 1e64};
-CONST double tinytens[] = {1e-16, 1e-32, 1e-64};
-#else
+const double tinytens[] = {1e-16, 1e-32, 1e-64};
+	#else
 	bigtens[] = {1e16, 1e32};
-CONST double tinytens[] = {1e-16, 1e-32};
-#endif
+const double tinytens[] = {1e-16, 1e-32};
+	#endif
 #endif
 
-CONST double tens[] = {1e0,
+const double tens[] = {1e0,
 					   1e1,
 					   1e2,
 					   1e3,
@@ -996,38 +1005,28 @@ CONST double tens[] = {1e0,
 #endif
 };
 
-char*
-#ifdef KR_headers
-	strcp_D2A(a, b) char* a;
-char* b;
-#else
-strcp_D2A(char *a, CONST char *b)
-#endif
+char* strcp(char* a, const char* b)
 {
 	while((*a = *b++))
 	{
-		{
-			a++;
-		}
+		a++;
 	}
+
 	return a;
 }
 
 #ifdef NO_STRING_H
 
-Char*
-#ifdef KR_headers
-	memcpy_D2A(a, b, len) Char* a;
-Char* b;
-size_t len;
-#else
-memcpy_D2A(void *a1, void *b1, size_t len)
-#endif
+void* memcpy(void* a1, void* b1, size_t len)
 {
-	register char *a = (char*)a1, *ae = a + len;
-	register char *b = (char*)b1, *a0 = a;
+	char *a = (char*)a1, *ae = a + len;
+	char *b = (char*)b1, *a0 = a;
+
 	while(a < ae)
+	{
 		*a++ = *b++;
+	}
+
 	return a0;
 }
 

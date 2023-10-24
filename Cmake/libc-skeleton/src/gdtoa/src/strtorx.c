@@ -34,32 +34,17 @@ THIS SOFTWARE.
 #undef _0
 #undef _1
 
-/* one or the other of IEEE_MC68k or IEEE_8087 should be #defined */
-
-#ifdef IEEE_MC68k
-#define _0 0
-#define _1 1
-#define _2 2
-#define _3 3
-#define _4 4
-#endif
 #ifdef IEEE_8087
-#define _0 4
-#define _1 3
-#define _2 2
-#define _3 1
-#define _4 0
+	#define _0 4
+	#define _1 3
+	#define _2 2
+	#define _3 1
+	#define _4 0
+#else
+	#error Something went wrong, IEEE8087 is not defined
 #endif
 
-void
-#ifdef KR_headers
-	ULtox(L, bits, exp, k) UShort* L;
-const ULong* bits;
-Long exp;
-int k;
-#else
-ULtox(UShort *L, const ULong *bits, Long exp, int k)
-#endif
+void ULtox(uint16_t* L, const uint32_t* bits, int32_t exp, int k)
 {
 	switch(k & STRTOG_Retmask)
 	{
@@ -74,12 +59,12 @@ ULtox(UShort *L, const ULong *bits, Long exp, int k)
 
 		case STRTOG_Normal:
 		case STRTOG_NaNbits:
-			L[_0] = (UShort)(exp + 0x3fff + 63);
+			L[_0] = (uint16_t)(exp + 0x3fff + 63);
 		normal_bits:
-			L[_4] = (UShort)bits[0];
-			L[_3] = (UShort)(bits[0] >> 16);
-			L[_2] = (UShort)bits[1];
-			L[_1] = (UShort)(bits[1] >> 16);
+			L[_4] = (uint16_t)bits[0];
+			L[_3] = (uint16_t)(bits[0] >> 16);
+			L[_2] = (uint16_t)bits[1];
+			L[_1] = (uint16_t)(bits[1] >> 16);
 			break;
 
 		case STRTOG_Infinite:
@@ -106,20 +91,13 @@ ULtox(UShort *L, const ULong *bits, Long exp, int k)
 	}
 }
 
-int
-#ifdef KR_headers
-	strtorx(s, sp, rounding, L) CONST char* s;
-char** sp;
-int rounding;
-void* L;
-#else
-strtorx(CONST char *s, char **sp, int rounding, void *L)
-#endif
+int strtorx(const char* s, char** sp, int rounding, void* L)
 {
 	static FPI fpi0 = {64, 1 - 16383 - 64 + 1, 32766 - 16383 - 64 + 1, 1, SI};
-	FPI *fpi, fpi1;
-	ULong bits[2];
-	Long exp;
+	FPI* fpi;
+	FPI fpi1;
+	uint32_t bits[2];
+	int32_t exp;
 	int k;
 
 	fpi = &fpi0;
@@ -130,6 +108,6 @@ strtorx(CONST char *s, char **sp, int rounding, void *L)
 		fpi = &fpi1;
 	}
 	k = strtodg(s, sp, fpi, &exp, bits);
-	ULtox((UShort*)L, bits, exp, k);
+	ULtox((uint16_t*)L, bits, exp, k);
 	return k;
 }

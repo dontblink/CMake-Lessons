@@ -31,26 +31,23 @@ THIS SOFTWARE.
 
 #include "gdtoaimp.h"
 
-Bigint* s2b
-#ifdef KR_headers
-	(s, nd0, nd, y9) CONST char* s;
-int nd0, nd;
-ULong y9;
-#else
-	(CONST char* s, int nd0, int nd, ULong y9)
-#endif
+Bigint* s2b(const char* s, int nd0, int nd, uint32_t y9)
 {
 	Bigint* b;
-	int i, k;
-	Long x, y;
+	int i;
+	int k;
+	int32_t x;
+	int32_t y;
 
 	x = (nd + 8) / 9;
+
 	for(k = 0, y = 1; x > y; y <<= 1, k++)
 	{
 		{
 			;
 		}
 	}
+
 #ifdef Pack_32
 	b = Balloc(k);
 	b->x[0] = y9;
@@ -62,6 +59,7 @@ ULong y9;
 #endif
 
 	i = 9;
+
 	if(9 < nd0)
 	{
 		s += 9;
@@ -79,29 +77,29 @@ ULong y9;
 			s += 10;
 		}
 	}
+
 	for(; i < nd; i++)
 	{
 		{
 			b = multadd(b, 10, *s++ - '0');
 		}
 	}
+
 	return b;
 }
 
-double ratio
-#ifdef KR_headers
-	(a, b) Bigint *a,
-	*b;
-#else
-	(Bigint* a, Bigint* b)
-#endif
+double ratio(Bigint* a, Bigint* b)
 {
-	double da, db;
-	int k, ka, kb;
+	double da;
+	double db;
+	int k;
+	int ka;
+	int kb;
 
 	dval(da) = b2d(a, &ka);
 	dval(db) = b2d(b, &kb);
 	k = ka - kb + ULbits * (a->wds - b->wds);
+
 #ifdef IBM
 	if(k > 0)
 	{
@@ -129,57 +127,53 @@ double ratio
 		word0(db) += (unsigned)(k * Exp_msk1);
 	}
 #endif
+
 	return dval(da) / dval(db);
 }
 
 #ifdef INFNAN_CHECK
 
-int match
-#ifdef KR_headers
-	(sp, t) char **sp,
-	*t;
-#else
-	(CONST char** sp, char* t)
-#endif
+int match(const char** sp, char* t)
 {
 	int d;
-	CONST char* s = *sp;
+	const char* s = *sp;
 
 	while((d = *t++) != 0)
 	{
 		int c;
+
 		if((c = *++s) >= 'A' && c <= 'Z')
 		{
 			c += 'a' - 'A';
 		}
+
 		if(c != d)
 		{
 			return 0;
 		}
 	}
+
 	*sp = s + 1;
+
 	return 1;
 }
 #endif /* INFNAN_CHECK */
 
-void
-#ifdef KR_headers
-	copybits(c, n, b) ULong* c;
-int n;
-Bigint* b;
-#else
-copybits(ULong *c, int n, Bigint *b)
-#endif
+void copybits(uint32_t* c, int n, Bigint* b)
 {
-	ULong *ce, *x, *xe;
+	uint32_t* ce;
+	uint32_t* x;
+	uint32_t* xe;
 #ifdef Pack_16
-	int nw, nw1;
+	int nw;
+	int nw1;
 #endif
 
 	ce = c + ((n - 1) >> kshift) + 1;
 	x = b->x;
 #ifdef Pack_32
 	xe = x + b->wds;
+
 	while(x < xe)
 	{
 		{
@@ -189,63 +183,62 @@ copybits(ULong *c, int n, Bigint *b)
 #else
 	nw = b->wds;
 	nw1 = nw & 1;
+
 	for(xe = x + (nw - nw1); x < xe; x += 2)
+	{
 		Storeinc(c, x[1], x[0]);
+	}
+
 	if(nw1)
+	{
 		*c++ = *x;
+	}
 #endif
 	while(c < ce)
 	{
-		{
-			*c++ = 0;
-		}
+		*c++ = 0;
 	}
 }
 
-ULong
-#ifdef KR_headers
-	any_on(b, k) Bigint* b;
-int k;
-#else
-any_on(Bigint *b, int k)
-#endif
+uint32_t any_on(Bigint* b, int k)
 {
-	int n, nwds;
-	ULong *x, *x0, x1, x2;
+	int n;
+	int nwds;
+	uint32_t* x;
+	uint32_t* x0;
+	uint32_t x1;
+	uint32_t x2;
 
 	x = b->x;
 	nwds = b->wds;
 	n = k >> kshift;
+
 	if(n > nwds)
 	{
-		{
-			n = nwds;
-		}
+		n = nwds;
 	}
 	else if(n < nwds && (k &= kmask))
 	{
 		x1 = x2 = x[n];
 		x1 >>= k;
 		x1 <<= k;
+
 		if(x1 != x2)
 		{
-			{
-				return 1;
-			}
+			return 1;
 		}
 	}
+
 	x0 = x;
 	x += n;
+
 	while(x > x0)
 	{
+		if(*--x)
 		{
-			if(*--x)
-			{
-				{
-					return 1;
-				}
-			}
+			return 1;
 		}
 	}
+
 	return 0;
 }

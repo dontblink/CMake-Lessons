@@ -1,13 +1,6 @@
 add_executable(libc_tests)
-
-# Workaround for the potential to have CMake block our include directory if 
-# -nostdinc is used and the header is in a CMake implicit include path
-if(NOSTDINC_FOR_DEPENDENTS)
-    list(REMOVE_ITEM CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES "${CMOCKA_INCLUDE_DIR}")
-endif()
 target_include_directories(libc_tests PRIVATE . test/)
-target_include_directories(libc_tests SYSTEM PRIVATE ${CMOCKA_INCLUDE_DIR})
-target_link_libraries(libc_tests PRIVATE c ${CMOCKA_LIBRARIES})
+target_link_libraries(libc_tests PRIVATE c cmocka::cmocka)
 
 list(APPEND desired_libc_test_flags
     "-Wno-stringop-overflow"
@@ -93,14 +86,18 @@ target_sources(libc_tests PRIVATE
 add_custom_target(test-clear-results
     COMMAND ${CMAKE_COMMAND} -E rm -f ${CMAKE_BINARY_DIR}/test/*.xml
     COMMENT "Removing XML files in the test/ directory")
+
+add_custom_target(test-libc
+    COMMAND export CMOCKA_MESSAGE_OUTPUT=stdout              
+    COMMAND libc_tests)
+
 add_test(NAME Libc.ClearResults
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target test-clear-results)
+
 add_test(NAME Libc.Test COMMAND libc_tests)
+
 set_tests_properties(Libc.Test 
     PROPERTIES 
     	ENVIRONMENT CMOCKA_XML_FILE=${CMAKE_CURRENT_BINARY_DIR}/%g.xml
     	DEPENDS Libc.ClearResults)
 
-add_custom_target(test-libc
-    COMMAND export CMOCKA_MESSAGE_OUTPUT=stdout              
-    COMMAND libc_tests)

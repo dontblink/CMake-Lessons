@@ -1,5 +1,36 @@
 include(CMakeDependentOption)
 
+option(HIDE_UNIMPLEMENTED_C_APIS
+       "Make unimplemented libc functions invisible to the compiler."
+       OFF)
+
+option(ENABLE_GNU_EXTENSIONS
+       "Enable GNU extensions to the standard libc functions"
+       OFF)
+
+option(DISABLE_BUILTINS
+       "Disable builts to the library target but not it's dependencies"
+       ON)
+
+option(DISABLE_STACK_PROTECTION
+       "Disable stack protection on libc target and its dependencies"
+       ON)
+
+option(NOSTDINC_FOR_DEPENDENTS
+       "apply_supported_compiler_flags for -nostdinc should use a public scope when on, private when off"
+       OFF)
+
+CMAKE_DEPENDENT_OPTION(LIBC_BUILD_TESTING
+       "enables unit test builds when this project is used as a dependency in another project"
+       OFF
+       "NOT CMAKE_CROSSCOMPILING" OFF)
+
+if((NOT CMAKE_CROSSCOMPILING) AND BUILD_TESTING AND 
+   (LIBC_BUILD_TESTING OR (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)))
+	message("Enabling libc tests.")
+	set(LIBC_TESTING_IS_ENABLED ON CACHE INTERNAL "Logic that sets whether testing is enabled on this project")
+endif()
+
 #Set a default build type if none was specified
 set(default_build_type "RelWithDebInfo")
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFICATION_TYPES)
@@ -33,40 +64,9 @@ endif()
 
 # Export compile_commands.json file
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-if("${CMAKE_EXPORT_COMPILE_COMMANDS}" STREQUAL "")
-	message(STATUS "Setting 'export_compile_commands' to '${default_compile_commands}' as no value was specified.")
-	set(CMAKE_EXPORT_COMPILE_COMMANDS ${default_compile_commands} CACHE
-	    BOOL "Export compile_commands.json file."
-	    FORCE)
-endif()
-
-option(HIDE_UNIMPLEMENTED_C_APIS
-       "Make unimplemented libc functions invisible to the compiler."
-       OFF)
-
-option(ENABLE_GNU_EXTENSIONS
-       "Enable GNU extensions to the standard libc functions"
-       OFF)
-
-option(DISABLE_BUILTINS
-       "Disable builts to the library target but not it's dependencies"
-       ON)
-
-option(DISABLE_STACK_PROTECTION
-       "Disable stack protection on libc target and its dependencies"
-       ON)
-
-option(NOSTDINC_FOR_DEPENDENTS
-       "apply_supported_compiler_flags for -nostdinc should use a public scope when on, private when off"
-       OFF)
-
-CMAKE_DEPENDENT_OPTION(LIBC_BUILD_TESTING
-       "enables unit test builds when this project is used as a dependency in another project"
-       OFF
-       "NOT CMAKE_CROSSCOMPILING" OFF)
-
-if((NOT CMAKE_CROSSCOMPILING) AND BUILD_TESTING AND 
-   (LIBC_BUILD_TESTING OR (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)))
-	message("Enabling libc tests.")
-	set(LIBC_TESTING_IS_ENABLED ON CACHE INTERNAL "Logic that sets whether testing is enabled on this project")
-endif()
+# if("${CMAKE_EXPORT_COMPILE_COMMANDS}" STREQUAL "")
+# 	message(STATUS "Setting 'export_compile_commands' to '${default_compile_commands}' as no value was specified.")
+# 	set(CMAKE_EXPORT_COMPILE_COMMANDS ${default_compile_commands} CACHE
+# 	    BOOL "Export compile_commands.json file."
+# 	    FORCE)
+# endif()

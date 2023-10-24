@@ -31,21 +31,15 @@ THIS SOFTWARE.
 
 #include "gdtoaimp.h"
 
-int
-#ifdef KR_headers
-	strtoIx(s, sp, a, b) CONST char* s;
-char** sp;
-void* a;
-void* b;
-#else
-strtoIx(CONST char *s, char **sp, void *a, void *b)
-#endif
+int strtoIx(const char* s, char** sp, void* a, void* b)
 {
 	static FPI fpi = {64, 1 - 16383 - 64 + 1, 32766 - 16383 - 64 + 1, 1, SI};
-	Long exp[2];
+	int32_t exp[2];
 	Bigint* B[2];
-	int k, rv[2];
-	UShort *L = (UShort*)a, *M = (UShort*)b;
+	int k;
+	int rv[2];
+	uint16_t* L = (uint16_t*)a;
+	uint16_t* M = (uint16_t*)b;
 
 	B[0] = Balloc(1);
 	B[0]->wds = 2;

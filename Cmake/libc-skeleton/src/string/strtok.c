@@ -42,14 +42,14 @@ char* __strtok_r(char* /*s*/ /*s*/, const char* /*delim*/ /*delim*/, char** /*la
 
 char* __strtok_r(char* s, const char* delim, char** last)
 {
-	char *spanp, *tok;
-	int c, sc;
+	char* spanp;
+	char* tok;
+	int c;
+	int sc;
 
 	if(s == NULL && (s = *last) == NULL)
 	{
-		{
-			return (NULL);
-		}
+		return (NULL);
 	}
 
 /*
@@ -61,9 +61,7 @@ cont:
 	{
 		if(c == sc)
 		{
-			{
-				goto cont;
-			}
+			goto cont;
 		}
 	}
 
@@ -88,15 +86,11 @@ cont:
 			{
 				if(c == 0)
 				{
-					{
-						s = NULL;
-					}
+					s = NULL;
 				}
 				else
 				{
-					{
-						s[-1] = '\0';
-					}
+					s[-1] = '\0';
 				}
 				*last = s;
 				return (tok);
@@ -119,8 +113,13 @@ char* strtok(char* s, const char* delim)
  */
 int main(void)
 {
-	char blah[80], test[80];
-	char *brkb, *brkt, *phrase, *sep, *word;
+	char blah[80];
+	char test[80];
+	char* brkb;
+	char* brkt;
+	char* phrase;
+	char* sep;
+	char* word;
 
 	sep = "\\/:;=-";
 	phrase = "foo";
@@ -128,7 +127,9 @@ int main(void)
 	printf("String tokenizer test:\n");
 	strcpy(test, "This;is.a:test:of=the/string\\tokenizer-function.");
 	for(word = strtok(test, sep); word; word = strtok(NULL, sep))
+	{
 		printf("Next word is \"%s\".\n", word);
+	}
 	strcpy(test, "This;is.a:test:of=the/string\\tokenizer-function.");
 
 	for(word = strtok_r(test, sep, &brkt); word; word = strtok_r(NULL, sep, &brkt))
@@ -136,7 +137,9 @@ int main(void)
 		strcpy(blah, "blah:blat:blab:blag");
 
 		for(phrase = strtok_r(blah, sep, &brkb); phrase; phrase = strtok_r(NULL, sep, &brkb))
+		{
 			printf("So far we're at %s:%s\n", word, phrase);
+		}
 	}
 
 	return (0);

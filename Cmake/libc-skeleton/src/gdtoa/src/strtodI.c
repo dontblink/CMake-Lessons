@@ -31,15 +31,10 @@ THIS SOFTWARE.
 
 #include "gdtoaimp.h"
 
-static double
-#ifdef KR_headers
-	ulpdown(d) double* d;
-#else
-	ulpdown(double* d)
-#endif
+static double ulpdown(double* d)
 {
 	double u;
-	ULong* L = (ULong*)d;
+	uint32_t* L = (uint32_t*)d;
 
 	u = ulp(*d);
 	if(!(L[_1] | (L[_0] & 0xfffff)) && (L[_0] & 0x7ff00000) > 0x00100000)
@@ -51,29 +46,24 @@ static double
 	return u;
 }
 
-int
-#ifdef KR_headers
-	strtodI(s, sp, dd) CONST char* s;
-char** sp;
-double* dd;
-#else
-strtodI(CONST char *s, char **sp, double *dd)
-#endif
+int strtodI(const char* s, char** sp, double* dd)
 {
 	static FPI fpi = {53, 1 - 1023 - 53 + 1, 2046 - 1023 - 53 + 1, 1, SI};
-	ULong bits[2], sign;
-	Long exp;
-	int j, k;
+	uint32_t bits[2];
+	uint32_t sign;
+	int32_t exp;
+	int j;
+	int k;
 	typedef union
 	{
 		double d[2];
-		ULong L[4];
+		uint32_t L[4];
 	} U2;
 	U2* u;
 
 	k = strtodg(s, sp, &fpi, &exp, bits);
 	u = (U2*)dd;
-	sign = (k & STRTOG_Neg) ? 0x80000000L : 0;
+	sign = (uint32_t)((k & STRTOG_Neg) ? 0x80000000L : 0);
 	switch(k & STRTOG_Retmask)
 	{
 		case STRTOG_NoNumber:
@@ -86,9 +76,13 @@ strtodI(CONST char *s, char **sp, double *dd)
 			if(k & STRTOG_Inexact)
 			{
 				if(sign)
+				{
 					u->L[_0] = 0x80100000L;
+				}
 				else
+				{
 					u->L[2 + _0] = 0x100000L;
+				}
 			}
 			break;
 #else
