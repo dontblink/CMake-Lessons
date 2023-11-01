@@ -21,6 +21,26 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 	add_compile_options(-Wall -Wextra)
 endif()
 
+# generate map file in linker
+function(target_linker_map target)
+  check_c_linker_flag("-Wl,-Map,test.map" _Map1)
+  if("${_Map1}")
+    set(GEN_MAP_FILE "-Wl,-Map,")
+  else()
+    check_c_linker_flag("-Wl,-map,test.map" _Map2)
+    if("${_Map2}")
+      set(GEN_MAP_FILE "-Wl,-map,")
+    else()
+      message("[WARNING] ${CMAKE_C_COMPILER_ID} does not have a defined linker map argument. ")
+      return()
+    endif()
+  endif()
+  get_target_property(map_dir ${target} BINARY_DIR)
+  target_link_options(${target} PRIVATE ${GEN_MAP_FILE}${map_dir}/${target}.map)
+  set_target_properties(${target} PROPERTIES
+                        ADDITIONAL_CLEAN_FILES ${target}.map)
+endfunction()
+
 
 
 
@@ -52,6 +72,7 @@ if(LIBC_TESTING_IS_ENABLED)
   add_test(NAME Printf.Test
     COMMAND printf_tests -s -r junit -o ${CMAKE_BINARY_DIR}/printf_tests.xml
   )
+  target_linker_map(printf_tests)
 endif()
 
 
@@ -92,4 +113,3 @@ add_subdirectory(src)
 if(LIBC_TESTING_IS_ENABLED)
 	add_subdirectory(test)
 endif()
-

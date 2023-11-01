@@ -1,4 +1,5 @@
 include(CMakeDependentOption)
+include(CheckIPOSupported)
 
 option(HIDE_UNIMPLEMENTED_C_APIS
        "Make unimplemented libc functions invisible to the compiler."
@@ -33,7 +34,7 @@ endif()
 
 #Set a default build type if none was specified
 set(default_build_type "RelWithDebInfo")
-if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFICATION_TYPES)
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 	message(STATUS "Setting build type to '${default_build_type}' as none was specified.")
 	set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE
 	    STRING "choose the type of build"
@@ -48,25 +49,43 @@ endif()
 
 set(default_pic ON)
 if ("${CMAKE_POSITION_INDEPENDENT_CODE}" STREQUAL "")
-	message(STATUS "Setting PIC for all targets to '${default_pic}' as none was specified.")
-	set(CMAKE_POSITION_INDEPENDENT_CODE default_pic CACHE
-	    BOOL "Compile all targets with -fPIC."
-	    FORCE)
+  message(STATUS "Setting PIC for all targets to '${default_pic}' as no value was specified.")
+  set(CMAKE_POSITION_INDEPENDENT_CODE ${default_pic} CACHE
+    BOOL "Compile all targets with -fPIC"
+    FORCE
+  )
 endif()
 
 set(default_shared_libs OFF)
 if ("${BUILD_SHARED_LIBS}" STREQUAL "")
-	message(STATUS "Setting 'build shared libraries' to '${default_shared_libs}' as none was specified.")
-	set(BUILD_SHARED_LIBS default_shared_libs CACHE
+  message(STATUS "Setting 'build shared libraries' to '${default_shared_libs}' as no value was specified.")
+  set(BUILD_SHARED_LIBS ${default_shared_libs} CACHE
 	    BOOL "Compile shared libraries by default instead of static libraries."
 	    FORCE)
 endif()
 
 # Export compile_commands.json file
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-# if("${CMAKE_EXPORT_COMPILE_COMMANDS}" STREQUAL "")
-# 	message(STATUS "Setting 'export_compile_commands' to '${default_compile_commands}' as no value was specified.")
-# 	set(CMAKE_EXPORT_COMPILE_COMMANDS ${default_compile_commands} CACHE
-# 	    BOOL "Export compile_commands.json file."
-# 	    FORCE)
-# endif()
+
+check_ipo_supported(RESULT result)
+if("${result}")
+       option(ENABLE_LTO
+              "Enable link time optimization"
+              OFF)
+
+       # disable builtins, make it dependent on LTO and compiler checks
+       if(NOT "${ENABLE_LTO}" AND (${CMAKE_C_COMPILER_ID} STREQUAL Clang OR ${CMAKE_C_COMPILER_ID} STREQUAL AppleClang))
+              set(OPTION_DISABLE_BUILTINS_IS_ENABLED True)
+       else()
+              set(OPTION_DISABLE_BUILTINS_IS_ENABLED False)
+       endif()
+
+       CMAKE_DEPENDENT_OPTION(DISABLE_BUILTINS
+                              "Disable compiler builtins (-fno-builtin)."
+                              ON
+                              "${OPTION_DISABLE_BUILTINS_IS_ENABLED}"
+                              ON)
+       if("${ENABLE_LTO}")
+              set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+       endif()
+endif()

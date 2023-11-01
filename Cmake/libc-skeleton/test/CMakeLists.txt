@@ -1,6 +1,6 @@
 add_executable(libc_tests)
 target_include_directories(libc_tests PRIVATE . test/)
-target_link_libraries(libc_tests PRIVATE c cmocka::cmocka)
+target_link_libraries(libc_tests PRIVATE c_hosted cmocka::cmocka)
 
 list(APPEND desired_libc_test_flags
     "-Wno-stringop-overflow"
@@ -9,7 +9,6 @@ list(APPEND desired_libc_test_flags
     "-Wno-nonnull"
     "-Wno-stringop-truncation"
     "-Wno-unknown-pragmas"
-    "-Wno-stringop-overread"
 )
 
 apply_supported_compiler_flags(C libc_tests PRIVATE desired_libc_test_flags)
@@ -101,3 +100,4 @@ set_tests_properties(Libc.Test
     	ENVIRONMENT CMOCKA_XML_FILE=${CMAKE_CURRENT_BINARY_DIR}/%g.xml
     	DEPENDS Libc.ClearResults)
 
+target_linker_map(libc_tests)
