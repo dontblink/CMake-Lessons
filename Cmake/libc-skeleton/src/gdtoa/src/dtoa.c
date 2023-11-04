@@ -623,7 +623,7 @@ if(leftright)
 		denorm ? be + (Bias + (P - 1) - 1 + 1) :
 #endif
 #ifdef IBM
-				   1 + 4 * P - 3 - bbits + ((bbits + be - 1) & 3);
+				 1 + 4 * P - 3 - bbits + ((bbits + be - 1) & 3);
 #else
 				1 + P - bbits;
 #endif

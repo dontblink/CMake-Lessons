@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.18)
 project(EmbeddedArtistryLibc 
         VERSION 1.0 
         DESCRIPTION "A libc implementation for microcontroller-based embedded systems." 
-        LANGUAGES C CXX)
+        LANGUAGES C CXX ASM)
 
 set_property(GLOBAL PROPERTY C_STANDARD 11)
 
@@ -15,7 +15,8 @@ endif()
 
 include(cmake/CheckAndApplyFlags.cmake)
 include(BuildOptions.cmake)
-
+include(cmake/Conversions.cmake)
+include(cmake/AddExecutableWithLinkerScriptDep.cmake)
 # Compiler Flags
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 	add_compile_options(-Wall -Wextra)
@@ -107,9 +108,31 @@ if(LIBC_TESTING_IS_ENABLED)
 endif()
 
 #process source tree
+add_subdirectory(arch/${CMAKE_SYSTEM_PROCESSOR}/)
 add_subdirectory(src)
 
 #process test tree
-if(LIBC_TESTING_IS_ENABLED)
-	add_subdirectory(test)
+
+add_subdirectory(test)
+
+find_program(DOXYGEN doxygen)
+
+if(DOXYGEN)
+  add_custom_target(docs
+                    COMMAND ${DOXYGEN} docs/Doxyfile
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
+                    )
+  #this property will remove a directory, while add_custom_target BYPRODUCTS will not
+  set_target_properties(docs PROPERTIES ADDITIONAL_CLEAN_FILES ${CMAKE_BINARY_DIR}/doc/)
+endif()
+
+find_program(CLANG_FORMAT clang-format)
+if(CLANG_FORMAT)
+  add_custom_target(format
+                    COMMAND tools/format.sh
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
+                    )
+  add_custom_target(format-patch
+                    COMMAND tools/format-patch.sh
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 endif()

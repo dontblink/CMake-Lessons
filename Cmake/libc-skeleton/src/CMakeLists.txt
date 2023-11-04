@@ -54,11 +54,10 @@ target_compile_definitions(gdtoa INTERFACE
 
 #libc_core contains shared files and definitions that are used by libc and libc_hosted
 add_library(c_core INTERFACE)
-target_link_libraries(c_core INTERFACE printf openlibm gdtoa)
+target_link_libraries(c_core INTERFACE printf openlibm gdtoa architecture_specific)
 target_include_directories(c_core  
    INTERFACE 
        ${PROJECT_SOURCE_DIR}/include
-       ${PROJECT_SOURCE_DIR}/arch/${CMAKE_SYSTEM_PROCESSOR}/include
 )
 
 #libc is a standalone version of the library
@@ -98,9 +97,10 @@ endif()
 foreach(target c c_hosted)
 	target_include_directories(${target} 
 		INTERFACE SYSTEM
-			$<TARGET_PROPERTY:openlibm,INTERFACE_INCLUDE_DIRECTORIES>
 			${PROJECT_SOURCE_DIR}/include
-			${PROJECT_SOURCE_DIR}/arch/${CMAKE_SYSTEM_PROCESSOR}/include
+			$<TARGET_PROPERTY:openlibm,INTERFACE_INCLUDE_DIRECTORIES>
+			$<TARGET_PROPERTY:architecture_specific,INTERFACE_INCLUDE_DIRECTORIES>
+			
 	)
 
 	target_compile_definitions(${target}
@@ -131,6 +131,11 @@ else()
 	if("${_nostdlib}")
 		target_link_options(c INTERFACE "-nostdlib")	
 	endif()
+endif()
+
+check_c_compiler_flag("-nostartfiles" _nostartfiles)
+if("${_nostartfiles}")
+	target_link_options(c INTERFACE "-nostartfiles")
 endif()
 
 # Assert Module

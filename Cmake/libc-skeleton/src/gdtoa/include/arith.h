@@ -26,19 +26,19 @@
  */
 
 #if defined(__i386__)
-#define IEEE_8087
-#define Arith_Kind_ASL 1
+	#define IEEE_8087
+	#define Arith_Kind_ASL 1
 #elif defined(__x86_64__)
-#define IEEE_8087
-#define Arith_Kind_ASL 1
-#define Intcast (int)(long)
-#define Double_Align
-#define X64_bit_pointers
+	#define IEEE_8087
+	#define Arith_Kind_ASL 1
+	#define Intcast (int)(long)
+	#define Double_Align
+	#define X64_bit_pointers
 #elif defined(__arm__) || defined(__aarch64__)
-#define IEEE_8087
-#define Arith_Kind_ASL 1
+	#define IEEE_8087
+	#define Arith_Kind_ASL 1
 #else
-#error Unsupported architecture
+	#error Unsupported architecture
 #endif
 
 #define Honor_FLT_ROUNDS

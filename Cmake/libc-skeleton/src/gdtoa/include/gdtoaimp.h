@@ -173,22 +173,22 @@ THIS SOFTWARE.
 #include "gdtoa.h"
 
 #ifdef DEBUG
-#ifdef GDTOA_HOST_DEBUG
-#include <stdio.h>
-#define Bug(x)                      \
-	{                               \
-		fprintf(stderr, "%s\n", x); \
-		exit(1);                    \
-	}
-#else
-#ifdef GDTOA_NO_ASSERT
-#define Bug(...)
-#else
-#include <assert.h>
-#include <stdbool.h>
-#define Bug(x) assert(!(bool)(x))
-#endif // GDTOA_NO_ASSET
-#endif // GDTOA_HOST_DEBUG
+	#ifdef GDTOA_HOST_DEBUG
+		#include <stdio.h>
+		#define Bug(x)                      \
+			{                               \
+				fprintf(stderr, "%s\n", x); \
+				exit(1);                    \
+			}
+	#else
+		#ifdef GDTOA_NO_ASSERT
+			#define Bug(...)
+		#else
+			#include <assert.h>
+			#include <stdbool.h>
+			#define Bug(x) assert(!(bool)(x))
+		#endif // GDTOA_NO_ASSET
+	#endif // GDTOA_HOST_DEBUG
 #endif // DEBUG
 
 #include "stdlib.h"
@@ -197,107 +197,108 @@ THIS SOFTWARE.
 #ifdef MALLOC
 extern void* MALLOC(size_t);
 #else
-#define MALLOC malloc
+	#define MALLOC malloc
 #endif
 
 #undef IEEE_Arith
 #undef Avoid_Underflow
 #ifdef IEEE_8087
-#define IEEE_Arith
+	#define IEEE_Arith
 #else
-#error Something went wrong, IEEE8087 is not defined
+	#error Something went wrong, IEEE8087 is not defined
 #endif
 
 #ifndef NO_ERRNO
-#include "errno.h"
+	#include "errno.h"
 #endif
 
 #ifdef Bad_float_h
 
-#ifdef IEEE_Arith
-#define DBL_DIG 15
-#define DBL_MAX_10_EXP 308
-#define DBL_MAX_EXP 1024
-#define FLT_RADIX 2
-#define DBL_MAX 1.7976931348623157e+308
-#endif
+	#ifdef IEEE_Arith
+		#define DBL_DIG 15
+		#define DBL_MAX_10_EXP 308
+		#define DBL_MAX_EXP 1024
+		#define FLT_RADIX 2
+		#define DBL_MAX 1.7976931348623157e+308
+	#endif
 
-#ifdef IBM
-#define DBL_DIG 16
-#define DBL_MAX_10_EXP 75
-#define DBL_MAX_EXP 63
-#define FLT_RADIX 16
-#define DBL_MAX 7.2370055773322621e+75
-#endif
+	#ifdef IBM
+		#define DBL_DIG 16
+		#define DBL_MAX_10_EXP 75
+		#define DBL_MAX_EXP 63
+		#define FLT_RADIX 16
+		#define DBL_MAX 7.2370055773322621e+75
+	#endif
 
-#ifdef VAX
-#define DBL_DIG 16
-#define DBL_MAX_10_EXP 38
-#define DBL_MAX_EXP 127
-#define FLT_RADIX 2
-#define DBL_MAX 1.7014118346046923e+38
-#define n_bigtens 2
-#endif
+	#ifdef VAX
+		#define DBL_DIG 16
+		#define DBL_MAX_10_EXP 38
+		#define DBL_MAX_EXP 127
+		#define FLT_RADIX 2
+		#define DBL_MAX 1.7014118346046923e+38
+		#define n_bigtens 2
+	#endif
 
-#ifndef LONG_MAX
-#define LONG_MAX 2147483647
-#endif
+	#ifndef LONG_MAX
+		#define LONG_MAX 2147483647
+	#endif
 
 #else /* ifndef Bad_float_h */
-#include "float.h"
+	#include "float.h"
 #endif /* Bad_float_h */
 
 #ifdef IEEE_Arith
-#define Scale_Bit 0x10
-#define n_bigtens 5
+	#define Scale_Bit 0x10
+	#define n_bigtens 5
 #endif
 
 #ifdef IBM
-#define n_bigtens 3
+	#define n_bigtens 3
 #endif
 
 #ifdef VAX
-#define n_bigtens 2
+	#define n_bigtens 2
 #endif
 
 #ifndef GDTOA_NO_MATH_H
-#ifndef __MATH_H__
-#include "math.h"
-#endif
+	#ifndef __MATH_H__
+		#include "math.h"
+	#endif
 #endif
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #if defined(IEEE_8087) + defined(VAX) + defined(IBM) != 1
-Exactly one of IEEE_8087, VAX, or IBM should be defined.
+	Exactly one of IEEE_8087, VAX, or IBM should be defined.
 #endif
 
-											   typedef union
-{
-	double d;
-	uint32_t L[2];
-} U;
+									   typedef union
+	{
+		double d;
+		uint32_t L[2];
+	} U;
 
 #ifdef YES_ALIAS
-#define dval(x) x
-#ifdef IEEE_8087
-#define word0(x) ((uint32_t*)&x)[1]
-#define word1(x) ((uint32_t*)&x)[0]
-#else
-#define word0(x) ((uint32_t*)&x)[0]
-#define word1(x) ((uint32_t*)&x)[1]
-#endif
+	#define dval(x) x
+	#ifdef IEEE_8087
+		#define word0(x) ((uint32_t*)&x)[1]
+		#define word1(x) ((uint32_t*)&x)[0]
+	#else
+		#define word0(x) ((uint32_t*)&x)[0]
+		#define word1(x) ((uint32_t*)&x)[1]
+	#endif
 #else /* !YES_ALIAS */
-#ifdef IEEE_8087
-#define word0(x) ((U*)&x)->L[1]
-#define word1(x) ((U*)&x)->L[0]
-#else
-#define word0(x) ((U*)&x)->L[0]
-#define word1(x) ((U*)&x)->L[1]
-#endif
-#define dval(x) ((U*)&x)->d
+	#ifdef IEEE_8087
+		#define word0(x) ((U*)&x)->L[1]
+		#define word1(x) ((U*)&x)->L[0]
+	#else
+		#define word0(x) ((U*)&x)->L[0]
+		#define word1(x) ((U*)&x)->L[1]
+	#endif
+	#define dval(x) ((U*)&x)->d
 #endif /* YES_ALIAS */
 
 /* The following definition of Storeinc is appropriate for MIPS processors.
@@ -305,121 +306,124 @@ Exactly one of IEEE_8087, VAX, or IBM should be defined.
  * #define Storeinc(a,b,c) (*a++ = b << 16 | c & 0xffff)
  */
 #if defined(IEEE_8087) + defined(VAX)
-#define Storeinc(a, b, c) \
-	(((unsigned short*)a)[1] = (unsigned short)b, ((unsigned short*)a)[0] = (unsigned short)c, a++)
+	#define Storeinc(a, b, c)                                                                      \
+		(((unsigned short*)a)[1] = (unsigned short)b, ((unsigned short*)a)[0] = (unsigned short)c, \
+		 a++)
 #else
-#define Storeinc(a, b, c) \
-	(((unsigned short*)a)[0] = (unsigned short)b, ((unsigned short*)a)[1] = (unsigned short)c, a++)
+	#define Storeinc(a, b, c)                                                                      \
+		(((unsigned short*)a)[0] = (unsigned short)b, ((unsigned short*)a)[1] = (unsigned short)c, \
+		 a++)
 #endif
 
-/* #define P DBL_MANT_DIG */
-/* Ten_pmax = floor(P*log(2)/log(5)) */
-/* Bletch = (highest power of 2 < DBL_MAX_10_EXP) / 16 */
-/* Quick_max = floor((P-1)*log(FLT_RADIX)/log(10) - 1) */
-/* Int_max = floor(P*log(FLT_RADIX)/log(10) - 1) */
+	/* #define P DBL_MANT_DIG */
+	/* Ten_pmax = floor(P*log(2)/log(5)) */
+	/* Bletch = (highest power of 2 < DBL_MAX_10_EXP) / 16 */
+	/* Quick_max = floor((P-1)*log(FLT_RADIX)/log(10) - 1) */
+	/* Int_max = floor(P*log(FLT_RADIX)/log(10) - 1) */
 
 #ifdef IEEE_Arith
-#define Exp_shift 20
-#define Exp_shift1 20
-#define Exp_msk1 0x100000
-#define Exp_msk11 0x100000
-#define Exp_mask 0x7ff00000
-#define P 53
-#define Bias 1023
-#define Emin (-1022)
-#define Exp_1 0x3ff00000
-#define Exp_11 0x3ff00000
-#define Ebits 11
-#define Frac_mask 0xfffff
-#define Frac_mask1 0xfffff
-#define Ten_pmax 22
-#define Bletch 0x10
-#define Bndry_mask 0xfffff
-#define Bndry_mask1 0xfffff
-#define LSB 1
-#define Sign_bit 0x80000000
-#define Log2P 1
-#define Tiny0 0
-#define Tiny1 1
-#define Quick_max 14
-#define Int_max 14
+	#define Exp_shift 20
+	#define Exp_shift1 20
+	#define Exp_msk1 0x100000
+	#define Exp_msk11 0x100000
+	#define Exp_mask 0x7ff00000
+	#define P 53
+	#define Bias 1023
+	#define Emin (-1022)
+	#define Exp_1 0x3ff00000
+	#define Exp_11 0x3ff00000
+	#define Ebits 11
+	#define Frac_mask 0xfffff
+	#define Frac_mask1 0xfffff
+	#define Ten_pmax 22
+	#define Bletch 0x10
+	#define Bndry_mask 0xfffff
+	#define Bndry_mask1 0xfffff
+	#define LSB 1
+	#define Sign_bit 0x80000000
+	#define Log2P 1
+	#define Tiny0 0
+	#define Tiny1 1
+	#define Quick_max 14
+	#define Int_max 14
 
-#ifndef Flt_Rounds
-#ifdef FLT_ROUNDS
-#define Flt_Rounds FLT_ROUNDS
-#else
-#define Flt_Rounds 1
-#endif
-#endif /*Flt_Rounds*/
+	#ifndef Flt_Rounds
+		#ifdef FLT_ROUNDS
+			#define Flt_Rounds FLT_ROUNDS
+		#else
+			#define Flt_Rounds 1
+		#endif
+	#endif /*Flt_Rounds*/
 
 #else /* ifndef IEEE_Arith */
-#undef Sudden_Underflow
-#define Sudden_Underflow
-#ifdef IBM
-#undef Flt_Rounds
-#define Flt_Rounds 0
-#define Exp_shift 24
-#define Exp_shift1 24
-#define Exp_msk1 0x1000000
-#define Exp_msk11 0x1000000
-#define Exp_mask 0x7f000000
-#define P 14
-#define Bias 65
-#define Exp_1 0x41000000
-#define Exp_11 0x41000000
-#define Ebits 8 /* exponent has 7 bits, but 8 is the right value in b2d */
-#define Frac_mask 0xffffff
-#define Frac_mask1 0xffffff
-#define Bletch 4
-#define Ten_pmax 22
-#define Bndry_mask 0xefffff
-#define Bndry_mask1 0xffffff
-#define LSB 1
-#define Sign_bit 0x80000000
-#define Log2P 4
-#define Tiny0 0x100000
-#define Tiny1 0
-#define Quick_max 14
-#define Int_max 15
-#else /* VAX */
-#undef Flt_Rounds
-#define Flt_Rounds 1
-#define Exp_shift 23
-#define Exp_shift1 7
-#define Exp_msk1 0x80
-#define Exp_msk11 0x800000
-#define Exp_mask 0x7f80
-#define P 56
-#define Bias 129
-#define Exp_1 0x40800000
-#define Exp_11 0x4080
-#define Ebits 8
-#define Frac_mask 0x7fffff
-#define Frac_mask1 0xffff007f
-#define Ten_pmax 24
-#define Bletch 2
-#define Bndry_mask 0xffff007f
-#define Bndry_mask1 0xffff007f
-#define LSB 0x10000
-#define Sign_bit 0x8000
-#define Log2P 1
-#define Tiny0 0x80
-#define Tiny1 0
-#define Quick_max 15
-#define Int_max 15
-#endif /* IBM, VAX */
+	#undef Sudden_Underflow
+	#define Sudden_Underflow
+	#ifdef IBM
+		#undef Flt_Rounds
+		#define Flt_Rounds 0
+		#define Exp_shift 24
+		#define Exp_shift1 24
+		#define Exp_msk1 0x1000000
+		#define Exp_msk11 0x1000000
+		#define Exp_mask 0x7f000000
+		#define P 14
+		#define Bias 65
+		#define Exp_1 0x41000000
+		#define Exp_11 0x41000000
+		#define Ebits 8 /* exponent has 7 bits, but 8 is the right value in b2d */
+		#define Frac_mask 0xffffff
+		#define Frac_mask1 0xffffff
+		#define Bletch 4
+		#define Ten_pmax 22
+		#define Bndry_mask 0xefffff
+		#define Bndry_mask1 0xffffff
+		#define LSB 1
+		#define Sign_bit 0x80000000
+		#define Log2P 4
+		#define Tiny0 0x100000
+		#define Tiny1 0
+		#define Quick_max 14
+		#define Int_max 15
+	#else /* VAX */
+		#undef Flt_Rounds
+		#define Flt_Rounds 1
+		#define Exp_shift 23
+		#define Exp_shift1 7
+		#define Exp_msk1 0x80
+		#define Exp_msk11 0x800000
+		#define Exp_mask 0x7f80
+		#define P 56
+		#define Bias 129
+		#define Exp_1 0x40800000
+		#define Exp_11 0x4080
+		#define Ebits 8
+		#define Frac_mask 0x7fffff
+		#define Frac_mask1 0xffff007f
+		#define Ten_pmax 24
+		#define Bletch 2
+		#define Bndry_mask 0xffff007f
+		#define Bndry_mask1 0xffff007f
+		#define LSB 0x10000
+		#define Sign_bit 0x8000
+		#define Log2P 1
+		#define Tiny0 0x80
+		#define Tiny1 0
+		#define Quick_max 15
+		#define Int_max 15
+	#endif /* IBM, VAX */
 #endif /* IEEE_Arith */
 
 #ifndef IEEE_Arith
-#define ROUND_BIASED
+	#define ROUND_BIASED
 #endif
 
 #ifdef RND_PRODQUOT
-#define rounded_product(a, b) a = rnd_prod(a, b)
-#define rounded_quotient(a, b) a = rnd_quot(a, b) extern double rnd_prod(double, double), rnd_quot(double, double);
+	#define rounded_product(a, b) a = rnd_prod(a, b)
+	#define rounded_quotient(a, b) \
+		a = rnd_quot(a, b) extern double rnd_prod(double, double), rnd_quot(double, double);
 #else
-#define rounded_product(a, b) a *= b
-#define rounded_quotient(a, b) a /= b
+	#define rounded_product(a, b) a *= b
+	#define rounded_quotient(a, b) a /= b
 #endif
 
 #define Big0 (Frac_mask1 | Exp_msk1 * (DBL_MAX_EXP + Bias - 1))
@@ -427,108 +431,109 @@ Exactly one of IEEE_8087, VAX, or IBM should be defined.
 
 #undef Pack_16
 #ifndef Pack_32
-#define Pack_32
+	#define Pack_32
 #endif
 
 #ifdef NO_LONG_LONG
-#ifdef Just_16
-#undef Pack_32
-#define Pack_16
-/* When Pack_32 is not defined, we store 16 bits per 32-bit int32_t.
- * This makes some inner loops simpler and sometimes saves work
- * during multiplications, but it often seems to make things slightly
- * slower.  Hence the default is now to store 32 bits per int32_t.
- */
-#endif
+	#ifdef Just_16
+		#undef Pack_32
+		#define Pack_16
+	/* When Pack_32 is not defined, we store 16 bits per 32-bit int32_t.
+	 * This makes some inner loops simpler and sometimes saves work
+	 * during multiplications, but it often seems to make things slightly
+	 * slower.  Hence the default is now to store 32 bits per int32_t.
+	 */
+	#endif
 #endif /* NO_LONG_LONG */
 
 #ifdef Pack_32
-#define ULbits 32
-#define kshift 5
-#define kmask 31
-#define ALL_ON 0xffffffff
+	#define ULbits 32
+	#define kshift 5
+	#define kmask 31
+	#define ALL_ON 0xffffffff
 #else
-#define ULbits 16
-#define kshift 4
-#define kmask 15
-#define ALL_ON 0xffff
+	#define ULbits 16
+	#define kshift 4
+	#define kmask 15
+	#define ALL_ON 0xffff
 #endif
 
 #ifndef MULTIPLE_THREADS
-#define ACQUIRE_DTOA_LOCK(n) /*nothing*/
-#define FREE_DTOA_LOCK(n) /*nothing*/
+	#define ACQUIRE_DTOA_LOCK(n) /*nothing*/
+	#define FREE_DTOA_LOCK(n) /*nothing*/
 #endif
 
 #define Kmax 15
 
-struct Bigint
-{
-	struct Bigint* next;
-	int k, maxwds, sign, wds;
-	uint32_t x[1];
-};
+	struct Bigint
+	{
+		struct Bigint* next;
+		int k, maxwds, sign, wds;
+		uint32_t x[1];
+	};
 
-typedef struct Bigint Bigint;
+	typedef struct Bigint Bigint;
 
 #ifdef NO_STRING_H
-#ifdef DECLARE_SIZE_T
-typedef unsigned int size_t;
-#endif
-extern void memcpy(void*, const void*, size_t);
-#define Bcopy(x, y) \
-	memcpy(&x->sign, &y->sign, (size_t)(y->wds) * sizeof(uint32_t) + 2 * sizeof(int))
+	#ifdef DECLARE_SIZE_T
+	typedef unsigned int size_t;
+	#endif
+	extern void memcpy(void*, const void*, size_t);
+	#define Bcopy(x, y) \
+		memcpy(&x->sign, &y->sign, (size_t)(y->wds) * sizeof(uint32_t) + 2 * sizeof(int))
 #else /* !NO_STRING_H */
-#define Bcopy(x, y) memcpy(&x->sign, &y->sign, (size_t)(y->wds) * sizeof(uint32_t) + 2 * sizeof(int))
+	#define Bcopy(x, y) \
+		memcpy(&x->sign, &y->sign, (size_t)(y->wds) * sizeof(uint32_t) + 2 * sizeof(int))
 #endif /* NO_STRING_H */
 
 // This is still required at the moment because strtod switches out tinytens
 // for its own copy.
 #define tinytens tinytens_D2A
 
-extern char* dtoa_result;
-extern const double bigtens[], tens[], tinytens[];
-extern unsigned char hexdig[];
+	extern char* dtoa_result;
+	extern const double bigtens[], tens[], tinytens[];
+	extern unsigned char hexdig[];
 
-extern Bigint* Balloc(int);
-extern void Bfree(Bigint*);
-extern void ULtof(uint32_t*, const uint32_t*, int32_t, int);
-extern void ULtod(uint32_t*, const uint32_t*, int32_t, int);
-extern void ULtodd(uint32_t*, uint32_t*, int32_t, int);
-extern void ULtoQ(uint32_t*, const uint32_t*, int32_t, int);
-extern void ULtox(uint16_t*, const uint32_t*, int32_t, int);
-extern void ULtoxL(uint32_t*, const uint32_t*, int32_t, int);
-extern uint32_t any_on(Bigint*, int);
-extern double b2d(Bigint*, int*);
-extern int cmp(Bigint*, Bigint*);
-extern void copybits(uint32_t*, int, Bigint*);
-extern Bigint* d2b(double, int*, int*);
-extern int decrement(Bigint*);
-extern Bigint* diff(Bigint*, Bigint*);
-extern char* g__fmt(char*, char*, const char*, int, uint32_t);
-extern int gethex(const char**, FPI*, int32_t*, Bigint**, int);
-extern void hexdig_init(void);
-extern int hexnan(const char**, FPI*, uint32_t*);
-extern int hi0bits(uint32_t);
-extern Bigint* i2b(int);
-extern Bigint* increment(Bigint*);
-extern int lo0bits(uint32_t*);
-extern Bigint* lshift(Bigint*, int);
-extern int match(const char**, char*);
-extern Bigint* mult(Bigint*, Bigint*);
-extern Bigint* multadd(Bigint*, int, int);
-extern char* nrv_alloc(const char*, char**, int);
-extern Bigint* pow5mult(Bigint*, int);
-extern int quorem(Bigint*, Bigint*);
-extern double ratio(Bigint*, Bigint*);
-extern void rshift(Bigint*, int);
-extern char* rv_alloc(int);
-extern Bigint* s2b(const char*, int, int, uint32_t);
-extern Bigint* set_ones(Bigint*, int);
-extern char* strcp(char*, const char*);
-extern int strtoIg(const char*, char**, FPI*, int32_t*, Bigint**, int*);
-extern Bigint* sum(Bigint*, Bigint*);
-extern int trailz(Bigint*);
-extern double ulp(double);
+	extern Bigint* Balloc(int);
+	extern void Bfree(Bigint*);
+	extern void ULtof(uint32_t*, const uint32_t*, int32_t, int);
+	extern void ULtod(uint32_t*, const uint32_t*, int32_t, int);
+	extern void ULtodd(uint32_t*, uint32_t*, int32_t, int);
+	extern void ULtoQ(uint32_t*, const uint32_t*, int32_t, int);
+	extern void ULtox(uint16_t*, const uint32_t*, int32_t, int);
+	extern void ULtoxL(uint32_t*, const uint32_t*, int32_t, int);
+	extern uint32_t any_on(Bigint*, int);
+	extern double b2d(Bigint*, int*);
+	extern int cmp(Bigint*, Bigint*);
+	extern void copybits(uint32_t*, int, Bigint*);
+	extern Bigint* d2b(double, int*, int*);
+	extern int decrement(Bigint*);
+	extern Bigint* diff(Bigint*, Bigint*);
+	extern char* g__fmt(char*, char*, const char*, int, uint32_t);
+	extern int gethex(const char**, FPI*, int32_t*, Bigint**, int);
+	extern void hexdig_init(void);
+	extern int hexnan(const char**, FPI*, uint32_t*);
+	extern int hi0bits(uint32_t);
+	extern Bigint* i2b(int);
+	extern Bigint* increment(Bigint*);
+	extern int lo0bits(uint32_t*);
+	extern Bigint* lshift(Bigint*, int);
+	extern int match(const char**, char*);
+	extern Bigint* mult(Bigint*, Bigint*);
+	extern Bigint* multadd(Bigint*, int, int);
+	extern char* nrv_alloc(const char*, char**, int);
+	extern Bigint* pow5mult(Bigint*, int);
+	extern int quorem(Bigint*, Bigint*);
+	extern double ratio(Bigint*, Bigint*);
+	extern void rshift(Bigint*, int);
+	extern char* rv_alloc(int);
+	extern Bigint* s2b(const char*, int, int, uint32_t);
+	extern Bigint* set_ones(Bigint*, int);
+	extern char* strcp(char*, const char*);
+	extern int strtoIg(const char*, char**, FPI*, int32_t*, Bigint**, int*);
+	extern Bigint* sum(Bigint*, Bigint*);
+	extern int trailz(Bigint*);
+	extern double ulp(double);
 
 #ifdef __cplusplus
 }
@@ -543,34 +548,34 @@ extern double ulp(double);
  * (On HP Series 700/800 machines, -DNAN_WORD0=0x7ff40000 works.)
  */
 #ifdef IEEE_Arith
-#ifdef IEEE_MC68k
-#define _0 0
-#define _1 1
-#ifndef NAN_WORD0
-#define NAN_WORD0 d_QNAN0
-#endif
-#ifndef NAN_WORD1
-#define NAN_WORD1 d_QNAN1
-#endif
+	#ifdef IEEE_MC68k
+		#define _0 0
+		#define _1 1
+		#ifndef NAN_WORD0
+			#define NAN_WORD0 d_QNAN0
+		#endif
+		#ifndef NAN_WORD1
+			#define NAN_WORD1 d_QNAN1
+		#endif
+	#else
+		#define _0 1
+		#define _1 0
+		#ifndef NAN_WORD0
+			#define NAN_WORD0 d_QNAN1
+		#endif
+		#ifndef NAN_WORD1
+			#define NAN_WORD1 d_QNAN0
+		#endif
+	#endif
 #else
-#define _0 1
-#define _1 0
-#ifndef NAN_WORD0
-#define NAN_WORD0 d_QNAN1
-#endif
-#ifndef NAN_WORD1
-#define NAN_WORD1 d_QNAN0
-#endif
-#endif
-#else
-#undef INFNAN_CHECK
+	#undef INFNAN_CHECK
 #endif
 
 #undef SI
 #ifdef Sudden_Underflow
-#define SI 1
+	#define SI 1
 #else
-#define SI 0
+	#define SI 0
 #endif
 
 #endif /* GDTOAIMP_H_INCLUDED */

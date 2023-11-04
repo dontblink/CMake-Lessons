@@ -980,7 +980,7 @@ for(;;)
 								(scale && (y = word0(rv) & Exp_mask) <= 2 * P * Exp_msk1) ?
 									(0xffffffff & (0xffffffff << (2 * P + 1 - (y >> Exp_shift)))) :
 #endif
-									  0xffffffff))
+									0xffffffff))
 			{
 				/*boundary case -- increment exponent*/
 				word0(rv) = (word0(rv) & Exp_mask) + Exp_msk1

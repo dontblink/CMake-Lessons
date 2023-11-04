@@ -1,7 +1,7 @@
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR arm)
 # Represents the name of the specific processor type, e.g. Cortex-M4
-if (NOT CPU_NAME)
+if(NOT CPU_NAME)
     set(CPU_NAME generic)
 endif()
 
@@ -41,7 +41,11 @@ set(CMAKE_CXX_FLAGS_INIT
     "${CPU_FLAGS} ${VFP_FLAGS} -fdata-sections -ffunction-sections"
     CACHE
     INTERNAL "Default C++ compiler flags.")
+set(CMAKE_ASM_FLAGS_INIT
+    "${CPU_FLAGS} -x assembler-with-cpp"
+    CACHE
+    INTERNAL "Default ASM compiler flags.")
 set(CMAKE_EXE_LINKER_FLAGS_INIT
-    "${LD_FLAGS} -Wl, --gc-sections"
+    "${LD_FLAGS} -Wl,--gc-sections"
     CACHE
     INTERNAL "Default linker flags.")
