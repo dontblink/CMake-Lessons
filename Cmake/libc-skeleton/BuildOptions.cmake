@@ -21,6 +21,10 @@ option(NOSTDINC_FOR_DEPENDENTS
        "apply_supported_compiler_flags for -nostdinc should use a public scope when on, private when off"
        OFF)
 
+option(BUILD_WITH_STATIC_ANALYSIS
+       "Enable static analysis output when building the project"
+       OFF)
+
 CMAKE_DEPENDENT_OPTION(LIBC_BUILD_TESTING
        "enables unit test builds when this project is used as a dependency in another project"
        OFF

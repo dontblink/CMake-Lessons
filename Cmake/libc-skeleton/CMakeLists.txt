@@ -107,6 +107,44 @@ if(LIBC_TESTING_IS_ENABLED)
   )
 endif()
 
+#enable static analysis, don't need to run this on cmocka so set it after
+find_program(CPPCHECK cppcheck)
+if(CPPCHECK)
+  set(CPPCHECK_DEFAULT_ARGS
+      ${CPPCHECK} --quiet --enable=style --force
+      # Include Directories
+      -I ${CMAKE_CURRENT_LIST_DIR}/include)
+
+  if(BUILD_WITH_STATIC_ANALYSIS)
+    set(CMAKE_C_CPPCHECK ${CPPCHECK_DEFAULT_ARGS})
+  endif()
+
+  add_custom_target(cppcheck
+                    COMMAND ${CPPCHECK_DEFAULT_ARGS}
+                    # Source directories
+                    ${CMAKE_CURRENT_LIST_DIR}/src ${CMAKE_CURRENT_LIST_DIR}/target/)
+
+  add_custom_target(cppcheck-xml
+                    COMMAND ${CPPCHECK_DEFAULT_ARGS}
+                    #enable XML output
+                    --xml --xml-version=2
+                    $ Source Directories
+                    ${CMAKE_CURRENT_LIST_DIR}/src/ ${CMAKE_CURRENT_LIST_DIR}/target/
+                    # Redirect to file
+                    2>${CMAKE_BINARY_DIR}/cppcheck.xml
+                    )
+endif()
+
+find_program(CLANG_TIDY clang-tidy)
+if(CLANG_TIDY)
+  if(BUILD_WITH_STATIC_ANALYSIS)
+    set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY})
+  endif()
+  add_custom_target(tidy
+                    COMMAND tools/clang-tidy.sh ${CMAKE_BINARY_DIR}
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
+endif()
+
 #process source tree
 add_subdirectory(arch/${CMAKE_SYSTEM_PROCESSOR}/)
 add_subdirectory(src)
@@ -136,3 +174,40 @@ if(CLANG_FORMAT)
                     COMMAND tools/format-patch.sh
                     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 endif()
+
+find_program(LIZARD lizard)
+if(LIZARD)
+  set(LIZARD_BASE_ARGS
+      ${LIZARD}
+      # Configuration
+      --length 75 #fail when functions longer than this
+      --CCN 10 # fail over this ccn
+      --arguments 10 # fail this arg count
+      )
+  set(LIZARD_PATHS ${CMAKE_CURRENT_LIST_DIR}/src ${CMAKE_CURRENT_LIST_DIR}/tests)
+  
+  add_custom_target(complexity
+                    COMMAND
+                    ${LIZARD_BASE_ARGS}
+                    -w # Only show warnings
+                    ${LIZARD_PATHS}
+                    )
+
+  add_custom_target(complexity-full
+  COMMAND
+    ${LIZARD_BASE_ARGS}
+    ${LIZARD_PATHS}
+)
+
+  add_custom_target(complexity-xml
+  COMMAND
+    ${LIZARD_BASE_ARGS}
+    --xml # Generate XML output
+    ${LIZARD_PATHS}
+    # Redirect output to file
+    > ${CMAKE_BINARY_DIR}/complexity.xml
+  BYPRODUCTS
+    ${CMAKE_BINARY_DIR}/complexity.xml
+)
+endif()
+
