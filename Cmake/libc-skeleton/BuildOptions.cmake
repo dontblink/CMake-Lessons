@@ -1,6 +1,10 @@
 include(CMakeDependentOption)
 include(CheckIPOSupported)
 
+set(USE_SANITIZER
+    "" CACHE STRING
+    "Compile with a sanitizer. Options are: Address, Memory, Leak, Undefined, Thread 'Address;Undefined'")
+
 option(HIDE_UNIMPLEMENTED_C_APIS
        "Make unimplemented libc functions invisible to the compiler."
        OFF)
@@ -29,6 +33,12 @@ CMAKE_DEPENDENT_OPTION(LIBC_BUILD_TESTING
        "enables unit test builds when this project is used as a dependency in another project"
        OFF
        "NOT CMAKE_CROSSCOMPILING" OFF)
+
+CMAKE_DEPENDENT_OPTION(ENABLE_COVERAGE
+                       "Enable code coverage analysis."
+                       OFF
+                       "\"${CMAKE_BUILD_TYPE}\" STREQUAL \"Debug\""
+                       OFF)
 
 if((NOT CMAKE_CROSSCOMPILING) AND BUILD_TESTING AND 
    (LIBC_BUILD_TESTING OR (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)))

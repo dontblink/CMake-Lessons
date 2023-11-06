@@ -21,6 +21,32 @@ include(cmake/AddExecutableWithLinkerScriptDep.cmake)
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 	add_compile_options(-Wall -Wextra)
 endif()
+if(ENABLE_COVERAGE)
+  include(cmake/CodeCoverage.cmake)
+  append_coverage_compiler_flags()
+endif()
+
+if(USE_SANITIZER MATCHES "([Aa]ddress)")
+  add_compile_options(-fsanitize=address)
+  add_link_options(-fsanitize=address)
+elseif(USE_SANITIZER MATCHES "([Tt]hread)")
+  add_compile_options(-fsanitize=thread)
+  add_link_options(-fsanitize=thread)
+elseif(USE_SANITIZER MATCHES "([Uu]ndefined)")
+  add_compile_options(-fsanitize=undefined)
+  add_link_options(-fsanitize=undefined)
+elseif(USE_SANITIZER MATCHES "([Ll]eak)")
+  add_compile_options(-fsanitize=leak)
+  add_link_options(-fsanitize=leak)
+elseif(USE_SANITIZER MATCHES "([Mm]emory)")
+  add_compile_options(-fsanitize=memory)
+  add_link_options(-fsanitize=memory)
+elseif(USE_SANITIZER MATCHES "([Aa]ddress);([Uu]ndefined)")
+  add_compile_options(-fsanitize=address,undefined)
+  add_link_options(-fsanitize=address,undefined)
+elseif(NOT "${USE_SANITIZER}" STREQUAL "")
+  message(FATAL_ERROR "Unsupported value of USE_SANITIZER: ${USE_SANITIZER}")
+endif()
 
 # generate map file in linker
 function(target_linker_map target)
@@ -96,6 +122,17 @@ target_include_directories(openlibm SYSTEM INTERFACE
 ##############
 
 if(LIBC_TESTING_IS_ENABLED)
+  #Redefine add_custom_target so we can change cmocka's doc target name
+  # in order to preserve our own
+  function(add_custom_target target)
+    if(${CMAKE_CURRENT_LIST_DIR} MATCHES cmocka-src AND ${target} STREQUAL docs)
+      set(target cmocka-docs)
+    endif()
+
+    # Forward all arguments to the standard _add_custom_target
+    _add_custom_target(${target} ${ARGN})
+  endfunction()
+  
   CPMFindPackage(
     NAME cmocka
     GIT_REPOSITORY https://git.cryptomilk.org/projects/cmocka.git/
@@ -152,6 +189,22 @@ add_subdirectory(src)
 #process test tree
 
 add_subdirectory(test)
+if(ENABLE_COVERAGE)
+  setup_target_for_coverage_gcovr_xml(
+                                      NAME coverage-xml
+                                      EXECUTABLE ctest
+                                      DEPENDENCIES libc_tests printf_tests
+                                      )
+
+  setup_target_for_coverage_gcovr_html(
+                                       NAME coverage-html
+                                       EXECUTABLE ctest
+                                       DEPENDENCIES libc_tests printf_tests
+                                       )
+
+  add_custom_target(coverage 
+                    DEPENDS coverage-xml coverage-html)
+endif()
 
 find_program(DOXYGEN doxygen)
 
@@ -210,4 +263,11 @@ if(LIZARD)
     ${CMAKE_BINARY_DIR}/complexity.xml
 )
 endif()
+
+if(ENABLE_COVERAGE)
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
+endif()
+
 
