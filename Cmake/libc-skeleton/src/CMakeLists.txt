@@ -302,4 +302,7 @@ target_sources(c_core INTERFACE
 	wchar/wcwidth.c
 )
 
+install(TARGETS c DESTINATION lib)
+install(TARGETS c_hosted DESTINATION lib)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION include)
 

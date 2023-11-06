@@ -13,6 +13,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR LIBC_BUILD_TESTING)
 	include(CTest)
 endif()
 
+include(Packaging.cmake)
 include(cmake/CheckAndApplyFlags.cmake)
 include(BuildOptions.cmake)
 include(cmake/Conversions.cmake)
@@ -270,4 +271,6 @@ if(ENABLE_COVERAGE)
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
 endif()
 
-
+install(FILES ${printf_SOURCE_DIR}/src/printf/printf.h DESTINATION include)
+install(DIRECTORY ${openlibm_SOURCE_DIR}/include/ DESTINATION include)
+install(DIRECTORY ${openlibm_SOURCE_DIR}/src DESTINATION include FILES_MATCHING PATTERN "*.h")
