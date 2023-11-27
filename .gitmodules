@@ -1,0 +1,3 @@
+[submodule "CMake_Skeleton/skeleton/cmake"]
+	path = CMake_Skeleton/skeleton/cmake
+	url = https://github.com/dontblink/cmake_build_system.git
