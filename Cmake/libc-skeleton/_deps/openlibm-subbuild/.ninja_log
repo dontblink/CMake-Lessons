@@ -1,0 +1,21 @@
+# ninja log v5
+84	158	1699649751172119000	openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-mkdir	e0c80b7c997e3b28
+84	158	1699649751172119000	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-mkdir	e0c80b7c997e3b28
+172	7323	1699649757785733100	openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-download	48cec4ea17c189ab
+172	7323	1699649757785733100	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-download	48cec4ea17c189ab
+7333	7704	0	openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-update	a2c58053488f3eec
+7333	7704	0	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-update	a2c58053488f3eec
+7711	7733	1699649758164361900	openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-patch	c3cfdebd21ff1baa
+7711	7733	1699649758164361900	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-patch	c3cfdebd21ff1baa
+7742	7774	1699649758202663900	openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-configure	5f8413a83fba8308
+7742	7774	1699649758202663900	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-configure	5f8413a83fba8308
+7783	7805	1699649758231215800	openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-build	a01c34c83d37f6e4
+7783	7805	1699649758231215800	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-build	a01c34c83d37f6e4
+7814	7837	1699649758260381900	openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-install	9c006b5d2dbb5c5a
+7814	7837	1699649758260381900	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-install	9c006b5d2dbb5c5a
+7847	7869	1699649758290147300	openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-test	45e8ae7756351d89
+7847	7869	1699649758290147300	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-test	45e8ae7756351d89
+7878	7914	1699649758331654300	CMakeFiles/openlibm-populate-complete	505c3d2cc15c6da5
+7878	7914	1699649758331654300	openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-done	505c3d2cc15c6da5
+7878	7914	1699649758331654300	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/openlibm-subbuild/CMakeFiles/openlibm-populate-complete	505c3d2cc15c6da5
+7878	7914	1699649758331654300	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/openlibm-subbuild/openlibm-populate-prefix/src/openlibm-populate-stamp/openlibm-populate-done	505c3d2cc15c6da5

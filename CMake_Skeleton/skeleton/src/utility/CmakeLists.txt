@@ -1,0 +1,9 @@
+# The default build structure is for a header-only library
+# If you want to add source files, remove the 'INTERFACE' 
+# option from 'add_library' and make the INTERFACE option in
+# 'target_include_directories' PUBLIC. 
+# Then you can use 'add_subdirectory' and call 'target_sources(utilities PRIVATE ..)'
+# to add files to the library 
+
+add_library(utilities INTERFACE)
+target_include_directories(utilities INTERFACE .)

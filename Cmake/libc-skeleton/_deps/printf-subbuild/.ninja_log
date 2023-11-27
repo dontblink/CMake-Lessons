@@ -1,0 +1,21 @@
+# ninja log v5
+92	165	1699649744974669200	printf-populate-prefix/src/printf-populate-stamp/printf-populate-mkdir	4ab25a8c8c695b0a
+92	165	1699649744974669200	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/printf-subbuild/printf-populate-prefix/src/printf-populate-stamp/printf-populate-mkdir	4ab25a8c8c695b0a
+177	3990	1699649748505867300	printf-populate-prefix/src/printf-populate-stamp/printf-populate-download	35b5940e233f5631
+177	3990	1699649748505867300	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/printf-subbuild/printf-populate-prefix/src/printf-populate-stamp/printf-populate-download	35b5940e233f5631
+3998	4342	0	printf-populate-prefix/src/printf-populate-stamp/printf-populate-update	ca33d09cec229c6d
+3998	4342	0	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/printf-subbuild/printf-populate-prefix/src/printf-populate-stamp/printf-populate-update	ca33d09cec229c6d
+4360	4384	1699649748868837300	printf-populate-prefix/src/printf-populate-stamp/printf-populate-patch	8ec26e6fc06f9deb
+4360	4384	1699649748868837300	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/printf-subbuild/printf-populate-prefix/src/printf-populate-stamp/printf-populate-patch	8ec26e6fc06f9deb
+4393	4416	1699649748899112000	printf-populate-prefix/src/printf-populate-stamp/printf-populate-configure	892311eb006c0a3a
+4393	4416	1699649748899112000	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/printf-subbuild/printf-populate-prefix/src/printf-populate-stamp/printf-populate-configure	892311eb006c0a3a
+4426	4451	1699649748931142400	printf-populate-prefix/src/printf-populate-stamp/printf-populate-build	60245d6f81f5d3dd
+4426	4451	1699649748931142400	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/printf-subbuild/printf-populate-prefix/src/printf-populate-stamp/printf-populate-build	60245d6f81f5d3dd
+4461	4485	1699649748962540000	printf-populate-prefix/src/printf-populate-stamp/printf-populate-install	bd6f716bb985a153
+4461	4485	1699649748962540000	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/printf-subbuild/printf-populate-prefix/src/printf-populate-stamp/printf-populate-install	bd6f716bb985a153
+4493	4516	1699649748991095600	printf-populate-prefix/src/printf-populate-stamp/printf-populate-test	398fabe02de3406b
+4493	4516	1699649748991095600	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/printf-subbuild/printf-populate-prefix/src/printf-populate-stamp/printf-populate-test	398fabe02de3406b
+4526	4563	1699649749035000900	CMakeFiles/printf-populate-complete	fc90360d9981aa2c
+4526	4563	1699649749035000900	printf-populate-prefix/src/printf-populate-stamp/printf-populate-done	fc90360d9981aa2c
+4526	4563	1699649749035000900	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/printf-subbuild/CMakeFiles/printf-populate-complete	fc90360d9981aa2c
+4526	4563	1699649749035000900	/mnt/c/code/EA/Cmake/libc-skeleton/_deps/printf-subbuild/printf-populate-prefix/src/printf-populate-stamp/printf-populate-done	fc90360d9981aa2c

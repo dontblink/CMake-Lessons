@@ -20,12 +20,6 @@ int main(void)
 	// Generate JUnit results
 	cmocka_set_message_output(CM_OUTPUT_XML);
 
-	overall_result |= ctype_tests();
-	overall_result |= string_tests();
-	overall_result |= stdlib_tests();
-#ifdef ENABLE_CRT_TESTING
-	overall_result |= crt_tests();
-#endif
-
+	overall_result = test_suite();
 	return overall_result;
 }
