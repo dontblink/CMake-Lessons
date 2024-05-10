@@ -1,0 +1,4 @@
+[wrap-git]
+url=https://github.com/embeddedartistry/printf
+revision=43e98e84
+patch_directory=printf

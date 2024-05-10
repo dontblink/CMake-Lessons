@@ -1,0 +1,4 @@
+# Meson subprojects
+libc-skeleton/subprojects/*
+!libc-skeleton/subprojects/packagefiles/
+!libc-skeleton/subprojects/*.wrap

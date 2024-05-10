@@ -1,0 +1,4053 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"libc_test_",
+				"libc_test_flags"
+			],
+			[
+				"test",
+				"test_output_dir"
+			],
+			[
+				"openlib",
+				"openlibm_subproject"
+			],
+			[
+				"DRDY",
+				"DRDY_PIN"
+			],
+			[
+				"DRDY_",
+				"DRDY_DIR_PORT"
+			],
+			[
+				"HT_C",
+				"HT_CS_DIR_PORT"
+			],
+			[
+				"intrin",
+				"intrinsics.h\""
+			],
+			[
+				"mb_re",
+				"mb_file_records.h\""
+			],
+			[
+				"proximi",
+				"proximity_i2c.h\""
+			],
+			[
+				"temphum",
+				"temphumadc.h\""
+			],
+			[
+				"calen",
+				"calendar_i2c.h\""
+			],
+			[
+				"msp430",
+				"msp430_adc.h\""
+			],
+			[
+				"mock_in",
+				"mock_intrinsics.h\""
+			],
+			[
+				"msp",
+				"msp430_adc.h\""
+			],
+			[
+				"ads",
+				"SPI_ADS1256.h\""
+			],
+			[
+				"temphu",
+				"temphumadc.h\""
+			],
+			[
+				"relay",
+				"relay_timer.h\""
+			],
+			[
+				"proxi",
+				"proximity_i2c.h\""
+			],
+			[
+				"calendar",
+				"calendar_i2c.h\""
+			],
+			[
+				"msp43",
+				"msp430_adc.h\""
+			],
+			[
+				"proxim",
+				"proximity_i2c"
+			],
+			[
+				"UART_DE",
+				"uart_de"
+			],
+			[
+				"FRAM_PROX",
+				"FRAM_PROXIMITY_LIMIT"
+			],
+			[
+				"calend",
+				"calendar_types.h\""
+			],
+			[
+				"HUMIDITY",
+				"HUMIDITY_OUT_L"
+			],
+			[
+				"read_i2c_data_mn",
+				"read_i2c_data_mnack_end"
+			],
+			[
+				"I2C_Mst",
+				"I2C_Mst_NACK"
+			],
+			[
+				"FAULT_TEMP",
+				"FAULT_TEMP_PROXIMITY"
+			],
+			[
+				"FAULT_MULT",
+				"FAULT_MULTIPLE_ERR_START"
+			],
+			[
+				"FAULT_MULTIPLE",
+				"FAULT_MULTIPLE_ERR_END"
+			],
+			[
+				"FAULT_MULTI",
+				"FAULT_MULTIPLE_ERR_END"
+			],
+			[
+				"FAULT_MU",
+				"FAULT_MULTIPLE_ERR_START"
+			],
+			[
+				"gIR_Pre",
+				"gIR_PreTest_27um_mV"
+			],
+			[
+				"gFire",
+				"gFireDiagram_Index"
+			],
+			[
+				"get_ir",
+				"get_ir_sensor_enabled"
+			],
+			[
+				"START_",
+				"START_OFFSET_CALC"
+			],
+			[
+				"std_",
+				"std_offset_idx"
+			],
+			[
+				"get_all",
+				"get_all_avg_signals"
+			],
+			[
+				"uv_",
+				"uv_ir_test_flag"
+			],
+			[
+				"handle_ir",
+				"handle_mode1_ir_alarm"
+			],
+			[
+				"handle",
+				"handle_mode1_ir_alarm"
+			],
+			[
+				"avg_signal",
+				"avg_signal_38um_5hz"
+			],
+			[
+				"avg_signal_43",
+				"avg_signal_43um_5hz"
+			],
+			[
+				"avg_signal_43um",
+				"avg_signal_43um_5hz"
+			],
+			[
+				"guv",
+				"gUVpulsTot"
+			],
+			[
+				"proximit",
+				"proximity_timeout_flag"
+			],
+			[
+				"Handle_Proxi",
+				"Handle_Proximity_ERR"
+			],
+			[
+				"TEST_ASSERT_BITS",
+				"TEST_ASSERT_BITS_HIGH"
+			],
+			[
+				"LEDObserv",
+				"LEDObserverState"
+			],
+			[
+				"RLY_AUX",
+				"RLY_AUX_ON"
+			],
+			[
+				"StopRelayOff",
+				"StopFireRelayOffTimer"
+			],
+			[
+				"timeobser",
+				"time_observer"
+			],
+			[
+				"gUV_IR_",
+				"gUV_IR_Test_FLAG"
+			],
+			[
+				"gAvg_",
+				"gAvg_mV43um25Hz"
+			],
+			[
+				"gAvg_mV27",
+				"gAvg_mV27um25Hz"
+			],
+			[
+				"FIRE_",
+				"FRAM_FIRE_RATIO"
+			],
+			[
+				"gIR",
+				"gIR_ALARM"
+			],
+			[
+				"gAvg_mV38",
+				"gAvg_mV38um5Hz"
+			],
+			[
+				"gA",
+				"gAvg_mV43um5Hz"
+			],
+			[
+				"gAvg_mV38um",
+				"gAvg_mV38um5Hz"
+			],
+			[
+				"TEST_ASSERT",
+				"TEST_ASSERT_EQUAL_FLOAT"
+			],
+			[
+				"gRatio_43u",
+				"gRatio_43um38um_5Hz"
+			],
+			[
+				"gAvg_mV43um",
+				"gAvg_mV43um25Hz"
+			],
+			[
+				"gRatio",
+				"gRatio_43um38um_5Hz"
+			],
+			[
+				"TEST_ASSERT_",
+				"TEST_ASSERT_EQUAL_FLOAT"
+			],
+			[
+				"gAvg_mV",
+				"gAvg_mV38um25Hz"
+			],
+			[
+				"gAvg",
+				"gAvg_mV43um25Hz"
+			],
+			[
+				"gAvg_mV27um",
+				"gAvg_mV27um25Hz"
+			],
+			[
+				"gavg",
+				"gAvg_mV43um25Hz"
+			],
+			[
+				"guvpu",
+				"gUVpulsTot"
+			],
+			[
+				"gAvg_mv38",
+				"gAvg_mV38um25Hz"
+			],
+			[
+				"gAvg_mv27",
+				"gAvg_mV27um25Hz"
+			],
+			[
+				"TEST_",
+				"TEST_ASSERT_EQUAL_FLOAT"
+			],
+			[
+				"gAvg_mV3",
+				"gAvg_mV38um25Hz"
+			],
+			[
+				"TEST_AS",
+				"TEST_ASSERT_EQUAL_FLOAT"
+			],
+			[
+				"ratiouv43",
+				"ratiouv43um5hz_min"
+			],
+			[
+				"gFLT_",
+				"gFLT_UnLatch"
+			],
+			[
+				"inc",
+				"inc_uv_ir_fail"
+			],
+			[
+				"in",
+				"intrinsics"
+			],
+			[
+				"gStart",
+				"gStartupFaultTest"
+			],
+			[
+				"SPI_ADS",
+				"SPI_ADS1256.h"
+			],
+			[
+				"msp4",
+				"msp430fr6989.h"
+			],
+			[
+				"gUV_Sen",
+				"gUV_Sen_index2"
+			],
+			[
+				"PIE1bi",
+				"PIE1bits.RCIE"
+			],
+			[
+				"eccp2",
+				"eccp2.h"
+			],
+			[
+				"last",
+				"glbMode.lastHazardSet"
+			],
+			[
+				"GetPul",
+				"GetPulseTime_CH2\t(input.h)"
+			],
+			[
+				"GetPulse",
+				"GetPulseTime_CH1\t(input.h)"
+			],
+			[
+				"tm",
+				"tmr4.h\t(mode.c)"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/stdio/putchar.c",
+			"settings":
+			{
+				"buffer_size": 94,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"file": "subprojects/printf/test/catch.hpp",
+			"settings":
+			{
+				"buffer_size": 659295,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"file": "subprojects/cmocka-1.1.5/src/cmocka.c",
+			"settings":
+			{
+				"buffer_size": 116390,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"file": "src/stdio/asprintf.c",
+			"settings":
+			{
+				"buffer_size": 233,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"file": "src/meson.build",
+			"redo_stack":
+			[
+				[
+					81,
+					1,
+					"left_delete",
+					null,
+					"AwAAAKIVAAAAAAAAoxUAAAAAAAAAAAAAoxUAAAAAAACkFQAAAAAAAAAAAACkFQAAAAAAAKUVAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAohUAAAAAAACiFQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					78,
+					1,
+					"cut",
+					null,
+					"AQAAAKUVAAAAAAAAthUAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAApRUAAAAAAAClFQAAAAAAAAAAAAAAAPC/"
+				]
+			],
+			"settings":
+			{
+				"buffer_size": 5932,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"file": "subprojects/packagefiles/printf/meson.build",
+			"settings":
+			{
+				"buffer_size": 735,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"contents": "Searching 979 files for \"PRINTF_VISIBILITY\"\n\n0 matches",
+			"settings":
+			{
+				"buffer_size": 54,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"file": "subprojects/printf/test/test_suite.cpp",
+			"settings":
+			{
+				"buffer_size": 41531,
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"file": "subprojects/printf/meson.build",
+			"settings":
+			{
+				"buffer_size": 735,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"file": "cross-compile.sublime-project",
+			"settings":
+			{
+				"buffer_size": 234,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+				[
+					5,
+					1,
+					"paste",
+					null,
+					"AgAAAAAAAAAAAAAA6gAAAAAAAAAAAAAA6gAAAAAAAADqAAAAAAAAAC0AAAB7CgkiZm9sZGVycyI6CglbCgkJewoJCQkicGF0aCI6ICIuIgoJCX0KCV0KfQo",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAtAAAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		},
+		{
+			"file": "subprojects/printf/printf.c",
+			"settings":
+			{
+				"buffer_size": 27133,
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"file": "subprojects/printf/printf.h",
+			"settings":
+			{
+				"buffer_size": 4865,
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"file": "src/string/memcmp.c",
+			"settings":
+			{
+				"buffer_size": 615,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"file": "test/string/memcmp.c",
+			"settings":
+			{
+				"buffer_size": 901,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"file": "src/string/strdup.c",
+			"settings":
+			{
+				"buffer_size": 2130,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/User/cmake.sublime-build",
+					""
+				],
+				[
+					"Packages/User/cmake.sublime-build",
+					"clean"
+				]
+			],
+			[
+				"Packages/Makefile/Make.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				],
+				[
+					"Packages/User/cmake.sublime-build",
+					""
+				],
+				[
+					"Packages/User/cmake.sublime-build",
+					"clean"
+				],
+				[
+					"Packages/User/cmake.sublime-build",
+					"new sublime build"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/User/cmake.sublime-build",
+					""
+				],
+				[
+					"Packages/User/cmake.sublime-build",
+					"clean"
+				]
+			],
+			[
+				"Packages/User/cmake.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"testNucleo - all",
+					""
+				],
+				[
+					"testNucleo - clean",
+					""
+				],
+				[
+					"testNucleo - edit_cache",
+					""
+				],
+				[
+					"testNucleo - rebuild_cache",
+					""
+				],
+				[
+					"testNucleo - testNucleo",
+					""
+				],
+				[
+					"testNucleo - testNucleo.bin",
+					""
+				],
+				[
+					"testNucleo - testNucleo.hex",
+					""
+				],
+				[
+					"testNucleo - testNucleo/fast",
+					""
+				],
+				[
+					"Packages/C++/C Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C Single File.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/User/cmake.sublime-build",
+					""
+				],
+				[
+					"Packages/User/cmake.sublime-build",
+					"clean"
+				]
+			],
+			[
+				"testNucleo - all",
+				""
+			]
+		],
+		[
+			[
+				[
+					"testNucleo - all",
+					""
+				],
+				[
+					"testNucleo - clean",
+					""
+				],
+				[
+					"testNucleo - edit_cache",
+					""
+				],
+				[
+					"testNucleo - rebuild_cache",
+					""
+				],
+				[
+					"testNucleo - testNucleo",
+					""
+				],
+				[
+					"testNucleo - testNucleo.bin",
+					""
+				],
+				[
+					"testNucleo - testNucleo.hex",
+					""
+				],
+				[
+					"testNucleo - testNucleo/fast",
+					""
+				],
+				[
+					"Packages/User/cmake.sublime-build",
+					""
+				],
+				[
+					"Packages/User/cmake.sublime-build",
+					"clean"
+				]
+			],
+			[
+				"testNucleo - all",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"project edit",
+				"Project: Edit Project"
+			],
+			[
+				"open panel",
+				"Meson: Toggle Panel"
+			],
+			[
+				"terminus",
+				"Terminus: List Shells"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"pya",
+				"PyYapf: Format Selection"
+			],
+			[
+				"debugger open",
+				"Debugger: Open"
+			],
+			[
+				"open debu",
+				"Debugger: Open"
+			],
+			[
+				"debugger configurat",
+				"Debugger: Add or Select Configuration"
+			],
+			[
+				"debugger settin",
+				"Preferences: Debugger Settings"
+			],
+			[
+				"build ",
+				"Build With: Python"
+			],
+			[
+				"debugger ",
+				"Debugger: Open"
+			],
+			[
+				"debug",
+				"Debugger: Add or Select Configuration"
+			],
+			[
+				"debugger setting",
+				"Preferences: Debugger Settings"
+			],
+			[
+				"debugger",
+				"Debugger: Install Adapters"
+			],
+			[
+				"doxyge",
+				"DoxyDoxygen: Build Documentation"
+			],
+			[
+				"todo",
+				"TodoReview: Project and Open Files"
+			],
+			[
+				"doxygen",
+				"DoxyDoxygen: Build Documentation"
+			],
+			[
+				"lsp form",
+				"LSP: Format Selection"
+			],
+			[
+				"lsp format",
+				"LSP: Format Selection"
+			],
+			[
+				"format",
+				"LSP: Format Selection"
+			],
+			[
+				"lsp",
+				"LSP: Enable Language Server in Project"
+			],
+			[
+				"lsp trou",
+				"LSP: Troubleshoot Server"
+			],
+			[
+				"clangd",
+				"Preferences: LSP-clangd Settings"
+			],
+			[
+				"lsp troub",
+				"LSP: Troubleshoot Server"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"package control ",
+				"Package Control: Satisfy Dependencies"
+			],
+			[
+				"package control upd",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"clangd ",
+				"Preferences: LSP-clangd Settings"
+			],
+			[
+				"lsp server",
+				"LSP: Troubleshoot Server"
+			],
+			[
+				"lsp enable",
+				"LSP: Enable Language Server in Project"
+			],
+			[
+				"lsp ser",
+				"LSP: Troubleshoot Server"
+			],
+			[
+				"lsp rest",
+				"LSP: Restart Server"
+			],
+			[
+				"lsp forma",
+				"LSP: Format Selection"
+			],
+			[
+				"debugger com",
+				"Debugger: Input Command"
+			],
+			[
+				"debugger configu",
+				"Debugger: Add or Select Configuration"
+			],
+			[
+				"debugger confi",
+				"Debugger: Add or Select Configuration"
+			],
+			[
+				"debugger adapter",
+				"Debugger: Install Adapters"
+			],
+			[
+				"debugger adap",
+				"Debugger: Install Adapters"
+			],
+			[
+				"debugger adapt",
+				"Debugger: Install Adapters"
+			],
+			[
+				"debugger sett",
+				"Preferences: Debugger Settings"
+			],
+			[
+				"debugger add",
+				"Debugger: Add Configuration"
+			],
+			[
+				"doxy build",
+				"DoxyDoxygen: Build Documentation"
+			],
+			[
+				"doxy buil",
+				"DoxyDoxygen: Build Documentation"
+			],
+			[
+				"doxygen key",
+				"Preferences: DoxyDoxygen Key Bindings"
+			],
+			[
+				"doxy",
+				"DoxyDoxygen: Select Comments (interactive)..."
+			],
+			[
+				"do",
+				"DoxyDoxygen: Comment All"
+			],
+			[
+				"lsp format file",
+				"LSP: Format File"
+			],
+			[
+				"format file",
+				"LSP: Format File"
+			],
+			[
+				"for",
+				"LSP: Format File"
+			],
+			[
+				"inlay",
+				"LSP: Toggle Inlay Hints"
+			],
+			[
+				"lsp file",
+				"LSP: Format File"
+			],
+			[
+				"forma",
+				"LSP: Format File"
+			],
+			[
+				"snake",
+				"Convert Case: snake_case"
+			],
+			[
+				"lsp re",
+				"LSP: Restart Server"
+			],
+			[
+				"lsp res",
+				"LSP: Restart Server"
+			],
+			[
+				"lsp restar",
+				"LSP: Restart Server"
+			],
+			[
+				"clangd sett",
+				"Preferences: LSP-clangd Settings"
+			],
+			[
+				"lsp serv",
+				"LSP: Troubleshoot Server"
+			],
+			[
+				"lsp setting",
+				"Preferences: LSP Settings"
+			],
+			[
+				"lsp restart",
+				"LSP: Restart Server"
+			],
+			[
+				"lsp dia",
+				"LSP: Toggle Diagnostics Panel"
+			],
+			[
+				"lsp log",
+				"LSP: Toggle Log Panel"
+			],
+			[
+				"restart",
+				"LSP: Restart Server"
+			],
+			[
+				"lsp settin",
+				"Preferences: LSP Settings"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"lsp key",
+				"Preferences: LSP Key Bindings"
+			],
+			[
+				"origami reorde",
+				"Preferences: Origami Key Bindings"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"preference set",
+				"Preferences: Settings"
+			],
+			[
+				"settings",
+				"Preferences: Settings"
+			],
+			[
+				"preferen",
+				"Preferences: LSP Settings"
+			],
+			[
+				"settin",
+				"Preferences: Settings"
+			],
+			[
+				"dia",
+				"LSP: Toggle Diagnostics Panel"
+			],
+			[
+				"refere",
+				"LSP: Find References"
+			],
+			[
+				"re",
+				"LSP: Restart Server"
+			],
+			[
+				"referen",
+				"LSP: Find References"
+			],
+			[
+				"reference",
+				"LSP: Find References"
+			],
+			[
+				"rest",
+				"LSP: Restart Server"
+			],
+			[
+				"lsp rese",
+				"LSP: Restart Server"
+			],
+			[
+				"clang form",
+				"Clang Format: Format Selection"
+			],
+			[
+				"lsp settings",
+				"Preferences: LSP Settings"
+			],
+			[
+				"lsp setti",
+				"Preferences: LSP Settings"
+			],
+			[
+				"restar",
+				"LSP: Restart Server"
+			],
+			[
+				"index",
+				"Help: Indexing Status"
+			],
+			[
+				"diagn",
+				"LSP: Toggle Diagnostics Panel"
+			],
+			[
+				"lsp d",
+				"LSP: Toggle Diagnostics Panel"
+			],
+			[
+				"refer",
+				"LSP: Find References"
+			],
+			[
+				"lsp rename",
+				"LSP: Rename"
+			],
+			[
+				"key",
+				"Preferences: Key Bindings"
+			],
+			[
+				"trouble",
+				"LSP: Troubleshoot Server"
+			],
+			[
+				"inde",
+				"Help: Indexing Status"
+			],
+			[
+				"log",
+				"LSP: Toggle Log Panel"
+			],
+			[
+				"lsp sett",
+				"Preferences: LSP Settings"
+			],
+			[
+				"lsp diagnostic",
+				"LSP: Toggle Diagnostics Panel"
+			],
+			[
+				"lsp goto symb",
+				"LSP: Goto Symbol In Project…"
+			],
+			[
+				"log panel",
+				"LSP: Toggle Log Panel"
+			],
+			[
+				"referenc",
+				"LSP: Find References"
+			],
+			[
+				"lsp pane",
+				"LSP: Toggle Log Panel"
+			],
+			[
+				"lsp find",
+				"LSP: Find References"
+			],
+			[
+				"package control up",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"lsb trou",
+				"LSP: Troubleshoot Server"
+			],
+			[
+				"lsp:",
+				"LSP: Enable Language Server in Project"
+			],
+			[
+				"lsb",
+				"LSP: Enable Language Server in Project"
+			],
+			[
+				"lsp diagn",
+				"LSP: Toggle Diagnostics Panel"
+			],
+			[
+				"lsp diag",
+				"LSP: Toggle Diagnostics Panel"
+			],
+			[
+				"lsp ",
+				"Preferences: LSP Key Bindings"
+			],
+			[
+				"switchhea",
+				"LSP-clangd: Switch to Source/Header"
+			],
+			[
+				"select ",
+				"UI: Select Color Scheme"
+			],
+			[
+				"theme",
+				"UI: Select Theme"
+			],
+			[
+				"sele",
+				"UI: Select Color Scheme"
+			],
+			[
+				"color",
+				"UI: Customize Color Scheme"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"debugger install",
+				"Debugger: Install Adapters"
+			],
+			[
+				"code lens",
+				"LSP: Run Code Lens"
+			],
+			[
+				"switch",
+				"LSP-clangd: Switch to Source/Header"
+			],
+			[
+				"file rename",
+				"File: Rename"
+			],
+			[
+				"rename ",
+				"LSP: Rename"
+			],
+			[
+				"lsp renam",
+				"LSP: Rename"
+			],
+			[
+				"rename",
+				"File: Rename"
+			],
+			[
+				"scope",
+				"Selection: Expand to Scope"
+			],
+			[
+				"type",
+				"LSP: Show Type Hierarchy"
+			],
+			[
+				"",
+				"LSP: Toggle Log Panel"
+			],
+			[
+				"clang",
+				"Preferences: LSP Language ID Mapping Overrides"
+			],
+			[
+				"ls",
+				"LSP: Restart Server"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"gitgutter",
+				"Preferences: GitGutter Settings"
+			],
+			[
+				"blame",
+				"Git: Blame"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 172.0,
+		"history":
+		[
+			"bash",
+			"quit",
+			"quit()",
+			"exit()",
+			"exit",
+			"pip install compiledb",
+			"py -m ensurepip --upgrade",
+			"pip",
+			"python -m ensurepip --upgrade",
+			"ensurepip",
+			"pip",
+			"sublime.log_indexing",
+			"docker build -t nirve/armenv:v1"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/code/EA/meson_build/reference/005-cross-compilation",
+		"/C/code/EA/meson_build/reference/005-cross-compilation/src",
+		"/C/code/EA/meson_build/reference/005-cross-compilation/subprojects",
+		"/C/code/EA/meson_build/reference/005-cross-compilation/subprojects/packagefiles",
+		"/C/code/EA/meson_build/reference/005-cross-compilation/subprojects/packagefiles/printf",
+		"/C/code/EA/meson_build/reference/005-cross-compilation/subprojects/packagefiles/printf/test"
+	],
+	"file_history":
+	[
+		"/C/code/EA/meson_build/reference/005-cross-compilation/include/string.h",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/printf/src/printf/printf.c",
+		"/C/code/EA/meson_build/reference/005-cross-compilation/subprojects/printf/printf.c",
+		"/C/code/EA/meson_build/libc-skeleton/src/meson.build",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/cmocka-1.1.7/meson.build",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/openlibm/meson.build",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/printf/meson.build",
+		"/C/code/EA/meson_build/libc-skeleton/src/stdio/putchar.c",
+		"/C/code/EA/meson_build/libc-skeleton/meson.build",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/packagefiles/printf/meson.build",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/cmocka.wrap",
+		"/C/code/EA/meson_build/libc-skeleton/src/string/strdup.c",
+		"/C/code/EA/meson_build/libc-skeleton/include/string.h",
+		"/C/code/EA/meson_build/reference/005-cross-compilation/subprojects/printf/printf.h",
+		"/C/code/EA/meson_build/reference/005-cross-compilation/subprojects/cmocka-1.1.5/src/meson.build",
+		"/C/code/EA/meson_build/libc-skeleton/test/meson.build",
+		"/C/code/EA/meson_build/libc-skeleton/test/string/memcmp.c",
+		"/C/code/EA/meson_build/libc-skeleton/meson_options.txt",
+		"/C/code/EA/meson_build/libc-skeleton/src/stdio/putchar_native.c",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/cmocka-1.1.7/src/cmocka.c",
+		"/C/code/EA/meson_build/libc-skeleton/buildresults/compile_commands.json",
+		"/C/Users/Marc/Desktop/meson.build",
+		"/C/Users/Marc/AppData/Local/Temp/7zE846BE53E/meson.build",
+		"/C/code/EA/meson_build/libc-skeleton/src/string/memcmp.c",
+		"/C/Users/Marc/AppData/Local/Temp/7zE0CAB4BAF/meson.build",
+		"/C/Users/Marc/AppData/Local/Temp/7zE4ABA2A47/meson.build",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/cmocka-1.1.7/tests/meson.build",
+		"/C/Users/Marc/AppData/Local/Temp/MicrosoftEdgeDownloads/ffac27c3-cfd1-4abc-91fc-db8576c7c666/cmocka.wrap",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/cmocka-1.1.5/meson.build",
+		"/C/code/EA/meson_build/reference/005-cross-compilation/subprojects/cmocka.wrap",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/cmocka-1.1.5/src/meson.build",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/packagefiles/printf/test/meson.build",
+		"/C/code/EA/meson_build/reference/004-options-and-flags/src/meson.build",
+		"/C/code/EA/meson_build/libc-skeleton/build/cross/nrf52840.txt",
+		"/C/code/EA/meson_build/reference/003-run-targets/subprojects/packagefiles/printf/test/meson.build",
+		"/C/code/EA/meson_build/reference/003-run-targets/subprojects/packagefiles/printf/meson.build",
+		"/C/code/EA/meson_build/reference/005-cross-compilation/subprojects/packagefiles/printf/meson.build",
+		"/C/code/EA/meson_build/reference/005-cross-compilation/meson.build",
+		"/C/code/EA/meson_build/libc-skeleton/buildresults/meson-logs/meson-log.txt",
+		"/C/code/EA/meson_build/libc-skeleton/tools/clear_test_results.sh",
+		"/C/code/EA/meson_build/.gitignore",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/printf.wrap",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/openlibm.wrap",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/packagefiles/openlibm/meson.build",
+		"/C/code/EA/meson_build/reference/001-printf-dep/subprojects/printf.wrap",
+		"/C/Users/Marc/AppData/Local/Temp/MicrosoftEdgeDownloads/8cb9f270-2f9a-475f-9230-5d363813cd40/unity.wrap",
+		"/C/code/EA/meson_build/libc-skeleton/tools/libc_tests_xml.sh",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/printf/test/meson.build",
+		"/C/code/EA/meson_build/reference/001-printf-dep/meson.build",
+		"/C/code/EA/meson_build/libc-skeleton/subprojects/cmocka-1.1.5/cmocka.pc.cmake",
+		"/C/code/distributor-gui/legacyModbus.py",
+		"/C/code/distributor-gui/modbusBase.py",
+		"/C/code/distributor-gui/HoldingRegisters.py",
+		"/C/code/distributor-gui/Coils.py",
+		"/C/code/distributor-gui/fileLog.py",
+		"/C/code/distributor-gui/gui.py",
+		"/C/code/distributor-gui/modernModbus.py",
+		"/C/code/distributor-gui/distributor-gui-project.sublime-project",
+		"/C/code/distributor-gui/legacyCustomHandlers.py",
+		"/C/code/distributor-gui/modbusHandler.py",
+		"/C/Users/Marc/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json",
+		"/C/code/distributor-gui/config.ini",
+		"/C/code/EA/Cmake/libc-skeleton/cmake/toolchains/cross/cortex-m7_hardfloat.cmake",
+		"/C/code/EA/Cmake/libc-skeleton/cmake/toolchains/cross/cortex-m4_hardfloat.cmake",
+		"/C/code/EA/Cmake/libc-skeleton/cmake/toolchains/cross/cortex-m3_softfloat.cmake",
+		"/C/code/EA/Cmake/libc-skeleton/BuildOptions.cmake",
+		"/C/code/EA/Cmake/libc-skeleton/buildresults/_deps/printf-src/README.md",
+		"/C/code/EA/CMake reference/006-cross-compilation/test/CMakeLists.txt",
+		"/C/code/EA/Cmake/libc-skeleton/test/CMakelists.txt",
+		"/C/code/EA/reference testing/CMakeLists.txt",
+		"/C/code/EA/006-cross-compilation/src/CMakeLists.txt",
+		"/C/code/EA/005-build-options/src/CMakeLists.txt",
+		"/C/code/Franger/src/Application/system.c",
+		"/C/code/Franger/include/Drivers/interrupt.h",
+		"/C/code/Franger/src/Device/Relay/relay_timer.c",
+		"/C/code/Franger/include/Device/Relay/relay_timer.h",
+		"/C/code/Franger/src/Application/self_test.c",
+		"/C/code/Franger/include/Application/modbus/modbus.h",
+		"/C/code/Franger/src/Drivers/interrupt.c",
+		"/C/code/Franger/src/Device/runtime_flags.c",
+		"/C/code/Franger/src/Device/TempHum/temphum.c",
+		"/C/code/Franger/src/Application/tasks.c",
+		"/C/code/Franger/src/main.c",
+		"/C/code/Franger/src/Application/Signal/signal_avg.c",
+		"/C/code/Franger/src/Application/serial.c",
+		"/C/code/Franger/src/Application/inputs.c",
+		"/C/code/Franger/src/Application/defrost.c",
+		"/C/code/Franger/src/Application/Signal/signal_offset.c",
+		"/C/code/Franger/src/Application/Signal/signal_dft.c",
+		"/C/code/Franger/src/Application/modbus/mb_timers.c",
+		"/C/code/Franger/src/Application/modbus/modbus.c",
+		"/C/code/Franger/src/Application/Signal/signal_idx.c",
+		"/C/code/Franger/src/Device/Proximity/proximity.c",
+		"/C/code/Franger/src/Device/Proximity/proximity_i2c.c",
+		"/C/code/Franger/src/Drivers/msp430_adc.c",
+		"/C/code/Franger/include/Device/Proximity/proximity_i2c.h",
+		"/C/code/Franger/src/Application/alarms.c",
+		"/C/code/Franger/include/Misc.h",
+		"/C/code/Franger/src/Application/faults.c",
+		"/C/code/Franger/src/Application/records.c",
+		"/C/code/Franger/include/Application/records.h",
+		"/C/code/Franger/src/Device/mcu.c",
+		"/C/code/Franger/include/Device/wdt.h",
+		"/C/code/Franger/src/Device/wdt.c",
+		"/C/code/Franger/src/Application/Signal/signal_uv.c",
+		"/C/code/Franger/test/test_alarms.c",
+		"/C/code/Franger/include/Application/system.h",
+		"/C/code/Franger/include/Drivers/registers.h",
+		"/C/code/Franger/src/Device/TempHum/temphumadc.c",
+		"/C/code/Franger/src/Application/modbus/mb_holding_registers.c",
+		"/C/code/Franger/src/Application/Mode/mode.c",
+		"/C/code/Franger/src/Device/lamp.c",
+		"/C/code/Franger/src/Device/Calendar/calendar_i2c.c",
+		"/C/code/Franger/src/Device/TempHum/temphum_HTS221.c",
+		"/C/code/Franger/src/Drivers/SPI_ADS1256.c",
+		"/C/code/Franger/include/Device/mcu.h",
+		"/C/code/Franger/test/support/msp430fr6989.h",
+		"/C/code/Franger/buildtest/test/cache/signal_uv.h",
+		"/C/code/Franger/src/Drivers/I2C.c",
+		"/C/code/Franger/include/Application/faults.h",
+		"/C/code/Franger/src/Device/adc.c",
+		"/C/code/Franger/include/Device/lamp.h",
+		"/C/code/Franger/include/Device/adc_types.h",
+		"/C/code/Franger/include/Device/led.h",
+		"/C/code/Franger/include/Device/runtime_flags.h",
+		"/C/code/Franger/src/Device/Timer/timer.c",
+		"/C/code/Franger/src/Device/Relay/relays.c",
+		"/C/code/Franger/project.yml"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 415.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"PRINTF_VISIBILITY",
+			"libc_native_files",
+			"putchar",
+			"putchar_native",
+			"subprojects/printf",
+			"putchar.c",
+			"printf",
+			"libc_native_files",
+			"putchar",
+			"subprojects/printf",
+			"putchar_native",
+			"native",
+			"/libc_native.a.p/stdio_putchar",
+			"libprintf_native_dep",
+			"/libc_native.a.p/stdio_putchar",
+			"is_system",
+			"/libc_native.a.p/stdio_putchar",
+			"putchar",
+			"pexception_pointers",
+			"override_options ",
+			"strdup"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/stdio/putchar.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 94,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								94,
+								94
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ".<>:\"/*",
+									"selector": "punctuation.accessor | (meta.preprocessor.include string - punctuation.definition.string.end)",
+									"server": "clangd"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"lsp_active": true,
+							"lsp_uri": "file:///C:/code/EA/meson_build/reference/005-cross-compilation/src/stdio/putchar.c",
+							"show_definitions": false,
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "subprojects/printf/test/catch.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 659295,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								295600,
+								295600
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ".<>:\"/*",
+									"selector": "punctuation.accessor | (meta.preprocessor.include string - punctuation.definition.string.end)",
+									"server": "clangd"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										297471,
+										297472
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										295537,
+										295538
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"lsp_active": true,
+							"lsp_uri": "file:///C:/code/EA/meson_build/reference/005-cross-compilation/subprojects/printf/test/catch.hpp",
+							"show_definitions": false,
+							"syntax": "Packages/zzz A File Icon zzz/aliases/C++ (Header).sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 146737.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "subprojects/cmocka-1.1.5/src/cmocka.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 116390,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								734,
+								734
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ".<>:\"/*",
+									"selector": "punctuation.accessor | (meta.preprocessor.include string - punctuation.definition.string.end)",
+									"server": "clangd"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										756,
+										761
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/hash.png",
+										"region.yellowish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										715,
+										720
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"lsp_active": true,
+							"lsp_uri": "file:///C:/code/EA/meson_build/reference/005-cross-compilation/subprojects/cmocka-1.1.5/src/cmocka.c",
+							"show_definitions": false,
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/stdio/asprintf.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 233,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								233,
+								233
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ".<>:\"/*",
+									"selector": "punctuation.accessor | (meta.preprocessor.include string - punctuation.definition.string.end)",
+									"server": "clangd"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"lsp_active": true,
+							"lsp_uri": "file:///C:/code/EA/meson_build/reference/005-cross-compilation/src/stdio/asprintf.c",
+							"show_definitions": false,
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/meson.build",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5932,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5029,
+								5029
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										5028,
+										5029
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/round_bracket.png",
+										"region.yellowish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										5005,
+										5006
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"lsp_uri": "file:///C:/code/EA/meson_build/reference/005-cross-compilation/src/meson.build",
+							"syntax": "Packages/Meson/meson.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3744.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "subprojects/packagefiles/printf/meson.build",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 735,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								735,
+								735
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"lsp_uri": "file:///C:/code/EA/meson_build/reference/005-cross-compilation/subprojects/packagefiles/printf/meson.build",
+							"syntax": "Packages/Meson/meson.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 54,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								54,
+								54
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"default_dir": "C:\\code\\EA\\meson_build\\reference\\005-cross-compilation\\subprojects\\packagefiles\\printf",
+							"detect_indentation": false,
+							"git_gutter_is_enabled": false,
+							"line_numbers": false,
+							"lsp_uri": "buffer:1709",
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "subprojects/printf/test/test_suite.cpp",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 41531,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1659,
+								1659
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ".<>:\"/*",
+									"selector": "punctuation.accessor | (meta.preprocessor.include string - punctuation.definition.string.end)",
+									"server": "clangd"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										1658,
+										1659
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/double_quote.png",
+										"region.greenish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										1646,
+										1647
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"lsp_active": true,
+							"lsp_uri": "file:///C:/code/EA/meson_build/reference/005-cross-compilation/subprojects/printf/test/test_suite.cpp",
+							"show_definitions": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 153.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "subprojects/printf/meson.build",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 735,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								372,
+								372
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"lsp_uri": "file:///C:/code/EA/meson_build/reference/005-cross-compilation/subprojects/printf/meson.build",
+							"syntax": "Packages/Meson/meson.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "cross-compile.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 234,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								234,
+								234
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"selector": "- comment - punctuation.separator - punctuation.definition.string.end - constant.character.escape - invalid.illegal - punctuation.section.mapping - punctuation.section.sequence",
+									"server": "LSP-json"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"lsp_active": true,
+							"lsp_uri": "file:///C:/code/EA/meson_build/reference/005-cross-compilation/cross-compile.sublime-project",
+							"show_definitions": false,
+							"syntax": "Packages/zzz A File Icon zzz/aliases/JSON (Sublime).sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "subprojects/printf/printf.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 27133,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1577,
+								1577
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ".<>:\"/*",
+									"selector": "punctuation.accessor | (meta.preprocessor.include string - punctuation.definition.string.end)",
+									"server": "clangd"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"lsp_active": true,
+							"lsp_uri": "file:///C:/code/EA/meson_build/reference/005-cross-compilation/subprojects/printf/printf.c",
+							"show_definitions": false,
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 95.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "subprojects/printf/printf.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4865,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								938,
+								938
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ".<>:\"/*",
+									"selector": "punctuation.accessor | (meta.preprocessor.include string - punctuation.definition.string.end)",
+									"server": "clangd"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"lsp_active": true,
+							"lsp_uri": "file:///C:/code/EA/meson_build/reference/005-cross-compilation/subprojects/printf/printf.h",
+							"show_definitions": false,
+							"syntax": "Packages/C++/C.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "src/string/memcmp.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 615,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								544,
+								544
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ".<>:\"/*",
+									"selector": "punctuation.accessor | (meta.preprocessor.include string - punctuation.definition.string.end)",
+									"server": "clangd"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										613,
+										614
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										96,
+										97
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"lsp_active": true,
+							"lsp_uri": "file:///C:/code/EA/meson_build/reference/005-cross-compilation/src/string/memcmp.c",
+							"show_definitions": false,
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "test/string/memcmp.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 901,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								488,
+								488
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ".<>:\"/*",
+									"selector": "punctuation.accessor | (meta.preprocessor.include string - punctuation.definition.string.end)",
+									"server": "clangd"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										696,
+										697
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										325,
+										326
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"lsp_active": true,
+							"lsp_uri": "file:///C:/code/EA/meson_build/reference/005-cross-compilation/test/string/memcmp.c",
+							"show_definitions": false,
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "src/string/strdup.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2130,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1928,
+								1928
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ".<>:\"/*",
+									"selector": "punctuation.accessor | (meta.preprocessor.include string - punctuation.definition.string.end)",
+									"server": "clangd"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"lsp_active": true,
+							"lsp_uri": "file:///C:/code/EA/meson_build/reference/005-cross-compilation/src/string/strdup.c",
+							"show_definitions": false,
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 141.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.Debugger":
+	{
+		"height": 532.0
+	},
+	"output.Debugger Console":
+	{
+		"height": 264.0
+	},
+	"output.Debugger Protocol":
+	{
+		"height": 264.0
+	},
+	"output.Debugger Terminal":
+	{
+		"height": 264.0
+	},
+	"output.LSP Log Panel":
+	{
+		"height": 603.0
+	},
+	"output.Meson":
+	{
+		"height": 114.0
+	},
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.SublimeLinter Messages":
+	{
+		"height": 156.0
+	},
+	"output.Terminus":
+	{
+		"height": 273.0
+	},
+	"output.diagnostics":
+	{
+		"height": 126.0
+	},
+	"output.exec":
+	{
+		"height": 156.0
+	},
+	"output.find_results":
+	{
+		"height": 212.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups-dummy":
+	{
+		"height": 0.0
+	},
+	"output.references":
+	{
+		"height": 138.0
+	},
+	"output.rename":
+	{
+		"height": 114.0
+	},
+	"pinned_build_system": "",
+	"project": "cross-compile.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"test_suite.cpp",
+				"subprojects\\printf\\test\\test_suite.cpp"
+			],
+			[
+				"src/meson.build",
+				"src\\meson.build"
+			],
+			[
+				"putchar",
+				"src\\stdio\\putchar.c"
+			],
+			[
+				"printf/meson.build",
+				"subprojects\\printf\\meson.build"
+			],
+			[
+				"memcmp",
+				"test\\string\\memcmp.c"
+			],
+			[
+				"printf.h",
+				"subprojects\\printf\\printf.h"
+			],
+			[
+				"printf.c",
+				"subprojects\\printf\\printf.c"
+			],
+			[
+				"catch.hpp",
+				"subprojects\\printf\\test\\catch.hpp"
+			],
+			[
+				"src/meson",
+				"src\\meson.build"
+			],
+			[
+				"asprintf",
+				"src\\stdio\\asprintf.c"
+			],
+			[
+				"string.h",
+				"include\\string.h"
+			],
+			[
+				"cmocka.c",
+				"subprojects\\cmocka-1.1.5\\src\\cmocka.c"
+			],
+			[
+				"native",
+				"libc-skeleton\\src\\stdio\\putchar_native.c"
+			],
+			[
+				"stdio/putchar",
+				"libc-skeleton\\src\\stdio\\putchar.c"
+			],
+			[
+				"strdup.c",
+				"libc-skeleton\\src\\string\\strdup.c"
+			],
+			[
+				"test/meson.build",
+				"libc-skeleton\\test\\meson.build"
+			],
+			[
+				"tests/meson.build",
+				"libc-skeleton\\subprojects\\cmocka-1.1.7\\tests\\meson.build"
+			],
+			[
+				"test/meson",
+				"libc-skeleton\\test\\meson.build"
+			],
+			[
+				"mesonlog",
+				"libc-skeleton\\buildresults\\meson-logs\\meson-log.txt"
+			],
+			[
+				"meson-log.txt",
+				"libc-skeleton\\buildresults\\meson-logs\\meson-log.txt"
+			],
+			[
+				"nrf",
+				"libc-skeleton\\build\\cross\\nrf52840.txt"
+			],
+			[
+				"src/meson.buil",
+				"libc-skeleton\\src\\meson.build"
+			],
+			[
+				"printf.wrap",
+				"reference\\001-printf-dep\\subprojects\\printf.wrap"
+			],
+			[
+				"printf/test/meson",
+				"libc-skeleton\\subprojects\\packagefiles\\printf\\test\\meson.build"
+			],
+			[
+				"libc/test/meson",
+				"libc-skeleton\\test\\meson.build"
+			],
+			[
+				"log",
+				"libc-skeleton\\buildresults\\meson-logs\\meson-log.txt"
+			],
+			[
+				"transaction",
+				"pymodbus\\transaction.py"
+			],
+			[
+				"base",
+				"pymodbus\\framer\\base.py"
+			],
+			[
+				"rtu_framer",
+				"pymodbus\\framer\\rtu_framer.py"
+			],
+			[
+				"mod",
+				"modbusBase.py"
+			],
+			[
+				"gui",
+				"gui.py"
+			],
+			[
+				"modbus",
+				"modbusBase.py"
+			],
+			[
+				"modbusbase",
+				"modbusBase.py"
+			],
+			[
+				"modbu",
+				"modbusHandler.py"
+			],
+			[
+				"legacy",
+				"legacyModbus.py"
+			],
+			[
+				"coil",
+				"Coils.py"
+			],
+			[
+				"gui.py",
+				"gui.py"
+			],
+			[
+				"test/cmake",
+				"test\\CMakelists.txt"
+			],
+			[
+				"src/cmakelists",
+				"src\\CMakelists.txt"
+			],
+			[
+				"interrupt.h",
+				"include\\Drivers\\interrupt.h"
+			],
+			[
+				"system.c",
+				"src\\Application\\system.c"
+			],
+			[
+				"relay_timer.c",
+				"src\\Device\\Relay\\relay_timer.c"
+			],
+			[
+				"relay_timer.h",
+				"include\\Device\\Relay\\relay_timer.h"
+			],
+			[
+				"self_test.c",
+				"src\\Application\\self_test.c"
+			],
+			[
+				"mb_timers.c",
+				"src\\Application\\modbus\\mb_timers.c"
+			],
+			[
+				"main.c",
+				"src\\main.c"
+			],
+			[
+				"proximity_i2c.h",
+				"include\\Device\\Proximity\\proximity_i2c.h"
+			],
+			[
+				"proximity_i2c.c",
+				"src\\Device\\Proximity\\proximity_i2c.c"
+			],
+			[
+				"proximity.c",
+				"src\\Device\\Proximity\\proximity.c"
+			],
+			[
+				"msp430_adc.c",
+				"src\\Drivers\\msp430_adc.c"
+			],
+			[
+				"test_alarm",
+				"test\\test_alarms.c"
+			],
+			[
+				"inputs.c",
+				"src\\Application\\inputs.c"
+			],
+			[
+				"misc.h",
+				"include\\Misc.h"
+			],
+			[
+				"tasks.c",
+				"src\\Application\\tasks.c"
+			],
+			[
+				"records.c",
+				"src\\Application\\records.c"
+			],
+			[
+				"records.h",
+				"include\\Application\\records.h"
+			],
+			[
+				"signal_uv.h",
+				"buildtest\\test\\cache\\signal_uv.h"
+			],
+			[
+				"signal_uv.c",
+				"src\\Application\\Signal\\signal_uv.c"
+			],
+			[
+				"alarms.c",
+				"src\\Application\\alarms.c"
+			],
+			[
+				"mcu.c",
+				"src\\Device\\mcu.c"
+			],
+			[
+				"spi",
+				"src\\Drivers\\SPI_ADS1256.c"
+			],
+			[
+				"registers.h",
+				"include\\Drivers\\registers.h"
+			],
+			[
+				"main",
+				"src\\main.c"
+			],
+			[
+				"wdt.h",
+				"include\\Device\\wdt.h"
+			],
+			[
+				"wdt.c",
+				"src\\Device\\wdt.c"
+			],
+			[
+				"system.h",
+				"include\\Application\\system.h"
+			],
+			[
+				"interrupt.c",
+				"src\\Drivers\\interrupt.c"
+			],
+			[
+				"faults.c",
+				"src\\Application\\faults.c"
+			],
+			[
+				"mcu.h",
+				"include\\Device\\mcu.h"
+			],
+			[
+				"led.h",
+				"include\\Device\\led.h"
+			],
+			[
+				"tasks",
+				"src\\Application\\tasks.c"
+			],
+			[
+				"lamp.c",
+				"src\\Device\\lamp.c"
+			],
+			[
+				"lamp.h",
+				"include\\Device\\lamp.h"
+			],
+			[
+				"reg.h",
+				"include\\Drivers\\registers.h"
+			],
+			[
+				"runtime_flags.h",
+				"include\\Device\\runtime_flags.h"
+			],
+			[
+				"runtime_flags.c",
+				"src\\Device\\runtime_flags.c"
+			],
+			[
+				"adc.c",
+				"src\\Device\\adc.c"
+			],
+			[
+				"timer.c",
+				"src\\Device\\Timer\\timer.c"
+			],
+			[
+				"adc_types",
+				"include\\Device\\adc_types.h"
+			],
+			[
+				"hts",
+				"src\\Device\\TempHum\\temphum_HTS221.c"
+			],
+			[
+				"faults",
+				"include\\Application\\faults.h"
+			],
+			[
+				"adc_types.h",
+				"include\\Device\\adc_types.h"
+			],
+			[
+				"mcu",
+				"src\\Device\\mcu.c"
+			],
+			[
+				"relays.c",
+				"src\\Device\\Relay\\relays.c"
+			],
+			[
+				"faults.h",
+				"include\\Application\\faults.h"
+			],
+			[
+				"signal_dft.c",
+				"src\\Application\\Signal\\signal_dft.c"
+			],
+			[
+				"signal_dft",
+				"src\\Application\\Signal\\signal_dft.c"
+			],
+			[
+				"alarms.",
+				"src\\Application\\alarms.c"
+			],
+			[
+				"uv",
+				"src\\Application\\Signal\\signal_uv.c"
+			],
+			[
+				"proximity",
+				"src\\Device\\Proximity\\proximity.c"
+			],
+			[
+				"i2c.c",
+				"src\\Drivers\\I2C.c"
+			],
+			[
+				"calendar_i2c.c",
+				"src\\Device\\Calendar\\calendar_i2c.c"
+			],
+			[
+				"temphum.c",
+				"src\\Device\\TempHum\\temphum.c"
+			],
+			[
+				"reg",
+				"include\\Drivers\\registers.h"
+			],
+			[
+				"defrost",
+				"src\\Application\\defrost.c"
+			],
+			[
+				"temphumadc.c",
+				"src\\Device\\TempHum\\temphumadc.c"
+			],
+			[
+				"defrost.c",
+				"src\\Application\\defrost.c"
+			],
+			[
+				"regisetrs.h",
+				"include\\Drivers\\registers.h"
+			],
+			[
+				"registers.c",
+				"src\\Drivers\\registers.c"
+			],
+			[
+				"dft.c",
+				"src\\Application\\Signal\\signal_dft.c"
+			],
+			[
+				"spi_a",
+				"src\\Drivers\\SPI_ADS1256.c"
+			],
+			[
+				"signal2",
+				"test\\test_signal2.c"
+			],
+			[
+				"signal_avg.c",
+				"src\\Application\\Signal\\signal_avg.c"
+			],
+			[
+				"spiads",
+				"src\\Drivers\\SPI_ADS1256.c"
+			],
+			[
+				"ads",
+				"src\\Drivers\\SPI_ADS1256.c"
+			],
+			[
+				"test_signal2",
+				"test\\test_signal2.c"
+			],
+			[
+				"signal_mv.c",
+				"src\\Application\\Signal\\signal_mv.c"
+			],
+			[
+				"sensitivity.c",
+				"src\\Application\\Signal\\sensitivity.c"
+			],
+			[
+				"test_alarms.c",
+				"test\\test_alarms.c"
+			],
+			[
+				"alarms.h",
+				"include\\Application\\alarms.h"
+			],
+			[
+				"temphumhts",
+				"src\\Device\\TempHum\\temphum_HTS221.c"
+			],
+			[
+				"temphum",
+				"src\\Device\\TempHum\\temphum.c"
+			],
+			[
+				"runtime",
+				"include\\Device\\runtime_flags.h"
+			],
+			[
+				"heater.c",
+				"src\\Device\\heater.c"
+			],
+			[
+				"relay.c",
+				"src\\Device\\Relay\\relays.c"
+			],
+			[
+				"lamp",
+				"src\\Device\\lamp.c"
+			],
+			[
+				"heater",
+				"src\\Device\\heater.c"
+			],
+			[
+				"fault.c",
+				"src\\Application\\faults.c"
+			],
+			[
+				"ADC.C",
+				"src\\Device\\adc.c"
+			],
+			[
+				"spi_",
+				"include\\Drivers\\SPI_ADS1256.h"
+			],
+			[
+				"tasks.h",
+				"include\\Application\\tasks.h"
+			],
+			[
+				"timer.h",
+				"include\\Device\\Timer\\timer.h"
+			],
+			[
+				"test_timer",
+				"test\\test_timer.c"
+			],
+			[
+				"test_timer.c",
+				"test\\test_timer.c"
+			],
+			[
+				"timeobserver.h",
+				"include\\Device\\Timer\\time_observer.h"
+			],
+			[
+				"timerobserv",
+				"include\\Device\\Timer\\time_observer.h"
+			],
+			[
+				"led.c",
+				"src\\Device\\led.c"
+			],
+			[
+				"timer",
+				"src\\Device\\Timer\\timer.c"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 161.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 580.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 227.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -1,0 +1,4 @@
+[wrap-git]
+url=https://github.com/embeddedartistry/openlibm
+revision=0418324
+patch_directory=openlibm

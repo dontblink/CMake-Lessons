@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+    	"LSP": {
+	      	"clangd": {
+	        	"initializationOptions": {
+	          		"clangd.compile-commands-dir": "$project_dir/libc-skeleton/buildresults"
+	        	}
+	     	}
+  		}
+	}
+}

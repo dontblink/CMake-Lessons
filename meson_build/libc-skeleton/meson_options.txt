@@ -1,0 +1,13 @@
+option('hide-unimplemented-libc-apis', type: 'boolean', value: false,
+	description: 'Make unimplemented libc functiosn invisible to the compiler.',
+	yield: true)
+
+option('enable-gnu-extensions', type: 'boolean', value: false, yield: true)
+
+option('disable-builtins', type: 'boolean', value: true, 
+	description: 'Disable GCC built in function implementations for C standard library functions', 
+	yield: true)
+
+option('disable-stack-protection', type: 'boolean', value: true,
+	description: 'Prevents the compiler from automatically inserting stack protection functionality',
+	yield: true)
