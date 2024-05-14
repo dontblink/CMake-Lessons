@@ -1,0 +1,19 @@
+[binaries]
+c = 'arm-none-eabi-gcc'
+cpp = 'arm-none-eabi-c++'
+# *-gcc-ar is used over *-ar to support LTO
+# Without -gcc-ar, LTO will generate a linker warning:
+# arm-none-eabi-ar: file.o: plugin needed to handle lto object
+ar = 'arm-none-eabi-gcc-ar'
+strip = 'arm-none-eabi-strip'
+
+[properties]
+# Keep this set, or the sanity check won't pass
+needs_exe_warpper = true
+
+# Auto detection seems to work much better nowadays, so host machine is mostly optional now
+[host_machine]
+system = 'none'
+cpu_family = 'arm'
+cpu = 'arm-generic'
+endian = 'little'

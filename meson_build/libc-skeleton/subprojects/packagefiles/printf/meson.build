@@ -48,4 +48,13 @@ libprintf_native_dep = declare_dependency(
 	link_with: libprintf_native,
 )
 
+printf_files_dep = declare_dependency(
+	include_directories: printf_includes,
+	sources: printf_files,
+	compile_args: [
+		'-DPRINTF_ALIAS_STANDARD_FUNCTION_NAMES_HARD',
+		'-DPRINTF_INCLUDE_CONFIG_H=0',
+	]
+)
+
 subdir('test')
