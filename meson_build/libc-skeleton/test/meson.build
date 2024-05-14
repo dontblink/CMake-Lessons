@@ -100,3 +100,11 @@ run_target('libc-tests-xml',
 	depends: libc_tests
 )
 
+if meson.is_cross_build()
+	sample_app = executable('sample_app',
+		'app/main.c',
+		dependencies: libc_dep,
+		link_args: native_map_file.format(meson.current_build_dir() + '/sample_app'),
+		native: false
+	)
+endif

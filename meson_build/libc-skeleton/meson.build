@@ -20,10 +20,10 @@ host_c_compiler = meson.get_compiler('c', native: false)
 native_c_compiler_id = native_c_compiler.get_id()
 host_c_compiler_id = host_c_compiler.get_id()
 
-build_machine_arch_specific_includes = include_directories('arch/' + build_machine.cpu_family() + '/include')
-host_machine_arch_specific_includes = include_directories('arch/' + host_machine.cpu_family() + '/include')
-build_machine_arch_specific_sys_includes = include_directories('arch/' + build_machine.cpu_family() + '/include', is_system: true)
-host_machine_arch_specific_sys_includes = include_directories('arch/' + host_machine.cpu_family() + '/include', is_system: true)
+# build_machine_arch_specific_includes = include_directories('arch/' + build_machine.cpu_family() + '/include')
+# host_machine_arch_specific_includes = include_directories('arch/' + host_machine.cpu_family() + '/include')
+# build_machine_arch_specific_sys_includes = include_directories('arch/' + build_machine.cpu_family() + '/include', is_system: true)
+# host_machine_arch_specific_sys_includes = include_directories('arch/' + host_machine.cpu_family() + '/include', is_system: true)
 
 ##
 ## Options
@@ -126,9 +126,9 @@ endif
 ##
 ## subdirectories
 ##
+subdir('arch')
 subdir('src')
 subdir('test')
-
 ##
 ## custom targets
 ##

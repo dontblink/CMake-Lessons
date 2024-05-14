@@ -251,9 +251,13 @@ if enable_gnu_src
 	libc_compile_flags += '-D_GNU_SOURCE' # Note: This needs to be set for both libc compilation + dependency compile_args
 endif
 
+
 #Libc native/host compiler flags ########################
-libc_host_compile_flags = '-nostdinc' # Don't include standard include paths - we don't want system headers,	
-libc_native_compile_flags = '-nostdinc' # Don't include standard include paths - we don't want system headers,	
+libc_host_compile_flags = []
+libc_native_compile_flags = []
+
+libc_host_compile_flags += '-nostdinc' # Don't include standard include paths - we don't want system headers,	
+libc_native_compile_flags += '-nostdinc' # Don't include standard include paths - we don't want system headers,	
 
 if disable_builtins
 	libc_host_compile_flags += '-fno-builtin'
@@ -313,8 +317,8 @@ libc_native = static_library(
 	'c_native',
 	libc_common_files + libc_native_files,
 	c_args: libc_compile_flags + libc_native_compile_flags,
-	include_directories: [libc_includes, build_machine_arch_specific_includes, gdtoa_includes],
-	dependencies: [printf_files_dep, openlibm_dep],
+	include_directories: [libc_includes, gdtoa_includes],
+	dependencies: [printf_files_dep, openlibm_dep, build_machine_dep],
 	native: true,
 )
 
@@ -322,8 +326,8 @@ libc = static_library(
 	'c',
 	libc_common_files + libc_standalone_files,
 	c_args: libc_compile_flags + libc_host_compile_flags,
-	include_directories: [libc_includes, host_machine_arch_specific_includes, gdtoa_includes],
-	dependencies: [printf_files_dep, openlibm_dep],
+	include_directories: [libc_includes, gdtoa_includes],
+	dependencies: [printf_files_dep, openlibm_dep, host_machine_dep],
 	native: false,
 )
 
