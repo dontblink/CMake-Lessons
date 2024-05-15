@@ -10,6 +10,7 @@ strip = 'arm-none-eabi-strip'
 [properties]
 # Keep this set, or the sanity check won't pass
 needs_exe_warpper = true
+objcopy = 'arm-none-eabi-objcopy'
 
 # Auto detection seems to work much better nowadays, so host machine is mostly optional now
 [host_machine]

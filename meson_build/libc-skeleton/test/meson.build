@@ -77,6 +77,7 @@ libc_test_flags = native_c_compiler.get_supported_arguments( '-Wno-unused-parame
 
 libc_test_map = native_map_file.format(meson.current_build_dir() + '/libc_test')
 
+#Libc test executable ###############################
 libc_tests = executable(
 	'libc_test',
 	libc_test_files,
@@ -88,6 +89,7 @@ libc_tests = executable(
 	build_by_default: false,
 )
 
+#Libc test targets ################################################
 test_output_dir = 'CMOCKA_XML_FILE=' + meson.project_build_root() + '/test/%g.xml' # %g tells CMocka to output each test group to its own file
 test('libc_tests', libc_tests, env: [test_output_dir])
 
@@ -100,11 +102,60 @@ run_target('libc-tests-xml',
 	depends: libc_tests
 )
 
+#Libc Sample App ##################################################
 if meson.is_cross_build()
+	host_objcopy = find_program(meson.get_external_property('objcopy'))
+	
+	# ld_file = meson.current_source_dir()/'app/STM32F103VBIx_FLASH.ld'
+
+	linker_script_flags = []
+	linker_script_deps = []
+
+	foreach path : meson.get_external_property('linker_paths', [''])
+		if path != ''
+			linker_script_flags += '-L' + meson.source_root() / path
+		endif
+	endforeach
+
+	foreach script : meson.get_external_property('linker_scripts', [''])
+		if script != ''
+			linker_script_flags += '-T' + script
+		endif
+	endforeach
+
+	foreach dep : meson.get_external_property('linker_depends', [''])
+		if dep != ''
+			linker_script_deps += meson.source_root() / dep
+		endif
+	endforeach
+
 	sample_app = executable('sample_app',
 		'app/main.c',
 		dependencies: libc_dep,
-		link_args: native_map_file.format(meson.current_build_dir() + '/sample_app'),
-		native: false
+		link_args: [
+			linker_script_flags,
+			native_map_file.format(meson.current_build_dir() + '/sample_app'),
+		],
+		link_depends: linker_script_deps,
+		native: false,
 	)
+	bin_output = 'sample_app.bin'
+	hex_output = 'sample_app.hex'
+
+	sample_app_bin = custom_target(
+		bin_output,
+		output: bin_output,
+		input: sample_app,
+		command: [host_objcopy, '-O', 'binary', '@INPUT@', '@OUTPUT@'],		
+		build_by_default: true,
+	)
+	sample_app_hex = custom_target(
+		hex_output,
+		output: hex_output,
+		input: sample_app,
+		command: [host_objcopy, '-O', 'ihex', '@INPUT@', '@OUTPUT@'],	
+		build_by_default: true,
+	)
+
+
 endif
