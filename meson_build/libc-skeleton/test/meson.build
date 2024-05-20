@@ -104,30 +104,11 @@ run_target('libc-tests-xml',
 
 #Libc Sample App ##################################################
 if meson.is_cross_build()
-	host_objcopy = find_program(meson.get_external_property('objcopy'))
 	
-	# ld_file = meson.current_source_dir()/'app/STM32F103VBIx_FLASH.ld'
-
-	linker_script_flags = []
-	linker_script_deps = []
-
-	foreach path : meson.get_external_property('linker_paths', [''])
-		if path != ''
-			linker_script_flags += '-L' + meson.source_root() / path
-		endif
-	endforeach
-
-	foreach script : meson.get_external_property('linker_scripts', [''])
-		if script != ''
-			linker_script_flags += '-T' + script
-		endif
-	endforeach
-
-	foreach dep : meson.get_external_property('linker_depends', [''])
-		if dep != ''
-			linker_script_deps += meson.source_root() / dep
-		endif
-	endforeach
+	host_objcopy = find_program(meson.get_external_property('objcopy'), required: false, disabler: true)
+	if host_objcopy.found() == false
+		message('Specified objcopy not found, .hex and .bin conversion is disabled.')
+	endif
 
 	sample_app = executable('sample_app',
 		'app/main.c',
@@ -157,5 +138,6 @@ if meson.is_cross_build()
 		build_by_default: true,
 	)
 
-
 endif
+
+files_to_lint += libc_test_files

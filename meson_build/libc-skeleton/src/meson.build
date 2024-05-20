@@ -280,18 +280,19 @@ libc_host_link_flags = [
 	'-nolibc',
 	'-nostartfiles',	
 ]
+libc_hosted_native_link_flags = []
 
 if native_c_compiler_id == 'clang'
 	# Clang does nothing with -nolibc. We are forced to upgrade to -nostdlib
 	libc_native_link_flags += '-nostdlib'
 
 	# We can't do this for Linux, because we need the GCC startup files (for now)
-	if build_machine.system() != 'linux'
+	if build_machine.system() != 'linux' and get_option('b_sanitize') == 'none'
 		libc_hosted_native_link_flags += '-nostdlib'
 	endif
 endif
 
-libc_hosted_native_link_flags = libc_native_link_flags
+# libc_hosted_native_link_flags = libc_native_link_flags
 
 # Filter flags and only use the ones that are actually supported
 # We don't use the linker API due to false detections of "NO" values b/c of valid linker errors
@@ -359,3 +360,5 @@ libc_hosted_native_dep = declare_dependency(
 	link_args: libc_hosted_native_link_flags,
 	link_with: libc_native,
 )
+
+files_to_lint += [libc_common_files, libc_standalone_files]

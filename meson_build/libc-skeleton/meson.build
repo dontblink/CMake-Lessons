@@ -20,11 +20,6 @@ host_c_compiler = meson.get_compiler('c', native: false)
 native_c_compiler_id = native_c_compiler.get_id()
 host_c_compiler_id = host_c_compiler.get_id()
 
-# build_machine_arch_specific_includes = include_directories('arch/' + build_machine.cpu_family() + '/include')
-# host_machine_arch_specific_includes = include_directories('arch/' + host_machine.cpu_family() + '/include')
-# build_machine_arch_specific_sys_includes = include_directories('arch/' + build_machine.cpu_family() + '/include', is_system: true)
-# host_machine_arch_specific_sys_includes = include_directories('arch/' + host_machine.cpu_family() + '/include', is_system: true)
-
 ##
 ## Options
 ##
@@ -64,15 +59,36 @@ add_project_arguments(
 	native: false,
 )
 
+# Linker Arguments and Dependencies #######################
+linker_script_flags = []
+linker_script_deps = []
 
-##
+foreach path : meson.get_external_property('linker_paths', [''])
+	if path != ''
+		linker_script_flags += '-L' + meson.source_root() / path
+	endif
+endforeach
+
+foreach script : meson.get_external_property('linker_scripts', [''])
+	if script != ''
+		linker_script_flags += '-T' + script
+	endif
+endforeach
+
+foreach dep : meson.get_external_property('linker_depends', [''])
+	if dep != ''
+		linker_script_deps += meson.source_root() / dep
+	endif
+endforeach
+
+
 ## Subprojects
 ##
 printf_subproject = subproject('printf')
 # libprintf_dep = printf_subproject.get_variable('libprintf_dep')
 # libprintf_native_dep = printf_subproject.get_variable('libprintf_native_dep')
-printf_includes = printf_subproject.get_variable('printf_includes')
 printf_files_dep = printf_subproject.get_variable('printf_files_dep')
+printf_includes = printf_subproject.get_variable('printf_includes')
 
 openlibm_subproject = subproject('openlibm')
 openlibm_dep = openlibm_subproject.get_variable('openlibm_dep')
@@ -123,15 +139,116 @@ else
 	host_map_file = []
 endif
 
+
+files_to_lint = []
 ##
 ## subdirectories
 ##
 subdir('arch')
 subdir('src')
 subdir('test')
+
+#Tooling #####################
+
+subdir('docs/Doxygen')
+
+clangformat = find_program('clang-format', required: false, disabler: true)
+if clangformat.found()
+	run_target('format', 
+		command: 'tools/format.sh')
+
+	run_target('format-patch',
+		command: 'tools/format_patch.sh')
+endif
+
+cppcheck = find_program('cppcheck', required: false, disabler: true)
+if cppcheck.found()
+	run_target('cppcheck',
+		command: 'tools/cppcheck.sh',
+	)
+	run_target('cppcheck-xml',
+		command: ['tools/cppcheck.sh', 'xml'],
+	)
+endif
+
+clangtidy = find_program('clang-tidy', required: false, disabler: true)
+if clangtidy.found()
+	run_target('clang-tidy',
+		command: [
+			'tools/clang-tidy.sh',
+			files_to_lint,
+		],
+	)
+endif
+
+lizard = find_program('lizard', required: false, disabler: true)
+if lizard.found()
+
+	lizard_default_args = [
+		# Exclude these directories
+		'x', './buildresults/*',
+		'x', './subprojects/*',
+		# Configuration
+		'--length', '75', # Fail when functions are longer than this
+		'--CCN', '10', # Fail over this CCN
+		'--arguments', '10', # Fail at this arg count
+	]
+	run_target('complexity',
+		command: [
+			lizard,
+			lizard_default_args,
+			'-w' # only displays violation warnings
+		],
+	)
+
+	run_target('complexity-full',
+		command: [
+			lizard,
+			lizard_default_args,
+		],
+	)
+
+	complexity_xml = custom_target('complexity.xml',
+		output: 'complexity.xml',
+		command: [
+			lizard,
+			lizard_default_args,
+			'--xml',
+		],
+		capture: true, #tell meson to capture `stdout` and save it to our output
+		build_always_stale: true, #tell meson to run this target every time it is invoked, regardless of whether `complexity.xml already exists
+		build_by_default: false,
+	)
+
+	# Meson expects us to use the file name of the output to trigger the rule
+	# To create a consistent interface, we create an alias
+	alias_target('complexity-xml', complexity_xml)
+endif
+
 ##
 ## custom targets
 ##
 run_target('clear-test-results',
 	command: meson.project_source_root() + '/tools/clear_test_results.sh'
+)
+
+run_target('package', 
+	command: [
+		'tools/package.sh',
+		'-a', host_machine.cpu_family(),
+		'-c', host_machine.cpu(),
+		'-s', host_machine.system(),
+		'-v', meson.project_version(),
+	],
+)
+
+run_target('package-native', 
+	command: [
+		'tools/package.sh',
+		'-a', build_machine.cpu_family(),
+		'-c', build_machine.cpu(),
+		'-s', build_machine.system(),
+		'-v', meson.project_version(),
+		'-n',
+	],
 )
